@@ -23,6 +23,7 @@ namespace ZeroDaySiege.Core
         {
             SetupScreenController();
             SetupGameManager();
+            SetupWaveManager();
             SetupGameLayout();
             SetupEventSystem();
             SetupRunUI();
@@ -43,6 +44,14 @@ namespace ZeroDaySiege.Core
 
             var managerGO = new GameObject("[GameManager]");
             managerGO.AddComponent<GameManager>();
+        }
+
+        private void SetupWaveManager()
+        {
+            if (WaveManager.Instance != null) return;
+
+            var waveGO = new GameObject("[WaveManager]");
+            waveGO.AddComponent<WaveManager>();
         }
 
         private void SetupGameLayout()

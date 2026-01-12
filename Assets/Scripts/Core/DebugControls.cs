@@ -61,6 +61,12 @@ namespace ZeroDaySiege.Core
                 Debug.Log("[Debug] Returning to menu...");
                 GameManager.Instance.ReturnToMenu();
             }
+
+            if (keyboard.f5Key.wasPressedThisFrame)
+            {
+                Debug.Log($"[Debug] Wave {GameManager.Instance.CurrentWave} spawning complete...");
+                WaveManager.Instance?.CompleteCurrentWave();
+            }
         }
 #endif
     }
