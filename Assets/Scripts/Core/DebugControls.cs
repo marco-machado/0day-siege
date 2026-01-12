@@ -5,12 +5,39 @@ namespace ZeroDaySiege.Core
 {
     public class DebugControls : MonoBehaviour
     {
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
         private void Update()
         {
             var keyboard = Keyboard.current;
             if (keyboard == null) return;
 
+            HandlePauseInput(keyboard);
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            HandleDebugInput(keyboard);
+#endif
+        }
+
+        private void HandlePauseInput(Keyboard keyboard)
+        {
+            if (!keyboard.escapeKey.wasPressedThisFrame) return;
+
+            var state = GameManager.Instance?.CurrentState;
+            if (state == null) return;
+
+            switch (state)
+            {
+                case GameState.Playing:
+                    GameManager.Instance.PauseGame();
+                    break;
+                case GameState.Paused:
+                    GameManager.Instance.ResumeGame();
+                    break;
+            }
+        }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        private void HandleDebugInput(Keyboard keyboard)
+        {
             if (keyboard.f1Key.wasPressedThisFrame)
             {
                 Debug.Log("[Debug] Starting run...");
