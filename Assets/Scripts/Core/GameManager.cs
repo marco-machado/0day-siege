@@ -5,14 +5,23 @@ namespace ZeroDaySiege.Core
 {
     public class GameManager : MonoBehaviour
     {
+        public const int TotalWaves = 20;
+
         public static GameManager Instance { get; private set; }
 
         public event Action<GameState, GameState> OnStateChanged;
+        public event Action<int> OnWaveChanged;
 
         [SerializeField] private GameState initialState = GameState.Menu;
 
         private GameState currentState;
         public GameState CurrentState => currentState;
+
+        private int currentWave;
+        public int CurrentWave => currentWave;
+
+        private RunOutcome lastRunOutcome;
+        public RunOutcome LastRunOutcome => lastRunOutcome;
 
         public bool IsPlaying => currentState == GameState.Playing;
         public bool IsPaused => currentState == GameState.Paused;
@@ -100,7 +109,12 @@ namespace ZeroDaySiege.Core
 
         public void StartRun()
         {
-            TryChangeState(GameState.Playing);
+            if (TryChangeState(GameState.Playing))
+            {
+                lastRunOutcome = RunOutcome.None;
+                currentWave = 1;
+                OnWaveChanged?.Invoke(currentWave);
+            }
         }
 
         public void PauseGame()
@@ -131,7 +145,11 @@ namespace ZeroDaySiege.Core
 
         public void EndRun(bool victory)
         {
-            TryChangeState(GameState.GameOver);
+            if (TryChangeState(GameState.GameOver))
+            {
+                lastRunOutcome = victory ? RunOutcome.Victory : RunOutcome.Defeat;
+                Debug.Log($"Run ended: {lastRunOutcome} (Wave {currentWave}/{TotalWaves})");
+            }
         }
 
         public void ReturnToMenu()
@@ -143,7 +161,23 @@ namespace ZeroDaySiege.Core
         {
             if (currentState == GameState.GameOver || currentState == GameState.Paused)
             {
+                lastRunOutcome = RunOutcome.None;
+                currentWave = 1;
                 TryChangeState(GameState.Playing);
+                OnWaveChanged?.Invoke(currentWave);
+            }
+        }
+
+        public void AdvanceWave()
+        {
+            if (!IsPlaying) return;
+
+            currentWave++;
+            OnWaveChanged?.Invoke(currentWave);
+
+            if (currentWave > TotalWaves)
+            {
+                EndRun(true);
             }
         }
     }
