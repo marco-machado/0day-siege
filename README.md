@@ -1,6 +1,6 @@
 # 0DaySiege
 
-A tower defense game where players defend a network's Firewall against waves of malicious software.
+A tower defense game where players defend a network from waves of malicious software. The Firewall is your last line of defense.
 
 ## Platforms
 

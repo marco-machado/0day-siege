@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document outlines the implementation plan for 0DaySiege, a tower defense game where players defend a Firewall from waves of malware. The plan is organized into epics representing major feature areas.
+This document outlines the implementation plan for 0DaySiege, a tower defense game where players defend a network from waves of malware. The Firewall is the last line of defense. The plan is organized into epics representing major feature areas.
 
 **Engine:** Unity 6 (6000.2.7f2)
 
