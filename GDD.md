@@ -28,6 +28,73 @@ The game takes place in a stylized data center environment where players defend 
 
 *Alternative theme options are documented in Appendix G for future reskins.*
 
+### Art Pipeline
+
+**Development Phases:**
+- **Epics 1-4 (Placeholders):** TextMeshPro labels as stand-in visuals (`[V]` for Virus, `[T1]` for towers, etc.)
+- **Epic 5+ (Final Art):** AI-generated high-resolution sprites using image generation tools
+
+**Tools:** Gemini Imagen (Nano Banana Pro), Midjourney, DALL-E, or similar AI image generators
+
+**Target Style:** High-resolution 2D art (512x512 or higher), clean vector/painted style, cyberpunk/neon aesthetic, dark backgrounds with glowing accents. Sprites should be crisp at all screen sizes for mobile and desktop.
+
+### AI Art Prompts
+
+Prompts for generating game assets. All sprites should be high resolution with transparent backgrounds for game use.
+
+#### Enemies
+
+| Entity | Placeholder | AI Prompt |
+|--------|-------------|-----------|
+| **Virus (Basic)** | `[V]` | "High resolution 2D game sprite, hostile computer virus entity, geometric crystalline shape with menacing digital face, glowing red energy core, dark purple translucent body, floating particles, transparent background, cyberpunk style, clean vector art, top-down perspective" |
+| **Worm (Fast)** | `[W]` | "High resolution 2D game sprite, fast digital worm malware creature, sleek serpentine form, segmented body with neon green bioluminescent glow, speed motion trails, sharp angular design, transparent background, cyberpunk aesthetic, vector illustration" |
+| **Ransomware (Boss)** | `[R]` | "High resolution 2D game sprite, massive ransomware boss entity, imposing hovering figure with skull-padlock hybrid head, chains of encrypted data orbiting around it, dark crimson armor with gold circuit patterns, ominous red eye glow, transparent background, detailed cyberpunk illustration, intimidating presence" |
+
+#### Towers
+
+| Entity | Placeholder | AI Prompt |
+|--------|-------------|-----------|
+| **Antivirus Turret (Base)** | `[T1]` | "High resolution 2D game sprite, sleek antivirus defense turret, modern security scanner design with rotating barrel, glowing cyan energy core, polished chrome and white armor plating, holographic shield emblem, transparent background, cyberpunk tech style, clean illustration" |
+| **Logic Bomb (AOE)** | `[T2]` | "High resolution 2D game sprite, explosive logic bomb launcher tower, spherical mortar design, industrial warning stripes orange and black, glowing payload chamber, steam vents, heavy reinforced base, transparent background, cyberpunk military tech" |
+| **Zero-Day Striker (Burst)** | `[T3]` | "High resolution 2D game sprite, precision zero-day sniper tower, long elegant barrel with advanced scope, electric blue charging coils, minimalist angular chrome design, energy capacitor glowing, transparent background, futuristic cyberpunk weapon" |
+| **Traceroute Cannon (Piercing)** | `[T4]` | "High resolution 2D game sprite, powerful railgun tower, twin parallel magnetic rails with electric arc crackling between them, purple plasma energy core, heavy industrial frame, cooling fins, transparent background, cyberpunk sci-fi artillery" |
+| **Brute Force Node (Advanced)** | `[T5]` | "High resolution 2D game sprite, rapid-fire brute force node, triple rotating barrel gatling-style design, spinning mechanism visible, overheated orange barrel glow, heavy armored ammunition feeds, smoke wisps, transparent background, cyberpunk aesthetic" |
+
+#### Firewall & Environment
+
+| Entity | Placeholder | AI Prompt |
+|--------|-------------|-----------|
+| **Firewall (Full Health)** | `████████` | "High resolution game asset, horizontal digital firewall barrier, luminous blue hexagonal honeycomb energy shield, pulsing light waves, holographic data streams flowing through it, pristine and powerful, seamless tileable, cyberpunk security aesthetic, dark background" |
+| **Firewall (Damaged)** | `░░██░░██` | "High resolution game asset, damaged digital firewall barrier, cracked and fractured hexagonal grid, sections flickering red with corruption, glitch distortion effects, sparking broken edges, warning indicators, cyberpunk, dark background" |
+| **Tower Slot (Empty)** | `[__]` | "High resolution 2D game sprite, circular tech platform for tower placement, metallic floor panel with subtle grid pattern, dim cyan edge lighting, holographic placement indicator, transparent background, clean cyberpunk design" |
+| **Background** | — | "Game background, dark data center environment, server racks silhouettes, flowing data streams, circuit board floor pattern, deep blue and purple ambient lighting, subtle grid overlay, cyberpunk atmosphere, parallax-ready layers" |
+
+#### Projectiles
+
+| Entity | Placeholder | AI Prompt |
+|--------|-------------|-----------|
+| **Basic Projectile** | `•` | "High resolution game sprite, small cyan energy bullet, glowing orb with soft light trail, clean circular shape, transparent background, cyberpunk style" |
+| **AOE Projectile** | `◉` | "High resolution game sprite, lobbed explosive orb projectile, orange plasma sphere, unstable energy shell, small warning glow, arc trail, transparent background, cyberpunk" |
+| **Burst Projectile** | `▏` | "High resolution game sprite, high-velocity sniper round, elongated blue energy bolt, electric discharge particles, speed lines, transparent background, cyberpunk" |
+| **Rail Beam** | `═══` | "High resolution game effect, instant hitscan energy beam, purple electric rail with lightning crackle, horizontal laser line, energy dissipation at edges, transparent background" |
+| **Rapid Shot** | `···` | "High resolution game sprite, small rapid-fire tracer round, orange hot bullet, circular with motion blur, transparent background, simple clean design" |
+
+#### UI Elements
+
+| Element | Placeholder | AI Prompt |
+|---------|-------------|-----------|
+| **Health Bar Frame** | `[====]` | "High resolution UI element, horizontal health bar frame, sleek tech border with hexagonal end caps, brushed metal with cyan accent lighting, transparent background, cyberpunk HUD style, clean vector design" |
+| **Card Frame** | text box | "High resolution UI element, rectangular upgrade card frame, circuit board pattern border, dark translucent center, neon blue edge glow, holographic sheen, cyberpunk trading card aesthetic, 3:4 aspect ratio" |
+| **Data Shard (Currency)** | `◈` | "High resolution 2D icon, glowing data shard crystal currency, multifaceted geometric gem shape, cyan and white inner glow, floating light particles, transparent background, cyberpunk collectible, clean illustration" |
+
+#### Status Effects
+
+| Effect | Placeholder | AI Prompt |
+|--------|-------------|-----------|
+| **Burn** | `🔥` | "High resolution game icon, digital corruption fire effect, stylized orange and red flames with data glitch distortion, transparent background, cyberpunk style" |
+| **Breach** | `⚡` | "High resolution game icon, security breach vulnerability mark, cracked shield with lightning bolt, electric green glow, transparent background, cyberpunk warning symbol" |
+| **Slow** | `❄` | "High resolution game icon, system slowdown effect, frozen clock or ice crystal with blue cold glow, frost particles, transparent background, cyberpunk aesthetic" |
+
 ---
 
 ## 3. Core Mechanics

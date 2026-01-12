@@ -22,10 +22,12 @@ All game code lives in the `ZeroDaySiege` assembly (`Assets/Scripts/ZeroDaySiege
 
 **GameBootstrap** (`Core/GameBootstrap.cs`) - Entry point using `[RuntimeInitializeOnLoadMethod]`. Creates persistent manager objects at startup:
 - `[GameManager]` - State machine and run flow
+- `[WaveManager]` - Wave state and transitions
 - `[GameLayout]` - Screen boundaries and coordinate conversion
 - `[ScreenController]` - Resolution and orientation handling
-- `[RunCanvas]` - UI canvas with wave display
-- `[DebugControls]` - Dev-only keyboard shortcuts
+- `[EventSystem]` - UI input handling (new Input System)
+- `[RunCanvas]` - UI canvas with wave display, pause overlay, confirmation dialogs
+- `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F5 for debug)
 
 **GameManager** (Singleton) - State machine with validated transitions:
 ```
@@ -36,7 +38,16 @@ Playing -> GameOver
 GameOver -> Menu | Playing (restart)
 Paused -> Menu
 ```
-Events: `OnStateChanged(prev, new)`, `OnWaveChanged(wave)`
+- Events: `OnStateChanged(prev, new)`, `OnWaveChanged(wave)`
+- Run tracking: `CurrentWave` (1-20), `LastRunOutcome` (None/Victory/Defeat)
+- Methods: `StartRun()`, `PauseGame()`, `ResumeGame()`, `RestartRun()`, `EndRun(victory)`, `AdvanceWave()`
+
+**WaveManager** (Singleton) - Wave lifecycle and transitions:
+```
+Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
+```
+- Events: `OnWaveStateChanged(state)`
+- Methods: `CompleteCurrentWave()` - called when wave spawning finishes, triggers transition
 
 **GameLayout** (Singleton) - Defines play area in world units:
 - Spawn line: Y=8, Firewall: Y=-4, Tower slots: Y=-6
@@ -50,11 +61,32 @@ Events: `OnStateChanged(prev, new)`, `OnWaveChanged(wave)`
 - **SerializeField** for inspector-exposed private fields
 - **Time.timeScale** controls pause (0 for Paused/CardSelection/GameOver)
 
+### UI Systems (Implemented)
+
+**RunUI** (`UI/RunUI.cs`) - Wave counter display, visible during Playing/Paused/CardSelection
+
+**PauseUI** (`UI/PauseUI.cs`) - Pause button (top-right during Playing) and pause overlay with Resume/Restart/Quit buttons
+
+**ConfirmationDialog** (`UI/ConfirmationDialog.cs`) - Reusable modal dialog for destructive actions (Restart/Quit)
+
+### Debug Controls
+
+| Key | Action |
+|-----|--------|
+| Escape | Toggle pause (Playing ↔ Paused) |
+| F1 | Start run |
+| F2 | Advance wave (instant, no transition) |
+| F3 | Trigger defeat |
+| F4 | Return to menu |
+| F5 | Complete wave (triggers 1s transition) |
+
+*F1-F5 only available in Editor/Development builds*
+
 ### Namespace Organization
 
 ```
-ZeroDaySiege.Core     - Game state, layout, bootstrap
-ZeroDaySiege.UI       - HUD and menus
+ZeroDaySiege.Core     - Game state, managers, bootstrap
+ZeroDaySiege.UI       - HUD, pause menu, dialogs
 ```
 
 Future namespaces (per PLAN.md): `Firewall`, `Enemies`, `Towers`, `Cards`, `Progression`
