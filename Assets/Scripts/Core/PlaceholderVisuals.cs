@@ -7,7 +7,6 @@ namespace ZeroDaySiege.Core
         [Header("Colors")]
         [SerializeField] private Color spawnAreaColor = new Color(0.2f, 0.2f, 0.4f, 0.5f);
         [SerializeField] private Color playFieldColor = new Color(0.1f, 0.1f, 0.2f, 1f);
-        [SerializeField] private Color firewallColor = new Color(0f, 0.8f, 1f, 0.8f);
         [SerializeField] private Color towerSlotColor = new Color(0.3f, 0.3f, 0.3f, 0.8f);
 
         private void Start()
@@ -24,11 +23,6 @@ namespace ZeroDaySiege.Core
                 new Vector3(0, (layout.SpawnY + layout.FirewallY) / 2f, 1),
                 new Vector2(layout.PlayAreaWidth, layout.SpawnY - layout.FirewallY),
                 playFieldColor);
-
-            CreateRegion("Firewall",
-                new Vector3(0, layout.FirewallY + 0.5f, 0),
-                new Vector2(layout.PlayAreaWidth, 1f),
-                firewallColor);
 
             for (int i = 0; i < 5; i++)
             {

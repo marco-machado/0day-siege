@@ -288,5 +288,105 @@ namespace ZeroDaySiege.UI
 
             return button;
         }
+
+        public static (GameObject container, Image fill, TextMeshProUGUI text) CreateFirewallHealthBar(Transform parent)
+        {
+            var containerGO = new GameObject("FirewallHealthContainer");
+            containerGO.transform.SetParent(parent, false);
+
+            var containerRect = containerGO.AddComponent<RectTransform>();
+            containerRect.anchorMin = new Vector2(0.5f, 0f);
+            containerRect.anchorMax = new Vector2(0.5f, 0f);
+            containerRect.pivot = new Vector2(0.5f, 0f);
+            containerRect.anchoredPosition = UIConstants.FirewallHealthPosition;
+            containerRect.sizeDelta = UIConstants.FirewallHealthSize;
+
+            var bgGO = new GameObject("Background");
+            bgGO.transform.SetParent(containerGO.transform, false);
+
+            var bgRect = bgGO.AddComponent<RectTransform>();
+            bgRect.anchorMin = Vector2.zero;
+            bgRect.anchorMax = Vector2.one;
+            bgRect.offsetMin = Vector2.zero;
+            bgRect.offsetMax = Vector2.zero;
+
+            var bgImage = bgGO.AddComponent<Image>();
+            bgImage.color = UIConstants.HealthBarBackgroundColor;
+
+            var fillGO = new GameObject("Fill");
+            fillGO.transform.SetParent(containerGO.transform, false);
+
+            var fillRect = fillGO.AddComponent<RectTransform>();
+            fillRect.anchorMin = Vector2.zero;
+            fillRect.anchorMax = Vector2.one;
+            fillRect.offsetMin = new Vector2(4, 4);
+            fillRect.offsetMax = new Vector2(-4, -4);
+
+            var fillImage = fillGO.AddComponent<Image>();
+            fillImage.color = UIConstants.HealthBarHealthyColor;
+            fillImage.type = Image.Type.Filled;
+            fillImage.fillMethod = Image.FillMethod.Horizontal;
+            fillImage.fillOrigin = 0;
+            fillImage.fillAmount = 1f;
+
+            var textGO = new GameObject("HPText");
+            textGO.transform.SetParent(containerGO.transform, false);
+
+            var textRect = textGO.AddComponent<RectTransform>();
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
+
+            var hpText = textGO.AddComponent<TextMeshProUGUI>();
+            hpText.text = "2000 / 2000";
+            hpText.fontSize = UIConstants.HealthBarFontSize;
+            hpText.alignment = TextAlignmentOptions.Center;
+            hpText.color = Color.white;
+
+            return (containerGO, fillImage, hpText);
+        }
+
+        public static Image CreateVignetteOverlay(Transform parent)
+        {
+            var vignetteGO = new GameObject("VignetteOverlay");
+            vignetteGO.transform.SetParent(parent, false);
+            vignetteGO.transform.SetAsFirstSibling();
+
+            var rect = vignetteGO.AddComponent<RectTransform>();
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+
+            var image = vignetteGO.AddComponent<Image>();
+            image.sprite = CreateVignetteSprite();
+            image.color = UIConstants.VignetteColor;
+            image.raycastTarget = false;
+
+            return image;
+        }
+
+        private static Sprite CreateVignetteSprite()
+        {
+            int size = 256;
+            var texture = new Texture2D(size, size);
+            var center = new Vector2(size / 2f, size / 2f);
+            float maxDist = size / 2f;
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float dist = Vector2.Distance(new Vector2(x, y), center);
+                    float normalizedDist = Mathf.Clamp01(dist / maxDist);
+                    float alpha = Mathf.Pow(normalizedDist, 2f);
+                    texture.SetPixel(x, y, new Color(1f, 1f, 1f, alpha));
+                }
+            }
+
+            texture.Apply();
+            return Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f));
+        }
     }
 }

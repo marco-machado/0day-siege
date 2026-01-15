@@ -10,7 +10,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 
 ---
 
-## Epic 1: Core Game Framework
+## Epic 1: Core Game Framework ✅
 
 **Goal:** Establish the foundational game loop and scene structure.
 
@@ -25,7 +25,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 
 ---
 
-## Epic 2: Firewall System
+## Epic 2: Firewall System ✅
 
 **Goal:** Implement the defensive wall that players protect.
 

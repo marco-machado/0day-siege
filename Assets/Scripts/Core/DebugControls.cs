@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ZeroDaySiege.Firewall;
 
 namespace ZeroDaySiege.Core
 {
@@ -66,6 +67,24 @@ namespace ZeroDaySiege.Core
             {
                 Debug.Log($"[Debug] Wave {GameManager.Instance.CurrentWave} spawning complete...");
                 WaveManager.Instance?.CompleteCurrentWave();
+            }
+
+            if (keyboard.f6Key.wasPressedThisFrame)
+            {
+                if (Firewall.Firewall.Instance != null)
+                {
+                    Debug.Log($"[Debug] Damaging firewall by 200 (current: {Firewall.Firewall.Instance.CurrentHP})");
+                    Firewall.Firewall.Instance.TakeDamage(200);
+                }
+            }
+
+            if (keyboard.f7Key.wasPressedThisFrame)
+            {
+                if (Firewall.Firewall.Instance != null)
+                {
+                    Debug.Log($"[Debug] Healing firewall by 30% (current: {Firewall.Firewall.Instance.CurrentHP})");
+                    Firewall.Firewall.Instance.HealPercent(0.30f);
+                }
             }
         }
 #endif

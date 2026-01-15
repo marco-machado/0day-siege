@@ -25,9 +25,10 @@ All game code lives in the `ZeroDaySiege` assembly (`Assets/Scripts/ZeroDaySiege
 - `[WaveManager]` - Wave state and transitions
 - `[GameLayout]` - Screen boundaries and coordinate conversion
 - `[ScreenController]` - Resolution and orientation handling
+- `[Firewall]` - Firewall entity with HP and visual feedback
 - `[EventSystem]` - UI input handling (new Input System)
-- `[RunCanvas]` - UI canvas with wave display, pause overlay, confirmation dialogs
-- `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F5 for debug)
+- `[RunCanvas]` - UI canvas with wave display, health bar, pause overlay, vignette
+- `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F7 for debug)
 
 **GameManager** (Singleton) - State machine with validated transitions:
 ```
@@ -54,6 +55,14 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 - Play width: 10 units (-5 to +5)
 - Coordinate helpers: `NormalizedToWorldX/Y()`, `GetTowerSlotPosition(0-4)`
 
+**Firewall** (`Firewall/Firewall.cs`) - Singleton, the defensive wall players protect:
+- Base HP: 2000, tracks `CurrentHP`, `MaxHP`, `HPPercent`
+- Health states: `Healthy` (100-51%), `Damaged` (50-26%), `Critical` (≤25%), `Destroyed` (0%)
+- Events: `OnHPChanged(current, max)`, `OnHealthStateChanged(state)`, `OnFirewallDestroyed`
+- Methods: `TakeDamage(amount)`, `Heal(amount)`, `HealPercent(percent)`, `ResetHP()`
+- Visual: Color changes (cyan → orange → red with flicker), positioned at GameLayout.FirewallY
+- Triggers `GameManager.EndRun(false)` when destroyed
+
 ### Patterns
 
 - **Singletons** for managers (`Instance` property with `DontDestroyOnLoad`)
@@ -64,6 +73,10 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 ### UI Systems (Implemented)
 
 **RunUI** (`UI/RunUI.cs`) - Wave counter display, visible during Playing/Paused/CardSelection
+
+**FirewallUI** (`UI/FirewallUI.cs`) - Health bar display (bottom-center), shows current/max HP with color matching health state
+
+**VignetteOverlay** (`UI/VignetteOverlay.cs`) - Red pulsing screen overlay when Firewall HP ≤25%
 
 **PauseUI** (`UI/PauseUI.cs`) - Pause button (top-right during Playing) and pause overlay with Resume/Restart/Quit buttons
 
@@ -79,17 +92,20 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 | F3 | Trigger defeat |
 | F4 | Return to menu |
 | F5 | Complete wave (triggers 1s transition) |
+| F6 | Damage firewall by 200 HP |
+| F7 | Heal firewall by 30% |
 
-*F1-F5 only available in Editor/Development builds*
+*F1-F7 only available in Editor/Development builds*
 
 ### Namespace Organization
 
 ```
 ZeroDaySiege.Core     - Game state, managers, bootstrap
+ZeroDaySiege.Firewall - Firewall entity and health states
 ZeroDaySiege.UI       - HUD, pause menu, dialogs
 ```
 
-Future namespaces (per PLAN.md): `Firewall`, `Enemies`, `Towers`, `Cards`, `Progression`
+Future namespaces (per PLAN.md): `Enemies`, `Towers`, `Cards`, `Progression`
 
 ## Testing
 

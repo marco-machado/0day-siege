@@ -51,5 +51,13 @@ namespace ZeroDaySiege.UI
         public static readonly Color DialogButtonHighlightColor = new(0.45f, 0.45f, 0.45f, 1f);
         public static readonly Color DialogButtonPressedColor = new(0.3f, 0.3f, 0.3f, 1f);
         public static readonly Color MessageTextColor = new(0.8f, 0.8f, 0.8f, 1f);
+
+        public static readonly Vector2 FirewallHealthPosition = new(0, 120);
+        public static readonly Vector2 FirewallHealthSize = new(300, 40);
+        public const int HealthBarFontSize = 24;
+        public static readonly Color HealthBarBackgroundColor = new(0.1f, 0.1f, 0.1f, 0.9f);
+        public static readonly Color HealthBarHealthyColor = new(0f, 0.8f, 1f, 1f);
+
+        public static readonly Color VignetteColor = new(0.8f, 0f, 0f, 0.5f);
     }
 }

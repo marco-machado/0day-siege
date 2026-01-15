@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using ZeroDaySiege.Firewall;
 using ZeroDaySiege.UI;
 
 namespace ZeroDaySiege.Core
@@ -23,8 +24,11 @@ namespace ZeroDaySiege.Core
             SetupGameManager();
             SetupWaveManager();
             SetupGameLayout();
+            SetupFirewall();
             SetupEventSystem();
             SetupRunUI();
+            SetupFirewallUI();
+            SetupVignetteOverlay();
             SetupPauseUI();
             SetupDebugControls();
         }
@@ -64,6 +68,15 @@ namespace ZeroDaySiege.Core
             DontDestroyOnLoad(layoutGO);
         }
 
+        private void SetupFirewall()
+        {
+            if (Firewall.Firewall.Instance != null) return;
+
+            var firewallGO = new GameObject("[Firewall]");
+            firewallGO.AddComponent<Firewall.Firewall>();
+            DontDestroyOnLoad(firewallGO);
+        }
+
         private void SetupEventSystem()
         {
             if (Object.FindAnyObjectByType<EventSystem>() != null) return;
@@ -86,6 +99,26 @@ namespace ZeroDaySiege.Core
             runUI.SetReferences(waveText, waveContainer);
 
             waveContainer.SetActive(false);
+        }
+
+        private void SetupFirewallUI()
+        {
+            var (container, fill, text) = UIFactory.CreateFirewallHealthBar(runCanvas.transform);
+
+            var firewallUI = runCanvas.AddComponent<FirewallUI>();
+            firewallUI.SetReferences(fill, text, container);
+
+            container.SetActive(false);
+        }
+
+        private void SetupVignetteOverlay()
+        {
+            var vignetteImage = UIFactory.CreateVignetteOverlay(runCanvas.transform);
+
+            var vignette = runCanvas.AddComponent<VignetteOverlay>();
+            vignette.SetReferences(vignetteImage);
+
+            vignetteImage.gameObject.SetActive(false);
         }
 
         private void SetupPauseUI()
