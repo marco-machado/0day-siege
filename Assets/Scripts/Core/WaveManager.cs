@@ -35,6 +35,7 @@ namespace ZeroDaySiege.Core
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnStateChanged += HandleGameStateChanged;
+                GameManager.Instance.OnWaveChanged += HandleWaveChanged;
             }
         }
 
@@ -43,6 +44,15 @@ namespace ZeroDaySiege.Core
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.OnStateChanged -= HandleGameStateChanged;
+                GameManager.Instance.OnWaveChanged -= HandleWaveChanged;
+            }
+        }
+
+        private void HandleWaveChanged(int wave)
+        {
+            if (wave == 1 && GameManager.Instance.IsPlaying)
+            {
+                StartWave();
             }
         }
 

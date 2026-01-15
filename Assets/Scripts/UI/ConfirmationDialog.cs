@@ -16,14 +16,6 @@ namespace ZeroDaySiege.UI
         private Action onConfirm;
         private Action onCancel;
 
-        private void Awake()
-        {
-            if (yesButton != null)
-                yesButton.onClick.AddListener(OnYesClicked);
-            if (noButton != null)
-                noButton.onClick.AddListener(OnNoClicked);
-        }
-
         private void OnDestroy()
         {
             if (yesButton != null)
