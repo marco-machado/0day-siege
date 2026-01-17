@@ -51,7 +51,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 - Wall attack behavior (stop, wait for cooldown, attack repeatedly)
 - Health bars above enemies
 - HP scaling formula: `HP = base × difficulty × (1 + (wave - 1) × 0.10)`
-- Speed values: Basic 0.1, Fast 0.16, Boss 0.06 units/s
+- Speed values: Virus 0.2, Worm 0.3, Ransomware 0.2 units/s
 
 **Dependencies:** Epic 2
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ZeroDaySiege.Enemies;
 using ZeroDaySiege.Firewall;
 
 namespace ZeroDaySiege.Core
@@ -85,6 +86,29 @@ namespace ZeroDaySiege.Core
                     Debug.Log($"[Debug] Healing firewall by 30% (current: {Firewall.Firewall.Instance.CurrentHP})");
                     Firewall.Firewall.Instance.HealPercent(0.30f);
                 }
+            }
+
+            if (keyboard.f8Key.wasPressedThisFrame)
+            {
+                float randomX = Random.value;
+                int wave = GameManager.Instance?.CurrentWave ?? 1;
+                Debug.Log($"[Debug] Spawning Virus at X={randomX:F2}, wave {wave}");
+                EnemyManager.Instance?.SpawnEnemy(EnemyType.Virus, randomX, wave);
+            }
+
+            if (keyboard.f9Key.wasPressedThisFrame)
+            {
+                float randomX = Random.value;
+                int wave = GameManager.Instance?.CurrentWave ?? 1;
+                Debug.Log($"[Debug] Spawning Worm at X={randomX:F2}, wave {wave}");
+                EnemyManager.Instance?.SpawnEnemy(EnemyType.Worm, randomX, wave);
+            }
+
+            if (keyboard.f10Key.wasPressedThisFrame)
+            {
+                int wave = GameManager.Instance?.CurrentWave ?? 1;
+                Debug.Log($"[Debug] Spawning Ransomware at center, wave {wave}");
+                EnemyManager.Instance?.SpawnEnemy(EnemyType.Ransomware, 0.5f, wave);
             }
         }
 #endif

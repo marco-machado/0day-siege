@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using ZeroDaySiege.Enemies;
 using ZeroDaySiege.Firewall;
 using ZeroDaySiege.UI;
 
@@ -24,6 +25,7 @@ namespace ZeroDaySiege.Core
             SetupGameManager();
             SetupWaveManager();
             SetupGameLayout();
+            SetupEnemyManager();
             SetupFirewall();
             SetupEventSystem();
             SetupRunUI();
@@ -66,6 +68,15 @@ namespace ZeroDaySiege.Core
             layoutGO.AddComponent<GameLayout>();
             layoutGO.AddComponent<PlaceholderVisuals>();
             DontDestroyOnLoad(layoutGO);
+        }
+
+        private void SetupEnemyManager()
+        {
+            if (EnemyManager.Instance != null) return;
+
+            var enemyGO = new GameObject("[EnemyManager]");
+            enemyGO.AddComponent<EnemyManager>();
+            DontDestroyOnLoad(enemyGO);
         }
 
         private void SetupFirewall()
