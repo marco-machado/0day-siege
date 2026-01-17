@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ZeroDaySiege.Enemies;
 using ZeroDaySiege.Firewall;
+using ZeroDaySiege.Towers;
 
 namespace ZeroDaySiege.Core
 {
@@ -109,6 +110,34 @@ namespace ZeroDaySiege.Core
                 int wave = GameManager.Instance?.CurrentWave ?? 1;
                 Debug.Log($"[Debug] Spawning Ransomware at center, wave {wave}");
                 EnemyManager.Instance?.SpawnEnemy(EnemyType.Ransomware, 0.5f, wave);
+            }
+
+            if (keyboard.tKey.wasPressedThisFrame && !keyboard.shiftKey.isPressed)
+            {
+                var towerManager = TowerManager.Instance;
+                if (towerManager != null)
+                {
+                    int nextSlot = towerManager.GetNextEmptySlot();
+                    if (nextSlot >= 0)
+                    {
+                        Debug.Log($"[Debug] Placing BaseTower in slot {nextSlot}");
+                        towerManager.PlaceTower(nextSlot, TowerType.BaseTower);
+                    }
+                    else
+                    {
+                        Debug.Log("[Debug] All tower slots are occupied");
+                    }
+                }
+            }
+
+            if (keyboard.tKey.wasPressedThisFrame && keyboard.shiftKey.isPressed)
+            {
+                var towerManager = TowerManager.Instance;
+                if (towerManager != null)
+                {
+                    Debug.Log("[Debug] Clearing all towers");
+                    towerManager.ClearAllTowers();
+                }
             }
         }
 #endif

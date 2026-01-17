@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using ZeroDaySiege.Enemies;
 using ZeroDaySiege.Firewall;
+using ZeroDaySiege.Towers;
 using ZeroDaySiege.UI;
 
 namespace ZeroDaySiege.Core
@@ -26,6 +27,7 @@ namespace ZeroDaySiege.Core
             SetupWaveManager();
             SetupGameLayout();
             SetupEnemyManager();
+            SetupTowerManager();
             SetupFirewall();
             SetupEventSystem();
             SetupRunUI();
@@ -77,6 +79,15 @@ namespace ZeroDaySiege.Core
             var enemyGO = new GameObject("[EnemyManager]");
             enemyGO.AddComponent<EnemyManager>();
             DontDestroyOnLoad(enemyGO);
+        }
+
+        private void SetupTowerManager()
+        {
+            if (TowerManager.Instance != null) return;
+
+            var towerGO = new GameObject("[TowerManager]");
+            towerGO.AddComponent<TowerManager>();
+            DontDestroyOnLoad(towerGO);
         }
 
         private void SetupFirewall()

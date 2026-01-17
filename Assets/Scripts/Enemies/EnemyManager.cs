@@ -14,6 +14,7 @@ namespace ZeroDaySiege.Enemies
         public event Action OnAllEnemiesDefeated;
 
         private readonly List<Enemy> activeEnemies = new();
+        private int spawnCounter;
 
         public int ActiveEnemyCount => activeEnemies.Count;
         public IReadOnlyList<Enemy> ActiveEnemies => activeEnemies;
@@ -69,7 +70,7 @@ namespace ZeroDaySiege.Enemies
             enemyGO.transform.position = spawnPosition;
 
             var enemy = enemyGO.AddComponent<Enemy>();
-            enemy.Initialize(type, wave, difficultyMultiplier);
+            enemy.Initialize(type, wave, difficultyMultiplier, spawnCounter++);
 
             activeEnemies.Add(enemy);
             OnEnemySpawned?.Invoke(enemy);
@@ -109,6 +110,7 @@ namespace ZeroDaySiege.Enemies
                 }
             }
             activeEnemies.Clear();
+            spawnCounter = 0;
             Debug.Log("[EnemyManager] Cleared all enemies");
         }
 

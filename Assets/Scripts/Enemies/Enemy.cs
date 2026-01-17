@@ -28,6 +28,7 @@ namespace ZeroDaySiege.Enemies
         private float attackCooldown;
         private int scoreValue;
         private float attackTimer;
+        private int spawnOrder;
 
         private SpriteRenderer visualRenderer;
         private TextMeshPro labelText;
@@ -40,10 +41,12 @@ namespace ZeroDaySiege.Enemies
         public float HPPercent => maxHP > 0 ? (float)currentHP / maxHP : 0f;
         public bool IsAlive => currentHP > 0 && currentState != EnemyState.Dead;
         public int ScoreValue => scoreValue;
+        public int SpawnOrder => spawnOrder;
 
-        public void Initialize(EnemyType type, int wave, float difficultyMultiplier = 1f)
+        public void Initialize(EnemyType type, int wave, float difficultyMultiplier = 1f, int order = 0)
         {
             enemyType = type;
+            spawnOrder = order;
             var stats = EnemyData.GetStats(type);
 
             maxHP = EnemyData.CalculateScaledHP(type, wave, difficultyMultiplier);

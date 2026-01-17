@@ -25,10 +25,12 @@ All game code lives in the `ZeroDaySiege` assembly (`Assets/Scripts/ZeroDaySiege
 - `[WaveManager]` - Wave state and transitions
 - `[GameLayout]` - Screen boundaries and coordinate conversion
 - `[ScreenController]` - Resolution and orientation handling
+- `[EnemyManager]` - Enemy spawning and tracking
+- `[TowerManager]` - Tower placement and management
 - `[Firewall]` - Firewall entity with HP and visual feedback
 - `[EventSystem]` - UI input handling (new Input System)
 - `[RunCanvas]` - UI canvas with wave display, health bar, pause overlay, vignette
-- `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F7 for debug)
+- `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F10/T for debug)
 
 **GameManager** (Singleton) - State machine with validated transitions:
 ```
@@ -63,6 +65,32 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 - Visual: Color changes (cyan → orange → red with flicker), positioned at GameLayout.FirewallY
 - Triggers `GameManager.EndRun(false)` when destroyed
 
+**EnemyManager** (`Enemies/EnemyManager.cs`) - Singleton for spawning and tracking enemies:
+- `ActiveEnemies` - Read-only list of all alive enemies
+- Events: `OnEnemySpawned(enemy)`, `OnEnemyDied(enemy, score)`, `OnAllEnemiesDefeated`
+- Methods: `SpawnEnemy(type, normalizedX, wave, difficulty)`, `ClearAllEnemies()`, `GetClosestEnemyToFirewall()`
+- HP scaling: `base × difficulty × (1 + (wave - 1) × 0.10)`
+
+**Enemy** (`Enemies/Enemy.cs`) - Individual enemy entity:
+- Types: `Virus` (100 HP, 0.2 speed), `Worm` (60 HP, 0.3 speed), `Ransomware` (500 HP, 0.2 speed)
+- States: `Moving` → `Attacking` → `Dead`
+- Methods: `TakeDamage(amount)` returns true if killed
+- Wall attack: Stops at Firewall, attacks repeatedly on cooldown
+
+**TowerManager** (`Towers/TowerManager.cs`) - Singleton for tower placement:
+- 5 tower slots (indices 0-4), middle slot (2) for Basic Tower
+- `StartingTowerType` - Set before run (default: BaseTower)
+- Events: `OnTowerPlaced(tower)`, `OnTowerDestroyed(tower)`
+- Methods: `PlaceTower(slotIndex, type)`, `RemoveTower(tower)`, `ClearAllTowers()`
+- Auto-places starting tower when run begins
+
+**Tower** (`Towers/Tower.cs`) - Individual tower entity:
+- Types: `BaseTower`, `AOETower`, `BurstTower`, `PiercingTower`, `BruteForceNode`
+- Stats from `TowerData`: Damage, FireRate, Range (normalized), ProjectileSpeed
+- Targeting: Uses `TargetingSystem` with priority (Attacking Wall > Boss > Closest > Highest HP > First Spawned)
+- Critical hits: 5% chance, 1.5x damage
+- Fires `Projectile` instances that travel and deal damage on hit
+
 ### Patterns
 
 - **Singletons** for managers (`Instance` property with `DontDestroyOnLoad`)
@@ -94,18 +122,25 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 | F5 | Complete wave (triggers 1s transition) |
 | F6 | Damage firewall by 200 HP |
 | F7 | Heal firewall by 30% |
+| F8 | Spawn Virus at random X |
+| F9 | Spawn Worm at random X |
+| F10 | Spawn Ransomware at center |
+| T | Place BaseTower in next empty slot |
+| Shift+T | Clear all towers |
 
-*F1-F7 only available in Editor/Development builds*
+*Debug keys only available in Editor/Development builds*
 
 ### Namespace Organization
 
 ```
 ZeroDaySiege.Core     - Game state, managers, bootstrap
 ZeroDaySiege.Firewall - Firewall entity and health states
+ZeroDaySiege.Enemies  - Enemy entity, spawning, and health bars
+ZeroDaySiege.Towers   - Tower entity, targeting, projectiles
 ZeroDaySiege.UI       - HUD, pause menu, dialogs
 ```
 
-Future namespaces (per PLAN.md): `Enemies`, `Towers`, `Cards`, `Progression`
+Future namespaces (per PLAN.md): `Cards`, `Progression`
 
 ## Testing
 

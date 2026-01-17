@@ -40,7 +40,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 
 ---
 
-## Epic 3: Enemy System
+## Epic 3: Enemy System ✅
 
 **Goal:** Create enemies that travel toward and attack the Firewall.
 
@@ -57,7 +57,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 
 ---
 
-## Epic 4: Tower System - Core
+## Epic 4: Tower System - Core ✅
 
 **Goal:** Implement the tower placement and basic tower functionality.
 
