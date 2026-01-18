@@ -28,73 +28,6 @@ The game takes place in a stylized data center environment where players defend 
 
 *Alternative theme options are documented in Appendix G for future reskins.*
 
-### Art Pipeline
-
-**Development Phases:**
-- **Epics 1-4 (Placeholders):** TextMeshPro labels as stand-in visuals (`[V]` for Virus, `[T1]` for towers, etc.)
-- **Epic 5+ (Final Art):** AI-generated high-resolution sprites using image generation tools
-
-**Tools:** Gemini Imagen (Nano Banana Pro), Midjourney, DALL-E, or similar AI image generators
-
-**Target Style:** High-resolution 2D art (512x512 or higher), clean vector/painted style, cyberpunk/neon aesthetic, dark backgrounds with glowing accents. Sprites should be crisp at all screen sizes for mobile and desktop.
-
-### AI Art Prompts
-
-Prompts for generating game assets. All sprites should be high resolution with transparent backgrounds for game use.
-
-#### Enemies
-
-| Entity | Placeholder | AI Prompt |
-|--------|-------------|-----------|
-| **Virus (Basic)** | `[V]` | "High resolution 2D game sprite, hostile computer virus entity, geometric crystalline shape with menacing digital face, glowing red energy core, dark purple translucent body, floating particles, transparent background, cyberpunk style, clean vector art, top-down perspective" |
-| **Worm (Fast)** | `[W]` | "High resolution 2D game sprite, fast digital worm malware creature, sleek serpentine form, segmented body with neon green bioluminescent glow, speed motion trails, sharp angular design, transparent background, cyberpunk aesthetic, vector illustration" |
-| **Ransomware (Boss)** | `[R]` | "High resolution 2D game sprite, massive ransomware boss entity, imposing hovering figure with skull-padlock hybrid head, chains of encrypted data orbiting around it, dark crimson armor with gold circuit patterns, ominous red eye glow, transparent background, detailed cyberpunk illustration, intimidating presence" |
-
-#### Towers
-
-| Entity | Placeholder | AI Prompt |
-|--------|-------------|-----------|
-| **Antivirus Turret (Base)** | `[T1]` | "High resolution 2D game sprite, sleek antivirus defense turret, modern security scanner design with rotating barrel, glowing cyan energy core, polished chrome and white armor plating, holographic shield emblem, transparent background, cyberpunk tech style, clean illustration" |
-| **Logic Bomb (AOE)** | `[T2]` | "High resolution 2D game sprite, explosive logic bomb launcher tower, spherical mortar design, industrial warning stripes orange and black, glowing payload chamber, steam vents, heavy reinforced base, transparent background, cyberpunk military tech" |
-| **Zero-Day Striker (Burst)** | `[T3]` | "High resolution 2D game sprite, precision zero-day sniper tower, long elegant barrel with advanced scope, electric blue charging coils, minimalist angular chrome design, energy capacitor glowing, transparent background, futuristic cyberpunk weapon" |
-| **Traceroute Cannon (Piercing)** | `[T4]` | "High resolution 2D game sprite, powerful railgun tower, twin parallel magnetic rails with electric arc crackling between them, purple plasma energy core, heavy industrial frame, cooling fins, transparent background, cyberpunk sci-fi artillery" |
-| **Brute Force Node (Advanced)** | `[T5]` | "High resolution 2D game sprite, rapid-fire brute force node, triple rotating barrel gatling-style design, spinning mechanism visible, overheated orange barrel glow, heavy armored ammunition feeds, smoke wisps, transparent background, cyberpunk aesthetic" |
-
-#### Firewall & Environment
-
-| Entity | Placeholder | AI Prompt |
-|--------|-------------|-----------|
-| **Firewall (Full Health)** | `████████` | "High resolution game asset, horizontal digital firewall barrier, luminous blue hexagonal honeycomb energy shield, pulsing light waves, holographic data streams flowing through it, pristine and powerful, seamless tileable, cyberpunk security aesthetic, dark background" |
-| **Firewall (Damaged)** | `░░██░░██` | "High resolution game asset, damaged digital firewall barrier, cracked and fractured hexagonal grid, sections flickering red with corruption, glitch distortion effects, sparking broken edges, warning indicators, cyberpunk, dark background" |
-| **Tower Slot (Empty)** | `[__]` | "High resolution 2D game sprite, circular tech platform for tower placement, metallic floor panel with subtle grid pattern, dim cyan edge lighting, holographic placement indicator, transparent background, clean cyberpunk design" |
-| **Background** | — | "Game background, dark data center environment, server racks silhouettes, flowing data streams, circuit board floor pattern, deep blue and purple ambient lighting, subtle grid overlay, cyberpunk atmosphere, parallax-ready layers" |
-
-#### Projectiles
-
-| Entity | Placeholder | AI Prompt |
-|--------|-------------|-----------|
-| **Basic Projectile** | `•` | "High resolution game sprite, small cyan energy bullet, glowing orb with soft light trail, clean circular shape, transparent background, cyberpunk style" |
-| **AOE Projectile** | `◉` | "High resolution game sprite, lobbed explosive orb projectile, orange plasma sphere, unstable energy shell, small warning glow, arc trail, transparent background, cyberpunk" |
-| **Burst Projectile** | `▏` | "High resolution game sprite, high-velocity sniper round, elongated blue energy bolt, electric discharge particles, speed lines, transparent background, cyberpunk" |
-| **Rail Beam** | `═══` | "High resolution game effect, instant hitscan energy beam, purple electric rail with lightning crackle, horizontal laser line, energy dissipation at edges, transparent background" |
-| **Rapid Shot** | `···` | "High resolution game sprite, small rapid-fire tracer round, orange hot bullet, circular with motion blur, transparent background, simple clean design" |
-
-#### UI Elements
-
-| Element | Placeholder | AI Prompt |
-|---------|-------------|-----------|
-| **Health Bar Frame** | `[====]` | "High resolution UI element, horizontal health bar frame, sleek tech border with hexagonal end caps, brushed metal with cyan accent lighting, transparent background, cyberpunk HUD style, clean vector design" |
-| **Card Frame** | text box | "High resolution UI element, rectangular upgrade card frame, circuit board pattern border, dark translucent center, neon blue edge glow, holographic sheen, cyberpunk trading card aesthetic, 3:4 aspect ratio" |
-| **Data Shard (Currency)** | `◈` | "High resolution 2D icon, glowing data shard crystal currency, multifaceted geometric gem shape, cyan and white inner glow, floating light particles, transparent background, cyberpunk collectible, clean illustration" |
-
-#### Status Effects
-
-| Effect | Placeholder | AI Prompt |
-|--------|-------------|-----------|
-| **Burn** | `🔥` | "High resolution game icon, digital corruption fire effect, stylized orange and red flames with data glitch distortion, transparent background, cyberpunk style" |
-| **Breach** | `⚡` | "High resolution game icon, security breach vulnerability mark, cracked shield with lightning bolt, electric green glow, transparent background, cyberpunk warning symbol" |
-| **Slow** | `❄` | "High resolution game icon, system slowdown effect, frozen clock or ice crystal with blue cold glow, frost particles, transparent background, cyberpunk aesthetic" |
-
 ---
 
 ## 3. Core Mechanics
@@ -143,16 +76,27 @@ Antivirus Turret
 DMG: 65 (+30%) (+25%)
 SPD: 1.0/s (+0%)
 RNG: 0.9
-DPS: 81.25
+CRIT: 35% (+15%) (+15%) × 2.1x (+0.5x) (+0.1x)
+DPS: 81.25 → 110.9 avg
 ─────────────
 Upgrades: Tier 1 Damage
-Mastery: Level 3 (+30% damage)
+Mastery: Level 5 (Overclocked)
+Gear: critical_section.dll
 ```
+
+**Tooltip Notes:**
+- CRIT line shows: `chance (chip bonus) (mastery/gear bonus) × multiplier (chip bonus) (mastery/gear bonus)`
+- DPS shows base → average (including expected crit contribution)
+- Sources in parentheses help players understand their build composition
 
 **DPS Calculation:** `DPS = BaseDamage × (1 + MasteryBonus) × (1 + DamageUpgrade) × FireRate × (1 + SpeedUpgrade)`
 
-Example: Base Tower with Mastery 3 (+30%) and Tier 1 Damage (+25%):
-- `50 × 1.30 × 1.25 × 1.0 = 81.25 DPS`
+**Average DPS Calculation:** `AvgDPS = DPS × (1 + CritChance × (CritMultiplier - 1))`
+
+Example: Base Tower with Mastery 5 (+50% damage, Overclocked), Tier 1 Damage (+25%), critical_section.dll (+5% crit):
+- Base DPS: `50 × 1.50 × 1.25 × 1.0 = 93.75 DPS`
+- Crit stats: 35% chance (5% base + 15% chips + 15% Overclocked), 2.1x multiplier (1.5x base + 0.5x Overclocked + 0.1x chips)
+- Avg DPS: `93.75 × (1 + 0.35 × 1.1) = 93.75 × 1.385 = 129.8 DPS`
 
 #### Nice to Have (Polish)
 Elements that improve game feel and clarity but aren't strictly blocking:
@@ -203,21 +147,63 @@ During a run, there is no resource management. Strategic depth comes from profil
 
 ### 3.6 Score System
 
-Score is the primary progression metric during a run:
+Score serves a **dual purpose**: it triggers card selection thresholds during a run AND acts as a **competitive metric** for personal bests and future leaderboards.
 
-- Each enemy killed adds to the player's score
-- Score thresholds unlock card selection opportunities
-- Score persists across waves within a single run
+**Key Distinction:**
+- **Score** = Competitive performance metric (in-run progression + bragging rights)
+- **Shards** = Progression currency (unlocks, mastery) — earned independently, NOT converted from score
 
-**Enemy Score Values:**
+Score persists across waves within a single run but resets between runs.
 
-| Enemy Type | Base Score |
-|------------|------------|
-| Basic Enemy | 10 |
-| Fast Enemy | 15 |
-| Boss Enemy | 100 |
+#### 3.6.1 Base Score (Per-Kill)
 
-Score values are not modified by difficulty—Hard mode rewards come from the end-of-run currency multiplier, not in-run score.
+| Enemy Type | Base Score | Notes |
+|------------|------------|-------|
+| Basic Enemy | 10 | Standard threat |
+| Fast Enemy | 15 | +50% for evasion difficulty |
+| Boss Enemy | 200 | High-value target |
+
+Base score values are **not modified by difficulty**—difficulty bonuses are applied as multipliers at run end.
+
+#### 3.6.2 Bonus Multipliers (Applied at Run End)
+
+At the end of a run, the accumulated score is multiplied by applicable bonuses:
+
+| Bonus | Condition | Multiplier | Rationale |
+|-------|-----------|------------|-----------|
+| **No-Leak Bonus** | Wall took 0 damage | ×1.25 | Rewards perfect defense |
+| **Difficulty Bonus** | Hard mode | ×1.5 | Rewards challenge |
+| **Full Clear Bonus** | All 20 waves + victory | +500 flat | Completion reward |
+
+**Multiplier Stacking:** Multipliers stack multiplicatively. The flat Full Clear Bonus is added after multipliers.
+
+**Example Calculation:**
+- Base score from kills: 6,000
+- Hard mode: 6,000 × 1.5 = 9,000
+- No-Leak: 9,000 × 1.25 = 11,250
+- Full Clear: 11,250 + 500 = **11,750 final score**
+
+#### 3.6.3 Combo/Streak Scoring (In-Run)
+
+Additional score can be earned through skilled play:
+
+| Event | Bonus | Condition |
+|-------|-------|-----------|
+| **Kill Streak** | +1 per kill | Consecutive kills within 2s window; resets after 2s gap |
+| **Multi-Kill** | +5 per additional enemy | 2+ enemies killed in same frame |
+| **Overkill** | +10% of excess damage | Damage beyond lethal converted to score |
+
+**Streak Example:**
+- Kill enemy 1: 10 base + 1 streak = 11
+- Kill enemy 2 (within 2s): 10 base + 2 streak = 12
+- Kill enemy 3 (within 2s): 10 base + 3 streak = 13
+- 2s gap passes: streak resets to 0
+
+**Caps:** Kill streak bonus caps at +50 per streak; multi-kill bonus caps at +100 per instance.
+
+#### 3.6.4 Score and Card Thresholds
+
+Score continues to trigger card selection (see Section 6.1). When a score threshold is reached, the game pauses for card selection. This creates a strategic layer where efficient killing unlocks more upgrade opportunities.
 
 ### 3.7 Run Controls
 
@@ -229,13 +215,33 @@ Players have access to the following controls during a run:
 | **Resume** | Resumes gameplay from the paused state. Only available when game is paused. |
 | **Restart** | Immediately ends the current run and starts a new run of the same stage with the same difficulty selection. Confirmation dialog required to prevent accidental restarts. |
 | **Quit** | Exits the current run and returns to the main menu/stage selection. Progress is lost. Confirmation dialog required. |
-| **Wave Transition** | Brief pause between waves (1-2s) for strategic assessment. No player action required—next wave begins automatically. |
+| **Wave Transition** | 1.0s delay between waves. Next wave begins automatically; wave counter updates silently with no additional UI. |
 
 **Control Availability:**
 - Pause/Resume: Available at any time during active gameplay
 - Restart: Available during gameplay or while paused
 - Quit: Available during gameplay or while paused
 - Controls are disabled during card selection (card selection itself acts as a pause state)
+
+#### Wave Timing
+
+| Phase | Duration | Notes |
+|-------|----------|-------|
+| **First wave delay** | 0.2s | Run starts, enemies begin spawning |
+| **Wave duration** | 9-27s | Varies by wave; ends when last enemy spawns |
+| **Inter-wave break** | 1.0s | Automatic; next wave starts after delay |
+
+**Timing Notes:**
+- Wave duration is determined by the final enemy's spawn time in the wave data
+- Enemies may still be alive when a wave "ends" (spawning complete)
+- Inter-wave break begins when all enemies for the current wave have spawned
+- Break does NOT wait for enemies to be defeated
+- Pause is available at any time (during waves or breaks)
+
+**Wave Transition UI:**
+- No warnings, banners, or notifications between waves
+- Only the wave counter updates silently
+- Gameplay is continuous and uninterrupted
 
 ### 3.8 Run Failure & Rewards
 
@@ -291,6 +297,77 @@ After a failed run, players see:
 | Fail during boss wave | Boss kill counted if boss died before wall |
 | Alt+F4 / disconnect | Run abandoned, no rewards (prevents save-scumming) |
 | Pause then quit | Treated as failure at current wave |
+
+### 3.9 Victory Conditions
+
+A run is won when **both** conditions are met:
+1. All 20 waves have been spawned
+2. All enemies on the field are defeated
+
+The victory screen appears immediately when the last enemy dies. Players cannot lose after the final enemy is killed, even if projectiles are mid-flight.
+
+**Victory Rewards:**
+- Stage clear bonus: 50 shards (75 on Hard)
+- Perfect clear bonus: +25 shards (if wall took no damage)
+- All kill rewards and wave completion bonuses
+- Stage unlock progression (unlocks next stage)
+- Hard mode unlock (if completed on Normal)
+
+### 3.10 Anti-Exploit Measures
+
+To maintain competitive integrity and prevent score farming, the following safeguards are in place:
+
+#### Time-Based Score Decay
+
+Runs that take excessively long receive reduced final scores:
+
+```
+If run_time > expected_time × 2:
+    score_multiplier = max(0.5, 1.0 - (excess_time / expected_time) × 0.1)
+```
+
+| Run Duration | Score Multiplier |
+|--------------|------------------|
+| ≤ 2× expected | 1.0× (no penalty) |
+| 2.5× expected | 0.95× |
+| 3× expected | 0.9× |
+| 5× expected | 0.7× |
+| 7×+ expected | 0.5× (minimum) |
+
+- **Expected time** = wave count × average wave duration (~20 waves × 15s = ~5 minutes base)
+- Timer **pauses** when game is paused (no penalty for breaks)
+- Prevents AFK farming and encourages active play
+
+#### Kill Rate Minimum
+
+If the player's kill rate drops below 2 kills/minute for 60+ consecutive seconds, score gains are reduced by 50% until the rate recovers. This prevents slow-roll exploits where players intentionally let enemies pile up.
+
+#### Score Caps
+
+| Cap Type | Limit | Rationale |
+|----------|-------|-----------|
+| Kill streak bonus | +50 max per streak | Prevents infinite streak farming |
+| Multi-kill bonus | +100 max per instance | Caps cluster bomb exploits |
+| Per-enemy score | 500 max | Prevents overflow exploits |
+
+**Additional Rules:**
+- No score granted for enemies killed by wall contact (only tower kills count)
+- Enemies that despawn without being killed award no score
+
+### 3.11 Competitive Features (Future)
+
+> **Note:** This section outlines planned features. MVP focuses on core scoring mechanics; leaderboards are post-launch.
+
+**Planned Features:**
+- Personal best tracking per stage/difficulty
+- Global leaderboards with weekly resets
+- Score-based mastery challenges with shard rewards
+- Badge system for score milestones (Bronze/Silver/Gold/Platinum)
+
+**Implementation Considerations:**
+- Server-side validation for anti-cheat
+- Replay storage for top scores
+- Seasonal rankings with cosmetic rewards
 
 ---
 
@@ -463,32 +540,66 @@ Additional tower examples and archetypes can be found in Appendix D. The MVP inc
 
 ### 5.5 Critical Hit System
 
-All towers have a chance to deal critical hits, dealing bonus damage with enhanced visual feedback.
+All towers have a chance to deal critical hits, dealing bonus damage with enhanced visual feedback. Crit stats are modified by chips, gear, and mastery abilities.
 
-#### Base Critical Hit Values
+#### Unified Crit Formula
 
-| Property | Value |
+**Crit Chance** (additive, capped):
+```
+finalCritChance = min(base + chipBonus + gearBonus + masteryBonus, 40%)
+```
+
+**Crit Multiplier** (additive, capped):
+```
+finalCritMultiplier = min(base + chipBonus + gearBonus + masteryBonus, 2.6x)
+```
+
+| Stat | Base | Cap |
+|------|------|-----|
+| Crit Chance | 5% | 40% |
+| Crit Multiplier | 1.5x | 2.6x |
+
+#### Crit Sources
+
+| Source | Crit Chance | Crit Multiplier |
+|--------|-------------|-----------------|
+| Base (all towers) | 5% | 1.5x |
+| CRIT Chip (×5 max useful) | +3% each, +15% cap | — |
+| CRIT-X Chip (×4 max useful) | — | +0.15x each, +0.6x cap |
+| Overclocked Processor (Base Tower M5) | +15% | +0.5x |
+| critical_section.dll (Uncommon) | +5% | — |
+| buffer_overflow.dll (Rare) | +8% | +0.25x vs <30% HP |
+| exception_handler.dll (Epic) | +10% | — |
+| zero_day.dll (Rare) | First hit = auto-crit | — |
+
+#### Overclocked Processor (Base Tower Mastery 5)
+
+The Base Tower at Mastery Level 5 gains the "Overclocked Processor" ability, which **adds** to base crit values:
+
+| Property | Bonus |
 |----------|-------|
-| Base Crit Chance | 5% |
-| Base Crit Multiplier | 1.5x damage |
+| Crit Chance | +15% (5% → 20%) |
+| Crit Multiplier | +0.5x (1.5x → 2.0x) |
 
-These base values apply to all towers that do not have an overriding special ability.
+With full chip investment, an Overclocked Base Tower reaches 35% crit chance and 2.1x multiplier.
 
-#### Overclocked Special Ability (Base Tower)
+#### Interaction Rules
 
-The Base Tower at Mastery Level 5 gains the "Overclocked Processor" ability, which overrides the base crit values:
-
-| Property | Value |
-|----------|-------|
-| Overclocked Crit Chance | 20% |
-| Overclocked Crit Multiplier | 2.0x damage |
+| Rule | Behavior |
+|------|----------|
+| **Calculation order** | Base damage → Upgrades → Gear flat bonuses → Crit roll → Status conversion |
+| **AoE crits** | Roll once per explosion; all targets receive same crit/non-crit result |
+| **DoT crits** | DoTs (Burn, etc.) cannot crit; calculated from pre-crit base damage |
+| **Multi-hit (Burst)** | Each projectile in a burst rolls independently |
+| **Piercing** | Single roll applies to all enemies hit by same projectile |
+| **Rounding** | `Math.round(damage × critMultiplier)` |
 
 #### Critical Hit Calculation
 
-1. Tower calculates base damage including all modifiers (upgrades, mastery bonuses)
-2. RNG roll determines if critical hit occurs (based on crit chance)
-3. If critical: `damage = floor(damage × critMultiplier)`
-4. Critical flag is passed to the projectile and collision system
+1. Tower calculates base damage including all modifiers (upgrades, mastery bonuses, gear)
+2. RNG roll determines if critical hit occurs (based on total crit chance)
+3. If critical: `damage = round(damage × critMultiplier)`
+4. Critical flag is passed to the projectile for visual feedback
 
 #### Visual Feedback
 
@@ -503,9 +614,7 @@ Critical hits are displayed with distinct styling:
 | Animation | Float up (0.8s) | Pop up with scale (1s) |
 | Effects | Basic shadow | Dual-layer glow |
 
-#### Known Issues & Limitations
-
-See **Appendix F.5: Critical Hit System Issues** for documented limitations and gaps in the current implementation.
+**AoE Crit Display:** When an AOE attack crits, only the impact point shows the "!" indicator. Splash damage targets show crit-colored numbers without the "!" suffix to avoid visual noise.
 
 ### 5.6 Status Effects
 
@@ -631,7 +740,49 @@ When the available card pool is limited:
 
 This is an edge case that occurs only in near-perfect late-game runs.
 
-### 6.5 Strategic Considerations
+### 6.5 Card Rerolls
+
+Players can spend **Decrypt Keys** to reroll card selections, providing agency when presented with undesirable options.
+
+**Reroll UI:**
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║  SELECT UPGRADE                                    🔑 12       ║
+╠═══════════════════════════════════════════════════════════════╣
+║                                                               ║
+║  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐           ║
+║  │ PLACE TOWER │  │ UPGRADE     │  │ UPGRADE     │           ║
+║  │             │  │             │  │             │           ║
+║  │ Brute Force │  │ Damage +    │  │ Fire Rate + │           ║
+║  │ Node        │  │ Tier 1      │  │ Tier 2      │           ║
+║  │             │  │             │  │             │           ║
+║  │ Slot: 1,2,4 │  │ Base Tower  │  │ AOE Tower   │           ║
+║  └─────────────┘  └─────────────┘  └─────────────┘           ║
+║                                                               ║
+║                    [🔑 DECRYPT - Reroll All]                  ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+```
+
+**Reroll Rules:**
+
+| Rule | Behavior |
+|------|----------|
+| Cost | 1 Decrypt Key per reroll |
+| Rerolls per selection | Unlimited (if keys available) |
+| New cards | Completely re-randomized from available pool |
+| Duplicates | Rerolled cards CAN reappear (pure random) |
+| No keys | Reroll button disabled, must choose from current cards |
+| Empty pool | If <3 valid cards exist, shows what's available (cannot reroll for more) |
+
+**Design Notes:**
+- Rerolls cost a scarce resource, preventing trivial abuse
+- Players can fish for specific upgrades but at meaningful cost
+- Key scarcity creates interesting decisions: save for later rerolls or spend now?
+- Fits cybersecurity theme: "decrypting" new options
+
+### 6.6 Strategic Considerations
 
 - **Battle Profile:** Configure a profile with the Basic Tower and gear that best suits the stage
 - **Early run:** Balance between placing Advanced/Special Towers vs. upgrading the Basic Tower
@@ -639,6 +790,7 @@ This is an edge case that occurs only in near-perfect late-game runs.
 - **Tower timing:** Decide whether to save card selections or use them immediately based on current threats
 - **Late run:** Stack upgrades on key towers for maximum effectiveness against boss waves
 - **Slot management:** Only 4 outer slots available for Advanced/Special Towers - choose wisely
+- **Reroll budgeting:** Conserve Decrypt Keys for critical card selections (e.g., boss wave preparation)
 
 ---
 
@@ -646,11 +798,22 @@ This is an edge case that occurs only in near-perfect late-game runs.
 
 Between runs, players spend currency to unlock new towers and permanently upgrade them. This provides long-term goals and allows players to develop personalized playstyles.
 
-### 7.1 Progression Currency
+### 7.1 Progression Currencies
 
-**Data Shards** (Cybersecurity theme)
+The game uses two currencies with distinct acquisition methods and purposes.
 
-A single currency used for unlocks and permanent upgrades. Earned from run performance.
+> **Tuning Reference:** See *Appendix H: Economy Balancing Reference* for a consolidated table of all tuning levers, expected run earnings, and stack caps.
+
+| Currency | Icon | Primary Source | Role |
+|----------|------|----------------|------|
+| **Data Shards** | ◈ | Run rewards, kills, bonuses | Unlocks, mastery, consumables |
+| **Decrypt Keys** | 🔑 | Boss kills, achievements, daily | Card rerolls, premium shop items |
+
+#### Data Shards
+
+The primary currency used for unlocks and permanent upgrades. Earned from run performance.
+
+**Important:** Shards are earned from **discrete events** (kills, waves, bonuses), NOT converted from score. Score and shards are independent systems—score is a competitive metric, shards are progression currency.
 
 #### Currency Sources
 
@@ -714,6 +877,30 @@ Optional bonuses that reward consistent play without punishing extended sessions
 - First-win bonus encourages completing at least one run per session
 - Daily challenge adds variety and directs players to different stages
 - Streak system creates long-term engagement without feeling mandatory
+
+#### Decrypt Keys
+
+A secondary currency used for card rerolls during runs and premium shop purchases. Harder to earn than shards, creating meaningful scarcity.
+
+**Key Acquisition:**
+
+| Source | Keys Earned | Notes |
+|--------|-------------|-------|
+| Boss kill | 1 | Guaranteed per boss |
+| Perfect clear | +1 | Bonus on top of boss key |
+| Hard mode clear | +1 | Bonus per stage clear |
+| Daily login | 1 | Once per day |
+| Weekly challenge | 3 | Complete specific Hard stage |
+| Achievement milestones | 1-5 | One-time rewards |
+| Shop purchase | 1 | 200 shards per key |
+
+**Expected Earn Rate:** 3-5 keys per day with active play
+
+**Key Usage:**
+- **Card Reroll:** Spend 1 key during card selection to reroll all 3 cards (see Section 6.5)
+- **Black Market:** Purchase premium rotating items (see Section 10.4)
+
+**Key Cap:** Maximum 99 keys held. Prevents excessive hoarding and creates spending incentive.
 
 ### 7.2 Tower Unlocks
 
@@ -905,6 +1092,45 @@ Stages unlock progressively within each chapter. Players must complete stages in
 - Per-stage Hard unlock lets players challenge favorite stages
 - No star ratings in MVP (simplifies UI, can add post-launch)
 
+### 8.10 Wave Pacing Design
+
+Waves follow a deliberate pacing model to create a satisfying difficulty curve.
+
+#### Pacing Phases
+
+| Phase | Waves | Design Intent |
+|-------|-------|---------------|
+| **Tutorial** | 1-5 | Introduce mechanics; low enemy count (7-10); Basic enemies only |
+| **Pressure** | 6-12 | Test tower placement; mixed Basic/Fast enemies; force card decisions |
+| **Escalation** | 13-19 | High enemy count (15-20); dense spawn patterns; punish poor builds |
+| **Climax** | 20 | Boss wave; coordination test; reduced Basic count with Boss enemy |
+
+#### Design Guidelines
+
+**Tutorial Phase (Waves 1-5):**
+- Low enemy count allows players to observe tower behavior
+- Gradual HP scaling lets players feel tower power
+- No Fast enemies in early waves (introduced wave 5-6)
+- First card selection typically triggers around wave 2-3
+
+**Pressure Phase (Waves 6-12):**
+- Fast enemies introduced, requiring faster response
+- Multiple simultaneous spawns test coverage
+- Card selections 2-4 become available
+- Players should fill outer tower slots during this phase
+
+**Escalation Phase (Waves 13-19):**
+- Peak enemy density tests DPS capacity
+- Spawn patterns designed to overwhelm single-tower coverage
+- Upgrade cards become critical for survival
+- Wall damage becomes likely if build is weak
+
+**Climax Phase (Wave 20):**
+- Boss enemy spawns mid-wave with supporting Basic enemies
+- Boss priority targeting (Section 5.4) ensures towers focus threat
+- Victory requires sustained DPS while managing adds
+- Time pressure: Boss reaches wall in ~13 seconds (Normal)
+
 ---
 
 ## 9. Gear System
@@ -1021,11 +1247,19 @@ Chips are earned and purchased separately from gear:
 | **overclock.dll** | Common | 0 | +8% fire rate |
 | **optimized_loop.dll** | Uncommon | 1 | +10% damage, +5% fire rate |
 | **exploit_kit.dll** | Uncommon | 1 | +15% damage to Fast enemies |
-| **zero_day.dll** | Rare | 2 | First hit on each enemy deals +30% damage |
+| **critical_section.dll** | Uncommon | 1 | +5% crit chance |
+| **zero_day.dll** | Rare | 2 | First hit on each enemy is a guaranteed critical hit |
 | **privilege_escalation.dll** | Rare | 2 | +12% damage, kills grant +2% damage for 5s (stacks to +20%) |
+| **buffer_overflow.dll** | Rare | 2 | +8% crit chance; crits against enemies below 30% HP deal +0.25x multiplier |
 | **apt_payload.dll** | Epic | 3 | +20% damage, enemies below 20% HP take 2x damage |
 | **worm_propagation.dll** | Epic | 3 | Kills have 20% chance to deal 50% damage to nearest enemy |
+| **exception_handler.dll** | Epic | 3 | +10% crit chance; non-crits have 20% chance to refund 0.5s cooldown |
 | **chaos_monkey.dll** | Legendary | 4 | +40% damage, -15% fire rate |
+
+**Crit Gear Notes:**
+- **zero_day.dll** synergizes with high-damage, slow-firing towers (Burst Tower) for devastating opening strikes
+- **buffer_overflow.dll** rewards focus-fire builds that whittle enemies down before finishing with boosted crits
+- **exception_handler.dll** provides consistent crit scaling plus a recovery mechanic for non-crit attacks
 
 #### Targeting Slot (Tower Behavior)
 
@@ -1142,14 +1376,14 @@ Legendary gear is powerful but comes with significant drawbacks:
 | Slot | Gear | Chips |
 |------|------|-------|
 | Firmware | hardened_runtime.sys | CRIT, CRIT |
-| Protocol | zero_day.dll | CRIT, CRIT-X, CRIT-X |
+| Protocol | exception_handler.dll | CRIT, CRIT-X, CRIT-X |
 | Targeting | omniscient.exe | CRIT, CRIT, CRIT-X |
 | Network | syn_flood.cfg | CRIT |
 | Utility | neural_cache.bat | CRIT, CRIT |
 
-**Profile:** Stack crit to cap (+15%), boost multiplier. Pairs well with Base Tower Mastery 5 (Overclocked Processor).
+**Profile:** Stack crit to cap (40%), boost multiplier. Pairs well with Base Tower Mastery 5 (Overclocked Processor). Non-crits have 20% chance to refund cooldown.
 
-**Final Crit Stats:** 5% base + 15% chips + 20% mastery = 40% crit chance, 2.0x + 0.45x = 2.45x multiplier
+**Final Crit Stats:** 5% base + 15% chips + 15% Overclocked + 10% gear = 45% → 40% (capped), 1.5x base + 0.45x chips + 0.5x Overclocked = 2.45x multiplier
 
 #### "Speedrun" - Fast Clear
 
@@ -1182,8 +1416,8 @@ Legendary gear is powerful but comes with significant drawbacks:
 ║                                                              ║
 ║  PROTOCOL ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ║
 ║  ┌─────────────────────────────────────┐                     ║
-║  │ ◆◆ zero_day.dll                     │  [✦][✦✦][✦✦][ ]    ║
-║  │ +30% first hit damage               │   CRIT CRITX CRITX  ║
+║  │ ◆◆◆ exception_handler.dll           │  [✦][✦✦][✦✦]       ║
+║  │ +10% crit, 20% cooldown refund      │   CRIT CRITX CRITX  ║
 ║  └─────────────────────────────────────┘                     ║
 ║                                                              ║
 ║  TARGETING ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  ║
@@ -1207,7 +1441,7 @@ Legendary gear is powerful but comes with significant drawbacks:
 ╠══════════════════════════════════════════════════════════════╣
 ║  SUMMARY                                                     ║
 ║  ────────────────────────────────────                        ║
-║  Crit Chance: +15%  │  Crit Multi: +0.45x  │  Wall HP: +10%  ║
+║  Crit Chance: +25%  │  Crit Multi: +0.45x  │  Wall HP: +10%  ║
 ║  Damage: +0%        │  Fire Rate: +0%      │  Range: +20%    ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
@@ -1274,6 +1508,8 @@ Triggered effects show notifications:
 
 ### 9.11 Balance Considerations
 
+> **Tuning Reference:** See *Appendix H.3: Stack Caps & Synergy Limits* for the complete caps reference and synergy calculations.
+
 #### Stack Caps Prevent Abuse
 
 All chip bonuses have hard caps to prevent degenerate builds:
@@ -1338,6 +1574,182 @@ Each chip is balanced to ~4% of a "power point":
 
 ---
 
+## 10. Shop System
+
+The Network Terminal is the between-runs shop where players spend currencies on unlocks, upgrades, and consumables.
+
+### 10.1 Shop Overview
+
+```
+╔════════════════════════════════════════════════════════════════╗
+║  NETWORK TERMINAL                              ◈ 2,450  🔑 12   ║
+╠════════════════════════════════════════════════════════════════╣
+║                                                                 ║
+║  [ARSENAL]  [MASTERY]  [SUPPLY]  [BLACK MARKET]  [COSMETICS]   ║
+║                                                                 ║
+╚════════════════════════════════════════════════════════════════╝
+```
+
+The shop is accessible from the main menu between runs. Currency totals are always visible in the header.
+
+### 10.2 Arsenal (Tower Unlocks)
+
+Permanent tower unlocks. Buy once, own forever.
+
+| Item | Cost | Description |
+|------|------|-------------|
+| Logic Bomb (AOE) | 200 ◈ | Unlocks AOE Tower for pre-run selection |
+| Zero-Day Striker (Burst) | 250 ◈ | Unlocks Burst Tower for pre-run selection |
+| Traceroute Cannon (Piercing) | 300 ◈ | Unlocks Piercing Tower for pre-run selection |
+| Brute Force Node | 400 ◈ | Unlocks Advanced Tower for card pool |
+
+**Visual States:**
+- Locked: Silhouette + "ENCRYPTED" label
+- Purchased: Full art + "DECRYPTED ✓" label
+
+### 10.3 Mastery (Permanent Upgrades)
+
+Per-tower mastery investment. Displays current level, next upgrade cost, and Level 5 ability preview.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  ANTIVIRUS TURRET                         [MASTERY: 2]  │
+│  ═══════════════════░░░░░░░░░░░░░░░░░░░░                │
+│                                                         │
+│  Current: +20% damage                                   │
+│  Next: +30% damage                      [300 ◈ UPGRADE] │
+│                                                         │
+│  Level 5 Ability: Overclocked Processor                 │
+│  "20% chance for 2x critical damage"                    │
+└─────────────────────────────────────────────────────────┘
+```
+
+See Section 7.3 for mastery costs and abilities per tower.
+
+### 10.4 Supply (Consumables & Chips)
+
+Repeatable purchases for chips and utility items.
+
+#### Chip Procurement
+
+| Item | Cost | Description |
+|------|------|-------------|
+| Random Chip | 50 ◈ | 1 chip from any category |
+| Offensive Chip Pack | 120 ◈ | 3 random offensive chips |
+| Defensive Chip Pack | 120 ◈ | 3 random defensive chips |
+| Targeted Chip | 150 ◈ | Choose exact chip type |
+| Premium Chip | 3 🔑 | Guaranteed rare chip variant (future) |
+
+#### Utility Items
+
+| Item | Cost | Description |
+|------|------|-------------|
+| Decrypt Key | 200 ◈ | Buy 1 key with shards |
+| Key Bundle (5) | 800 ◈ | 20% discount on bulk keys |
+| Emergency Patch | 100 ◈ | Consumable: +500 Wall HP at run start |
+| Recon Data | 75 ◈ | Consumable: See next 2 waves' spawns |
+
+**Consumable Rules:**
+- Consumables are single-use items activated at run start
+- Maximum 1 of each consumable type per run
+- Consumed whether run succeeds or fails
+
+### 10.5 Black Market (Rotating Stock)
+
+Daily rotating deals with discounted and exclusive items. Creates urgency and variety.
+
+```
+╔═══════════════════════════════════════════════════════════╗
+║  BLACK MARKET                    Refreshes in: 14:32:07   ║
+╠═══════════════════════════════════════════════════════════╣
+║                                                           ║
+║  TODAY'S DEALS                                            ║
+║  ─────────────────────────────────────────────────────    ║
+║                                                           ║
+║  [◆◆] zero_day.dll           280 ◈  ~~400~~   [BUY]      ║
+║  Rare Protocol gear - 30% OFF                             ║
+║                                                           ║
+║  [✦✦] CRIT-X Chip ×2         80 ◈   ~~120~~   [BUY]      ║
+║  Crit multiplier chips - 33% OFF                          ║
+║                                                           ║
+║  [🔑] Key Stash              150 ◈            [BUY]      ║
+║  3 Decrypt Keys - Limited 1/day                           ║
+║                                                           ║
+║  ─────────────────────────────────────────────────────    ║
+║  FEATURED                                                 ║
+║  ─────────────────────────────────────────────────────    ║
+║                                                           ║
+║  [◆◆◆] quantum_backup.sys    5 🔑             [BUY]      ║
+║  Epic Firmware - Keys only                                ║
+║                                                           ║
+╚═══════════════════════════════════════════════════════════╝
+```
+
+#### Black Market Rules
+
+| Rule | Description |
+|------|-------------|
+| Refresh | Daily at 00:00 UTC |
+| Slots | 3-4 discounted items + 1 featured |
+| Discounts | 20-40% off standard prices |
+| Featured | Keys-only item, rotates weekly |
+| Purchase limits | Some items limited to 1/day |
+
+### 10.6 Cosmetics (Visual Customization)
+
+Non-gameplay items for personalization. All cosmetics are earnable through gameplay OR purchasable.
+
+| Category | Examples | Price Range |
+|----------|----------|-------------|
+| Tower Skins | Neon, Retro, Glitch variants | 150-400 ◈ |
+| Projectile Trails | Fire, Ice, Data Stream | 100-250 ◈ |
+| Wall Themes | Matrix, Hologram, Corrupted | 200-500 ◈ |
+| Damage Number Fonts | Pixel, Terminal, Bold | 75-150 ◈ |
+| Victory Animations | Firewall Secure, System Clean | 300-600 ◈ |
+
+**Design Note:** No exclusive paid cosmetics. Everything is earnable through achievements or direct purchase with gameplay currency.
+
+### 10.7 Economy Balance Targets
+
+#### Shard Progression
+
+| Milestone | Target Time | Shards Needed |
+|-----------|-------------|---------------|
+| First tower unlock | 1-2 hours | 200 |
+| All Basic towers | 4-6 hours | 750 |
+| First Mastery 5 | 8-12 hours | 2,325 |
+| Full tower mastery (1 tower) | 15-20 hours | 2,325 |
+| All towers mastered | 60-80 hours | ~12,000 |
+
+#### Key Budgeting
+
+| Milestone | Target |
+|-----------|--------|
+| First reroll available | Run 2 (first boss kill) |
+| Comfortable reroll budget | 5-8 keys banked |
+| Keys earned per week (active) | 25-35 |
+
+### 10.8 Anti-Pay-to-Win Safeguards
+
+| Principle | Implementation |
+|-----------|----------------|
+| No shard purchases | Shards only from gameplay |
+| Key cap | Max 99 keys held (prevents hoarding) |
+| No exclusive power | All gameplay items earnable |
+| Cosmetic-only premium | If real money ever added, cosmetics only |
+| Catch-up mechanics | Bonus shards for first-time Hard clears |
+
+### 10.9 Shop Prompts & Tutorials
+
+| Trigger | Prompt |
+|---------|--------|
+| First boss kill | "You earned a Decrypt Key! Use these to reroll cards during runs." |
+| Enough shards for unlock | Badge appears on Arsenal tab |
+| New Black Market stock | Main menu notification dot |
+| First purchase | Brief tutorial on currency types |
+
+---
+
 ## Appendix A: Cybersecurity Theme Reference
 
 Complete mapping of game elements to cybersecurity-themed names.
@@ -1347,7 +1759,9 @@ Complete mapping of game elements to cybersecurity-themed names.
 | Game Element | Themed Name |
 |--------------|-------------|
 | Wall | Firewall |
-| Progression Currency | Data Shards |
+| Primary Currency | Data Shards |
+| Secondary Currency | Decrypt Keys |
+| Shop | Network Terminal |
 | Basic Enemy | Virus |
 | Fast Enemy | Worm |
 | Boss Enemy | Ransomware |
@@ -1462,6 +1876,44 @@ Time to kill with 5 fully upgraded towers (~112.5 DPS each = 562.5 DPS total):
 | 16-19 | Very High | Many | Basic + Fast mixed |
 | 20 | Boss | 1 + support | Boss + Basic + Fast |
 
+### Score Balance
+
+#### Score Caps
+
+| Cap Type | Maximum Value | Rationale |
+|----------|---------------|-----------|
+| Per-enemy score | 500 | Prevents overflow exploits |
+| Kill streak bonus | +50 per streak | Limits streak farming |
+| Multi-kill bonus | +100 per instance | Caps AOE exploitation |
+
+#### Score Calculation Examples
+
+**Stage 1-5 Hard, Perfect Clear:**
+
+| Component | Calculation | Score |
+|-----------|-------------|-------|
+| Basic kills (180) | 180 × 10 | 1,800 |
+| Fast kills (40) | 40 × 15 | 600 |
+| Boss kill (1) | 1 × 200 | 200 |
+| Streak bonuses (est.) | ~100 | 100 |
+| **Subtotal** | | 2,700 |
+| Difficulty bonus | × 1.5 | 4,050 |
+| No-Leak bonus | × 1.25 | 5,062 |
+| Full Clear bonus | + 500 | **5,562** |
+
+**Stage 1-1 Normal, Wall Damaged:**
+
+| Component | Calculation | Score |
+|-----------|-------------|-------|
+| Basic kills (120) | 120 × 10 | 1,200 |
+| Fast kills (20) | 20 × 15 | 300 |
+| Boss kill (1) | 1 × 200 | 200 |
+| **Subtotal** | | 1,700 |
+| Difficulty bonus | × 1.0 | 1,700 |
+| Full Clear bonus | + 500 | **2,200** |
+
+*Note: No No-Leak bonus due to wall damage.*
+
 ---
 
 ## Appendix C: Technical Specifications
@@ -1511,10 +1963,10 @@ Time to kill with 5 fully upgraded towers (~112.5 DPS each = 562.5 DPS total):
 **Enemy Definitions:**
 ```json
 {
-  "enemyId": "virus",
+  "enemyId": "basic",
   "displayName": "Virus",
   "baseHP": 100,
-  "speed": 0.2,
+  "speed": 0.1,
   "firewallDamage": 15,
   "firewallAttackCooldown": 1.0,
   "behavior": "direct",
@@ -1524,10 +1976,10 @@ Time to kill with 5 fully upgraded towers (~112.5 DPS each = 562.5 DPS total):
 
 ```json
 {
-  "enemyId": "worm",
+  "enemyId": "fast",
   "displayName": "Worm",
   "baseHP": 60,
-  "speed": 0.3,
+  "speed": 0.16,
   "firewallDamage": 10,
   "firewallAttackCooldown": 0.8,
   "behavior": "direct",
@@ -1543,14 +1995,14 @@ Speed determines how quickly enemies travel from spawn to wall. Values use norma
 
 | Enemy Type | Speed (units/s) | Time to Wall | Hard Mode (1.2x) |
 |------------|-----------------|--------------|------------------|
-| Virus | 0.2 | ~4 seconds | ~3.3 seconds |
-| Worm | 0.3 | ~2.7 seconds | ~2.2 seconds |
-| Ransomware | 0.2 | ~4 seconds | ~3.3 seconds |
+| Basic | 0.1 | ~8 seconds | ~6.7 seconds |
+| Fast | 0.16 | ~5 seconds | ~4.2 seconds |
+| Boss | 0.06 | ~13 seconds | ~11 seconds |
 
 **Design Notes:**
-- Virus enemies give towers ~4 seconds of firing time at Normal difficulty
-- Worm enemies give only ~2.7 seconds, requiring quick targeting or they slip through
-- Ransomware has the same speed as Virus but much higher HP
+- Basic enemies give towers ~8 seconds of firing time at Normal difficulty
+- Fast enemies give only ~5 seconds, requiring quick targeting or they slip through
+- Bosses are slower, giving more time to deal with their high HP
 - Hard mode's 1.2x speed multiplier reduces reaction time by ~17%
 
 ### Projectile Mechanics
@@ -1744,7 +2196,7 @@ Each tower could receive the following upgrades with multiple tiers. Upgrades we
 | Fire Rate + | +15% attack speed | +30% attack speed | +50% attack speed |
 | Range + | +20% range | +40% range | — |
 | Cooldown - | -15% cooldown | -25% cooldown | — |
-| Crit Chance | +10% crit chance | +20% crit chance | — | *(Not implemented; see Section 5.5)*
+| Crit Chance | +10% crit chance | +20% crit chance | — | *(Not planned; crit scaling via Gear/Chips only—see Section 5.5)*
 | Multi-shot | +1 extra target | +2 extra targets | — |
 | Piercing | Shots pierce 1 enemy | Shots pierce all enemies | — |
 | Slow Effect | 10% slow on hit | 20% slow on hit | — |
@@ -1760,23 +2212,29 @@ This appendix documents known design limitations and gaps that may require futur
 
 ### Active Issues
 
-#### F.5 Critical Hit System Issues
-
-The following issues affect the critical hit system (Section 5.5):
-
-| ID | Issue | Impact | Suggested Fix |
-|----|-------|--------|---------------|
-| F.5.1 | **Undocumented Base Crit** - All towers have a hidden 5% crit chance not displayed in tooltips or mentioned in-game | Players unaware of mechanic | Add crit stats to tower tooltips |
-| F.5.2 | **No Crit Upgrades** - Appendix E lists "Crit Chance" (+10%/+20%) but never implemented in card system | Lost upgrade variety | Implement crit cards or remove from Appendix E |
-| F.5.3 | **No Tooltip Display** - Crit chance/multiplier never shown, even for Overclocked ability | Player confusion | Update tooltip format in Section 3.3 |
-| F.5.4 | **Only Base Tower Has Crit Mastery** - Other mastery abilities don't affect crits | Asymmetric design | Intentional—document as design choice |
-| F.5.5 | **Splash Crit Inheritance** - AOE crits show "!" on all splash hits despite falloff damage | Misleading feedback | Only show "!" on center hit, or show reduced crit numbers |
-| F.5.6 | **Two-Tier Crit Gap** - Large jump from 5% to 20% crit with no intermediate values | Abrupt power spike at Mastery 5 | Add intermediate crit bonuses or smooth curve |
-| F.5.7 | **Rounding Behavior** - `Math.floor()` slightly reduces crit damage on odd values (49 × 1.5 = 73) | Minor damage loss | Use `Math.round()` or document as intentional |
+*No active issues at this time.*
 
 ---
 
 ### Resolved Issues
+
+#### ~~F.5 Critical Hit System Issues~~ *(Addressed)*
+
+~~The critical hit system had multiple undocumented behaviors, missing UI elements, and inconsistent interactions.~~
+
+*Resolution: Section 5.5 rewritten with unified crit formula. All issues addressed:*
+
+| ID | Issue | Resolution |
+|----|-------|------------|
+| F.5.1 | Undocumented Base Crit | Documented in Section 5.5; CRIT line added to tooltip (Section 3.3) |
+| F.5.2 | No Crit Upgrades | Marked "Not planned" in Appendix E; crit scaling via Gear/Chips instead |
+| F.5.3 | No Tooltip Display | New CRIT line shows chance × multiplier with source breakdown |
+| F.5.4 | Only Base Tower Has Crit Mastery | Documented as intentional; new crit gear provides alternatives |
+| F.5.5 | Splash Crit Inheritance | "Once per explosion" rule added; "!" only on impact point |
+| F.5.6 | Two-Tier Crit Gap | New gear (critical_section.dll +5%, buffer_overflow.dll +8%, exception_handler.dll +10%) provides intermediate options |
+| F.5.7 | Rounding Behavior | Changed to `Math.round()` in Section 5.5 |
+
+---
 
 #### ~~F.1 Targeting Priority Creates Strategic Limitations~~ *(Addressed)*
 
@@ -1908,3 +2366,156 @@ The game's core mechanics are theme-agnostic. Future content updates or reskins 
 - Each theme requires: sprites, sound effects, UI reskin, background art
 - Estimated effort: 2-4 weeks per theme depending on asset complexity
 - Consider theme packs as potential DLC or unlockable content
+
+---
+
+## Appendix H: Economy Balancing Reference
+
+This appendix consolidates all economy tuning parameters into a single reference. Use this for balance adjustments and to understand expected player progression rates.
+
+### H.1 Primary Tuning Levers
+
+| Lever | Value | Affects | Source |
+|-------|-------|---------|--------|
+| `SHARD_PER_BASIC_KILL` | 1 | Bulk income rate | §7.1 |
+| `SHARD_PER_FAST_KILL` | 2 | Fast enemy incentive | §7.1 |
+| `SHARD_PER_BOSS_KILL` | 15 | Boss value | §7.1 |
+| `SHARD_WAVE_BONUS` | 5 | Wave survival reward | §7.1 |
+| `SHARD_CLEAR_BONUS_NORMAL` | 50 | Victory incentive (Normal) | §7.1 |
+| `SHARD_CLEAR_BONUS_HARD` | 75 | Victory incentive (Hard) | §7.1 |
+| `SHARD_PERFECT_BONUS` | 25 | Perfect play reward | §7.1 |
+| `DIFFICULTY_MULTIPLIER_HARD` | 1.5× | Hard mode shard multiplier | §7.1, §8.5 |
+| `KEY_PER_BOSS_KILL` | 1 | Key acquisition rate | §7.1 |
+| `KEY_PERFECT_BONUS` | 1 | Perfect clear key bonus | §7.1 |
+| `KEY_HARD_BONUS` | 1 | Hard clear key bonus | §7.1 |
+| `KEY_DAILY_LOGIN` | 1 | Daily retention | §7.1 |
+| `CHIP_DROP_CHANCE_BOSS` | 15% | Chip acquisition rate | §9.4 |
+| `REROLL_COST_KEYS` | 1 | Reroll accessibility | §6.5 |
+| `KEY_SHOP_PRICE_SHARDS` | 200 | Shard→Key conversion rate | §10.4 |
+| `CHIP_RANDOM_PRICE` | 50 | Chip accessibility | §10.4 |
+| `CHIP_TARGETED_PRICE` | 150 | Chip targeting premium (3×) | §10.4 |
+| `STREAK_BONUS_2DAY` | +10% | Short retention incentive | §7.1 |
+| `STREAK_BONUS_5DAY` | +20% | Medium retention incentive | §7.1 |
+| `STREAK_BONUS_7DAY` | +30% | Weekly retention incentive | §7.1 |
+| `STREAK_BONUS_14DAY` | +50% | Long-term retention cap | §7.1 |
+
+### H.2 Expected Run Earnings
+
+**Baseline Assumptions (Stage 1-3, Mid-Chapter):**
+- 180 Basic enemies killed
+- 30 Fast enemies killed
+- 1 Boss killed
+- 20 waves completed
+- Victory achieved
+
+| Scenario | Calculation | Total Shards |
+|----------|-------------|--------------|
+| **Normal, Wall Damaged** | (180×1)+(30×2)+(1×15)+(20×5)+50 | **405** |
+| **Normal, Perfect** | 405 + 25 | **430** |
+| **Hard, Wall Damaged** | 405 × 1.5 | **607** |
+| **Hard, Perfect** | (405+25) × 1.5 | **645** |
+
+**With Streak Multipliers:**
+
+| Streak | Normal Perfect | Hard Perfect |
+|--------|----------------|--------------|
+| None | 430 | 645 |
+| 2-day (+10%) | 473 | 709 |
+| 5-day (+20%) | 516 | 774 |
+| 7-day (+30%) | 559 | 838 |
+| 14-day (+50%) | 645 | 967 |
+
+**Key Earnings Per Run:**
+- Normal clear: 1 key (boss)
+- Normal perfect: 2 keys (boss + perfect)
+- Hard clear: 2 keys (boss + hard)
+- Hard perfect: 3 keys (boss + hard + perfect)
+
+### H.3 Stack Caps & Synergy Limits
+
+All bonuses have hard caps to prevent degenerate builds.
+
+#### Hard Caps (Cannot Exceed)
+
+| Stat | Cap | Max Chips | Rationale |
+|------|-----|-----------|-----------|
+| Chip Damage Bonus | +20% | 5 DMG | Prevents trivializing HP scaling |
+| Chip Fire Rate Bonus | +20% | 5 SPD | Maintains tower identity |
+| Chip Crit Chance | +15% | 5 CRIT | Keeps crits exciting, not expected |
+| Chip Crit Multiplier | +0.6× | 4 CRIT-X | Caps burst potential |
+| Chip Wall HP | +30% | 6 HP | Prevents immortal builds |
+| Chip Damage Reduction | -15% | 5 ARMOR | Maintains threat tension |
+| Chip Shard Gain | +30% | 6 SHARD | Prevents runaway progression |
+| Chip Score Gain | +30% | 6 SCORE | Maintains leaderboard integrity |
+| Chip Card Threshold | -15% | 5 THRESH | Maintains pacing |
+| Chip Range | +15% | 5 RANGE | Preserves positioning decisions |
+
+#### Soft Caps (Hard Limits, Not Diminishing)
+
+| System | Cap | Behavior At Cap |
+|--------|-----|-----------------|
+| Kill Streak Bonus | +50/streak | No additional score beyond cap |
+| Multi-Kill Bonus | +100/instance | No additional score beyond cap |
+| Decrypt Keys Held | 99 | Cannot acquire more until spent |
+| Per-Enemy Score | 500 | Overflow protection |
+
+#### Score Decay Thresholds
+
+| Run Duration | Score Multiplier |
+|--------------|------------------|
+| ≤ 2× expected | 1.0× (no penalty) |
+| 2.5× expected | 0.95× |
+| 3× expected | 0.9× |
+| 5× expected | 0.7× |
+| 7×+ expected | 0.5× (minimum) |
+
+*Expected time ≈ 5 minutes (20 waves × 15s average)*
+
+### H.4 Synergy Calculations
+
+**Stacking Rules:**
+- Chip bonuses: Additive within same stat type
+- Gear + Chips: Additive (gear effect + sum of chip effects)
+- Mastery: Multiplicative with other bonuses
+- Card Upgrades: Multiplicative with base damage
+
+**Maximum Theoretical Damage:**
+
+| Source | Multiplier |
+|--------|------------|
+| Base Damage | 1.0× |
+| Mastery Level 5 | ×1.5 |
+| Chip Damage (+20%) | ×1.2 |
+| Card Tier 2 Damage (+50%) | ×1.5 |
+| Gear (apt_payload.dll, +20%) | ×1.2 |
+| **Combined** | **3.24×** |
+
+*Example: Base Tower (50 dmg) → 50 × 3.24 = 162 damage per shot*
+
+**Maximum Theoretical Shard Gain:**
+
+| Source | Multiplier |
+|--------|------------|
+| Base Rate | 1.0× |
+| Hard Mode | ×1.5 |
+| 14-Day Streak | ×1.5 |
+| Chip Shard (+30%) | ×1.3 |
+| Gear (quantum_compute.bat, +25%) | ×1.25 |
+| **Combined** | **3.66×** |
+
+*Example: Hard perfect run base 430 → 430 × 2.44 (excluding streak) = 1,049 shards*
+
+### H.5 Progression Milestones
+
+| Milestone | Shards Needed | Target Runs | Target Hours |
+|-----------|---------------|-------------|--------------|
+| First tower unlock | 200 | 1-2 | 0.5-1 |
+| All Basic towers | 750 | 3-5 | 1.5-2.5 |
+| First Mastery 5 | 2,325 | 8-12 | 4-6 |
+| One tower fully mastered | 2,325 | 8-12 | 4-6 |
+| All Uncommon gear | 1,350 | 5-8 | 2.5-4 |
+| All Rare gear | 3,600 | 12-18 | 6-9 |
+| All Epic gear | 7,200 | 20-30 | 10-15 |
+| All towers mastered | ~17,000 | 50-70 | 25-35 |
+
+*Assumes average 400-500 shards per run, 30 minutes per run including menus.*
