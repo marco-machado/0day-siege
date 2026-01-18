@@ -30,6 +30,7 @@ namespace ZeroDaySiege.Core
         public float ScreenBottom => -orthographicSize;
 
         private Camera mainCamera;
+        private LineRenderer spawnLineRenderer;
 
         private void Awake()
         {
@@ -42,6 +43,28 @@ namespace ZeroDaySiege.Core
 
             mainCamera = Camera.main;
             ConfigureCamera();
+            CreateSpawnLine();
+        }
+
+        private void CreateSpawnLine()
+        {
+            var lineGO = new GameObject("SpawnLine");
+            lineGO.transform.SetParent(transform);
+
+            spawnLineRenderer = lineGO.AddComponent<LineRenderer>();
+            spawnLineRenderer.positionCount = 2;
+            spawnLineRenderer.SetPosition(0, new Vector3(PlayAreaLeft, spawnY, 0));
+            spawnLineRenderer.SetPosition(1, new Vector3(PlayAreaRight, spawnY, 0));
+
+            spawnLineRenderer.startWidth = 0.05f;
+            spawnLineRenderer.endWidth = 0.05f;
+
+            Color spawnColor = new Color(1f, 0.2f, 0.2f, 0.6f);
+            spawnLineRenderer.startColor = spawnColor;
+            spawnLineRenderer.endColor = spawnColor;
+
+            spawnLineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            spawnLineRenderer.sortingOrder = 1;
         }
 
         private void ConfigureCamera()

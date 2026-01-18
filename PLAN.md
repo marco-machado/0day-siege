@@ -74,7 +74,7 @@ This document outlines the implementation plan for 0DaySiege, a tower defense ga
 
 ---
 
-## Epic 5: Tower System - Basic Towers
+## Epic 5: Tower System - Basic Towers ✅
 
 **Goal:** Implement all four Basic Tower types.
 

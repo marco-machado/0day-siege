@@ -139,6 +139,48 @@ namespace ZeroDaySiege.Core
                     towerManager.ClearAllTowers();
                 }
             }
+
+            if (keyboard.digit1Key.wasPressedThisFrame)
+            {
+                PlaceTowerOfType(TowerType.BaseTower);
+            }
+
+            if (keyboard.digit2Key.wasPressedThisFrame)
+            {
+                PlaceTowerOfType(TowerType.AOETower);
+            }
+
+            if (keyboard.digit3Key.wasPressedThisFrame)
+            {
+                PlaceTowerOfType(TowerType.BurstTower);
+            }
+
+            if (keyboard.digit4Key.wasPressedThisFrame)
+            {
+                PlaceTowerOfType(TowerType.PiercingTower);
+            }
+
+            if (keyboard.digit5Key.wasPressedThisFrame)
+            {
+                PlaceTowerOfType(TowerType.BruteForceNode);
+            }
+        }
+
+        private void PlaceTowerOfType(TowerType type)
+        {
+            var towerManager = TowerManager.Instance;
+            if (towerManager == null) return;
+
+            int nextSlot = towerManager.GetNextEmptySlot();
+            if (nextSlot >= 0)
+            {
+                Debug.Log($"[Debug] Placing {type} in slot {nextSlot}");
+                towerManager.PlaceTower(nextSlot, type);
+            }
+            else
+            {
+                Debug.Log($"[Debug] All tower slots are occupied, cannot place {type}");
+            }
         }
 #endif
     }

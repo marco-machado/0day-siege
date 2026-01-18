@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using ZeroDaySiege.Core;
 using ZeroDaySiege.Enemies;
 
@@ -26,12 +27,20 @@ namespace ZeroDaySiege.Towers
         private float normalizedRange;
         private float worldRange;
         private float projectileSpeed;
+        private float splashRadius;
+        private float splashFalloff;
+        private float worldSplashRadius;
+        private Color towerColor;
 
         private float fireTimer;
         private Enemy currentTarget;
 
+        private const float PiercingHitWidth = 0.5f;
+
         private SpriteRenderer visualRenderer;
         private TextMeshPro labelText;
+        private LineRenderer rangeIndicator;
+        private bool isHovered;
 
         public TowerType Type => towerType;
         public TowerState State => currentState;
@@ -51,11 +60,15 @@ namespace ZeroDaySiege.Towers
             fireRate = stats.FireRate;
             normalizedRange = stats.Range;
             projectileSpeed = stats.ProjectileSpeed;
+            splashRadius = stats.SplashRadius;
+            splashFalloff = stats.SplashFalloff;
+            towerColor = stats.Color;
 
             var layout = GameLayout.Instance;
             if (layout != null)
             {
                 worldRange = TowerData.ConvertRangeToWorld(normalizedRange, layout.SpawnY, layout.FirewallY);
+                worldSplashRadius = splashRadius * layout.PlayAreaWidth;
             }
 
             currentState = TowerState.Idle;
@@ -68,6 +81,8 @@ namespace ZeroDaySiege.Towers
 
         private void Update()
         {
+            UpdateHover();
+
             if (GameManager.Instance == null || !GameManager.Instance.IsPlaying)
                 return;
 
@@ -79,6 +94,27 @@ namespace ZeroDaySiege.Towers
             {
                 Fire();
                 fireTimer = 1f / fireRate;
+            }
+        }
+
+        private void UpdateHover()
+        {
+            if (rangeIndicator == null) return;
+
+            var mouse = Mouse.current;
+            if (mouse == null) return;
+
+            Vector3 mouseScreen = mouse.position.ReadValue();
+            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
+            mouseWorld.z = 0f;
+
+            float distance = Vector2.Distance(mouseWorld, transform.position);
+            bool nowHovered = distance <= towerSize * 0.5f;
+
+            if (nowHovered != isHovered)
+            {
+                isHovered = nowHovered;
+                rangeIndicator.gameObject.SetActive(isHovered);
             }
         }
 
@@ -107,14 +143,87 @@ namespace ZeroDaySiege.Towers
             bool isCrit = UnityEngine.Random.value < baseCritChance;
             int finalDamage = isCrit ? Mathf.FloorToInt(baseDamage * baseCritMultiplier) : baseDamage;
 
+            if (towerType == TowerType.PiercingTower)
+            {
+                FirePiercing(finalDamage, isCrit);
+            }
+            else
+            {
+                FireProjectile(finalDamage, isCrit);
+            }
+        }
+
+        private void FireProjectile(int damage, bool isCrit)
+        {
             var projectileGO = new GameObject($"Projectile_{towerType}");
             projectileGO.transform.position = transform.position;
 
             var projectile = projectileGO.AddComponent<Projectile>();
-            projectile.Initialize(currentTarget, projectileSpeed, finalDamage, isCrit);
-            projectile.OnHit += HandleProjectileHit;
 
-            Debug.Log($"[Tower] {towerType} fired at {currentTarget.Type}, Damage={finalDamage}{(isCrit ? " (CRIT!)" : "")}");
+            if (splashRadius > 0f)
+            {
+                projectile.InitializeAOE(currentTarget, projectileSpeed, damage, isCrit, worldSplashRadius, splashFalloff);
+                Debug.Log($"[Tower] {towerType} fired AOE at {currentTarget.Type}, Damage={damage}, Splash={worldSplashRadius:F2}{(isCrit ? " (CRIT!)" : "")}");
+            }
+            else
+            {
+                projectile.Initialize(currentTarget, projectileSpeed, damage, isCrit);
+                Debug.Log($"[Tower] {towerType} fired at {currentTarget.Type}, Damage={damage}{(isCrit ? " (CRIT!)" : "")}");
+            }
+
+            projectile.OnHit += HandleProjectileHit;
+        }
+
+        private void FirePiercing(int damage, bool isCrit)
+        {
+            var enemyManager = EnemyManager.Instance;
+            if (enemyManager == null) return;
+
+            Vector3 start = transform.position;
+            Vector3 targetPos = currentTarget.transform.position;
+            Vector3 direction = (targetPos - start).normalized;
+
+            var layout = GameLayout.Instance;
+            float maxDistance = layout != null ? Mathf.Abs(layout.SpawnY - layout.FirewallY) + 2f : 15f;
+            Vector3 end = start + direction * maxDistance;
+
+            int enemiesHit = 0;
+            int totalDamage = 0;
+
+            var enemies = new System.Collections.Generic.List<Enemy>(enemyManager.ActiveEnemies);
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null || !enemy.IsAlive) continue;
+
+                float distToLine = DistancePointToLine(enemy.transform.position, start, end);
+                if (distToLine <= PiercingHitWidth)
+                {
+                    enemy.TakeDamage(damage);
+                    totalDamage += damage;
+                    enemiesHit++;
+                }
+            }
+
+            var railGO = new GameObject($"PiercingRail_{towerType}");
+            var rail = railGO.AddComponent<PiercingRail>();
+            rail.Initialize(start, end, towerColor, isCrit);
+
+            if (enemiesHit > 0)
+            {
+                OnDamageDealt?.Invoke(totalDamage, isCrit ? 1 : 0);
+                Debug.Log($"[Tower] {towerType} piercing hit {enemiesHit} enemies for {totalDamage} total{(isCrit ? " (CRIT!)" : "")}");
+            }
+        }
+
+        private float DistancePointToLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+        {
+            Vector3 line = lineEnd - lineStart;
+            float lineLengthSq = line.sqrMagnitude;
+            if (lineLengthSq == 0f) return Vector3.Distance(point, lineStart);
+
+            float t = Mathf.Clamp01(Vector3.Dot(point - lineStart, line) / lineLengthSq);
+            Vector3 projection = lineStart + t * line;
+            return Vector3.Distance(point, projection);
         }
 
         private void HandleProjectileHit(Projectile projectile, Enemy enemy, int damage, bool wasCrit)
@@ -148,7 +257,44 @@ namespace ZeroDaySiege.Towers
 
             var rectTransform = labelText.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(2f, 2f);
+
+            CreateRangeIndicator(stats.Color);
         }
+
+        private void CreateRangeIndicator(Color color)
+        {
+            var rangeGO = new GameObject("RangeIndicator");
+            rangeGO.transform.SetParent(transform);
+            rangeGO.transform.localPosition = Vector3.zero;
+
+            rangeIndicator = rangeGO.AddComponent<LineRenderer>();
+            rangeIndicator.useWorldSpace = false;
+            rangeIndicator.loop = true;
+
+            int segments = 64;
+            rangeIndicator.positionCount = segments;
+
+            for (int i = 0; i < segments; i++)
+            {
+                float angle = (float)i / segments * Mathf.PI * 2f;
+                float x = Mathf.Cos(angle) * worldRange;
+                float y = Mathf.Sin(angle) * worldRange;
+                rangeIndicator.SetPosition(i, new Vector3(x, y, 0f));
+            }
+
+            rangeIndicator.startWidth = 0.05f;
+            rangeIndicator.endWidth = 0.05f;
+
+            Color rangeColor = new Color(color.r, color.g, color.b, 0.4f);
+            rangeIndicator.startColor = rangeColor;
+            rangeIndicator.endColor = rangeColor;
+
+            rangeIndicator.material = new Material(Shader.Find("Sprites/Default"));
+            rangeIndicator.sortingOrder = 2;
+
+            rangeGO.SetActive(false);
+        }
+
 
         private Sprite CreateSquareSprite()
         {

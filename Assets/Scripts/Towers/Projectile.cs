@@ -20,6 +20,10 @@ namespace ZeroDaySiege.Towers
         private bool isCritical;
         private bool hasHit;
 
+        private bool isAOE;
+        private float splashRadius;
+        private float splashFalloff;
+
         private SpriteRenderer visualRenderer;
 
         public void Initialize(Enemy target, float speed, int damage, bool isCritical)
@@ -30,6 +34,24 @@ namespace ZeroDaySiege.Towers
             this.damage = damage;
             this.isCritical = isCritical;
             this.hasHit = false;
+            this.isAOE = false;
+            this.splashRadius = 0f;
+            this.splashFalloff = 0f;
+
+            CreateVisual();
+        }
+
+        public void InitializeAOE(Enemy target, float speed, int damage, bool isCritical, float worldSplashRadius, float falloff)
+        {
+            this.target = target;
+            this.targetPosition = target != null ? target.transform.position : transform.position;
+            this.speed = speed;
+            this.damage = damage;
+            this.isCritical = isCritical;
+            this.hasHit = false;
+            this.isAOE = true;
+            this.splashRadius = worldSplashRadius;
+            this.splashFalloff = falloff;
 
             CreateVisual();
         }
@@ -71,13 +93,60 @@ namespace ZeroDaySiege.Towers
             if (hasHit) return;
             hasHit = true;
 
+            if (isAOE)
+            {
+                HitAOE();
+            }
+            else
+            {
+                HitSingle();
+            }
+
+            Destroy(gameObject);
+        }
+
+        private void HitSingle()
+        {
             if (target != null && target.IsAlive)
             {
                 target.TakeDamage(damage);
                 OnHit?.Invoke(this, target, damage, isCritical);
             }
+        }
 
-            Destroy(gameObject);
+        private void HitAOE()
+        {
+            var enemyManager = EnemyManager.Instance;
+            if (enemyManager == null) return;
+
+            Vector3 impactPos = transform.position;
+            int totalDamage = 0;
+            int enemiesHit = 0;
+
+            var enemies = new System.Collections.Generic.List<Enemy>(enemyManager.ActiveEnemies);
+            foreach (var enemy in enemies)
+            {
+                if (enemy == null || !enemy.IsAlive) continue;
+
+                float distance = Vector3.Distance(impactPos, enemy.transform.position);
+                if (distance > splashRadius) continue;
+
+                float damagePercent = 1f - (distance / splashRadius) * splashFalloff;
+                int splashDamage = Mathf.FloorToInt(damage * damagePercent);
+
+                if (splashDamage > 0)
+                {
+                    enemy.TakeDamage(splashDamage);
+                    totalDamage += splashDamage;
+                    enemiesHit++;
+                }
+            }
+
+            if (enemiesHit > 0)
+            {
+                OnHit?.Invoke(this, target, totalDamage, isCritical);
+                Debug.Log($"[Projectile] AOE hit {enemiesHit} enemies for {totalDamage} total damage");
+            }
         }
 
         private void CreateVisual()

@@ -9,18 +9,32 @@ namespace ZeroDaySiege.Towers
         public readonly float FireRate;
         public readonly float Range;
         public readonly float ProjectileSpeed;
+        public readonly float SplashRadius;
+        public readonly float SplashFalloff;
         public readonly string Placeholder;
         public readonly Color Color;
 
-        public TowerStats(int damage, float fireRate, float range, float projectileSpeed, string placeholder, Color color)
+        public TowerStats(
+            int damage,
+            float fireRate,
+            float range,
+            float projectileSpeed,
+            string placeholder,
+            Color color,
+            float splashRadius = 0f,
+            float splashFalloff = 0f)
         {
             Damage = damage;
             FireRate = fireRate;
             Range = range;
             ProjectileSpeed = projectileSpeed;
+            SplashRadius = splashRadius;
+            SplashFalloff = splashFalloff;
             Placeholder = placeholder;
             Color = color;
         }
+
+        public bool IsAOE => SplashRadius > 0f;
     }
 
     public static class TowerData
@@ -31,9 +45,9 @@ namespace ZeroDaySiege.Towers
                 TowerType.BaseTower,
                 new TowerStats(
                     damage: 50,
-                    fireRate: 1.0f,
-                    range: 0.9f,
-                    projectileSpeed: 1.5f,
+                    fireRate: 0.5f,
+                    range: 1.2f,
+                    projectileSpeed: 10.0f,
                     placeholder: "[T1]",
                     color: new Color(0f, 0.8f, 1f, 1f)
                 )
@@ -42,20 +56,22 @@ namespace ZeroDaySiege.Towers
                 TowerType.AOETower,
                 new TowerStats(
                     damage: 40,
-                    fireRate: 1.2f,
+                    fireRate: 0.6f,
                     range: 0.9f,
-                    projectileSpeed: 1.0f,
+                    projectileSpeed: 4.0f,
                     placeholder: "[T2]",
-                    color: new Color(1f, 0.6f, 0.2f, 1f)
+                    color: new Color(1f, 0.6f, 0.2f, 1f),
+                    splashRadius: 0.12f,
+                    splashFalloff: 0.5f
                 )
             },
             {
                 TowerType.BurstTower,
                 new TowerStats(
                     damage: 150,
-                    fireRate: 0.33f,
+                    fireRate: 0.165f,
                     range: 0.9f,
-                    projectileSpeed: 2.0f,
+                    projectileSpeed: 8.0f,
                     placeholder: "[T3]",
                     color: new Color(0.2f, 0.6f, 1f, 1f)
                 )
@@ -64,7 +80,7 @@ namespace ZeroDaySiege.Towers
                 TowerType.PiercingTower,
                 new TowerStats(
                     damage: 50,
-                    fireRate: 1.0f,
+                    fireRate: 0.5f,
                     range: 0.9f,
                     projectileSpeed: float.PositiveInfinity,
                     placeholder: "[T4]",
@@ -75,9 +91,9 @@ namespace ZeroDaySiege.Towers
                 TowerType.BruteForceNode,
                 new TowerStats(
                     damage: 18,
-                    fireRate: 0.83f,
+                    fireRate: 0.415f,
                     range: 0.85f,
-                    projectileSpeed: 2.0f,
+                    projectileSpeed: 8.0f,
                     placeholder: "[T5]",
                     color: new Color(1f, 0.5f, 0.2f, 1f)
                 )
