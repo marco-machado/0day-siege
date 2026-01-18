@@ -11,16 +11,23 @@ namespace ZeroDaySiege.Cards
         public readonly CardCategory Category;
         public readonly TowerType TowerType;
         public readonly UpgradeTier UpgradeTier;
+        public readonly UpgradeType UpgradeType;
+        public readonly int TargetTowerSlot;
+        public readonly float HealPercent;
         public readonly string DisplayName;
         public readonly string Description;
 
         public CardData(int id, CardCategory category, string displayName, string description,
-            TowerType towerType = TowerType.BaseTower, UpgradeTier upgradeTier = UpgradeTier.None)
+            TowerType towerType = TowerType.BaseTower, UpgradeTier upgradeTier = UpgradeTier.None,
+            UpgradeType upgradeType = UpgradeType.None, int targetTowerSlot = -1, float healPercent = 0f)
         {
             Id = id;
             Category = category;
             TowerType = towerType;
             UpgradeTier = upgradeTier;
+            UpgradeType = upgradeType;
+            TargetTowerSlot = targetTowerSlot;
+            HealPercent = healPercent;
             DisplayName = displayName;
             Description = description;
         }
@@ -33,6 +40,7 @@ namespace ZeroDaySiege.Cards
         public event Action<CardData[]> OnCardsOffered;
         public event Action<CardData> OnCardSelected;
 
+        private CardPool cardPool;
         private CardData[] currentOfferedCards;
         private int pendingCardSelections;
 
@@ -48,6 +56,8 @@ namespace ZeroDaySiege.Cards
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            cardPool = new CardPool();
         }
 
         private void Start()
@@ -105,32 +115,7 @@ namespace ZeroDaySiege.Cards
 
         private CardData[] GenerateCardChoices(int count)
         {
-            var cards = new CardData[count];
-
-            cards[0] = new CardData(
-                id: 0,
-                category: CardCategory.PlaceTower,
-                displayName: "Deploy Tower",
-                description: "Place a Basic Tower in an empty slot",
-                towerType: TowerType.BaseTower
-            );
-
-            cards[1] = new CardData(
-                id: 1,
-                category: CardCategory.PlaceTower,
-                displayName: "Deploy AOE Tower",
-                description: "Place an AOE Tower in an empty slot",
-                towerType: TowerType.AOETower
-            );
-
-            cards[2] = new CardData(
-                id: 2,
-                category: CardCategory.WallRepair,
-                displayName: "Repair Firewall",
-                description: "Restore 20% Firewall HP"
-            );
-
-            return cards;
+            return cardPool.GenerateCards(count);
         }
 
         public void SelectCard(int index)
@@ -166,32 +151,31 @@ namespace ZeroDaySiege.Cards
             switch (card.Category)
             {
                 case CardCategory.PlaceTower:
-                    PlaceTowerFromCard(card.TowerType);
                     break;
 
                 case CardCategory.TowerUpgrade:
-                    Debug.Log($"[CardManager] Tower upgrade not yet implemented");
+                    ApplyTowerUpgrade(card);
                     break;
 
                 case CardCategory.WallRepair:
-                    RepairFirewall(0.20f);
+                    RepairFirewall(card.HealPercent > 0 ? card.HealPercent : 0.30f);
                     break;
             }
         }
 
-        private void PlaceTowerFromCard(TowerType towerType)
+        private void ApplyTowerUpgrade(CardData card)
         {
             if (TowerManager.Instance == null) return;
 
-            int emptySlot = TowerManager.Instance.GetNextEmptySlot();
-            if (emptySlot >= 0)
+            var tower = TowerManager.Instance.GetTowerInSlot(card.TargetTowerSlot);
+            if (tower != null)
             {
-                TowerManager.Instance.PlaceTower(emptySlot, towerType);
-                Debug.Log($"[CardManager] Placed {towerType} in slot {emptySlot}");
+                tower.ApplyUpgrade(card.UpgradeType, card.UpgradeTier);
+                Debug.Log($"[CardManager] Applied {card.UpgradeType} {card.UpgradeTier} to {tower.Type} in slot {card.TargetTowerSlot}");
             }
             else
             {
-                Debug.Log("[CardManager] No empty slots available for tower placement");
+                Debug.LogWarning($"[CardManager] No tower found in slot {card.TargetTowerSlot} for upgrade");
             }
         }
 
@@ -201,6 +185,68 @@ namespace ZeroDaySiege.Cards
             {
                 Firewall.Firewall.Instance.HealPercent(percent);
                 Debug.Log($"[CardManager] Repaired Firewall by {percent * 100}%");
+            }
+        }
+
+        public void SelectCardWithSlot(int cardIndex, int slotIndex)
+        {
+            if (currentOfferedCards == null || cardIndex < 0 || cardIndex >= currentOfferedCards.Length)
+            {
+                Debug.LogWarning($"[CardManager] Invalid card selection: {cardIndex}");
+                return;
+            }
+
+            var card = currentOfferedCards[cardIndex];
+
+            if (card.Category != CardCategory.PlaceTower)
+            {
+                SelectCard(cardIndex);
+                return;
+            }
+
+            if (TowerManager.Instance != null && !TowerManager.Instance.IsSlotOccupied(slotIndex))
+            {
+                TowerManager.Instance.PlaceTower(slotIndex, card.TowerType);
+                Debug.Log($"[CardManager] Placed {card.TowerType} in slot {slotIndex}");
+            }
+            else
+            {
+                Debug.LogWarning($"[CardManager] Cannot place tower in slot {slotIndex}");
+                return;
+            }
+
+            OnCardSelected?.Invoke(card);
+            CompleteSelection();
+        }
+
+        public bool TryReroll()
+        {
+            if (DecryptKeyManager.Instance == null || !DecryptKeyManager.Instance.CanSpend(1))
+            {
+                Debug.Log("[CardManager] Cannot reroll: insufficient keys");
+                return false;
+            }
+
+            DecryptKeyManager.Instance.Spend(1);
+            currentOfferedCards = GenerateCardChoices(3);
+            OnCardsOffered?.Invoke(currentOfferedCards);
+            Debug.Log("[CardManager] Rerolled cards");
+            return true;
+        }
+
+        private void CompleteSelection()
+        {
+            pendingCardSelections--;
+            currentOfferedCards = null;
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.CloseCardSelection();
+            }
+
+            if (pendingCardSelections > 0)
+            {
+                OfferCards();
             }
         }
     }
