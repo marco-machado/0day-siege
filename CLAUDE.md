@@ -27,9 +27,11 @@ All game code lives in the `ZeroDaySiege` assembly (`Assets/Scripts/ZeroDaySiege
 - `[ScreenController]` - Resolution and orientation handling
 - `[EnemyManager]` - Enemy spawning and tracking
 - `[TowerManager]` - Tower placement and management
+- `[ScoreManager]` - Score tracking and personal bests
+- `[RunStats]` - Run statistics (enemies killed, wave reached, etc.)
 - `[Firewall]` - Firewall entity with HP and visual feedback
 - `[EventSystem]` - UI input handling (new Input System)
-- `[RunCanvas]` - UI canvas with wave display, health bar, pause overlay, vignette
+- `[RunCanvas]` - UI canvas with wave display, health bar, pause overlay, vignette, game over screen
 - `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F10/T for debug)
 
 **GameManager** (Singleton) - State machine with validated transitions:
@@ -51,6 +53,20 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 ```
 - Events: `OnWaveStateChanged(state)`
 - Methods: `CompleteCurrentWave()` - called when wave spawning finishes, triggers transition
+- Victory: After wave 20 spawning completes, waits for all enemies to be defeated before triggering victory
+
+**RunStats** (`Core/RunStats.cs`) - Singleton tracking run statistics:
+- `EnemiesDefeated`, `VirusesKilled`, `WormsKilled`, `RansomwareKilled` - Kill counts
+- `WaveReached` - Highest wave reached in current run
+- `PerfectWall` - True if firewall never took damage
+- `FinalScore` - Score at run end
+- Automatically resets on run start, captures stats on game over
+
+**ScoreManager** (`Core/ScoreManager.cs`) - Singleton for score tracking:
+- `CurrentScore`, `CardsEarned`, `NextCardThreshold`
+- Events: `OnScoreChanged(int)`, `OnCardThresholdReached(int)`
+- Kill bonuses: Streak (+1 per kill within 2s, max +50), Multi-kill (+5 per same-frame kill, max +100)
+- Personal bests: `GetPersonalBest(stageId)`, `SetPersonalBest(stageId, score)` via PlayerPrefs
 
 **GameLayout** (Singleton) - Defines play area in world units:
 - Spawn line: Y=8, Firewall: Y=-4, Tower slots: Y=-6
@@ -110,6 +126,11 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 
 **ConfirmationDialog** (`UI/ConfirmationDialog.cs`) - Reusable modal dialog for destructive actions (Restart/Quit)
 
+**GameOverUI** (`UI/GameOverUI.cs`) - Victory/Defeat screen shown when GameState == GameOver:
+- Victory: "VICTORY" title (cyan), shows wave completed, enemies defeated, final score, personal best
+- Defeat: "FIREWALL BREACHED" title (red), shows wave reached, enemies defeated, final score
+- Buttons: Restart/Retry, Menu
+
 ### Debug Controls
 
 | Key | Action |
@@ -133,14 +154,15 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 ### Namespace Organization
 
 ```
-ZeroDaySiege.Core     - Game state, managers, bootstrap
+ZeroDaySiege.Core     - Game state, managers, bootstrap, run stats
 ZeroDaySiege.Firewall - Firewall entity and health states
 ZeroDaySiege.Enemies  - Enemy entity, spawning, and health bars
 ZeroDaySiege.Towers   - Tower entity, targeting, projectiles
-ZeroDaySiege.UI       - HUD, pause menu, dialogs
+ZeroDaySiege.Cards    - Card system, card pool, upgrades
+ZeroDaySiege.UI       - HUD, pause menu, dialogs, game over screen
 ```
 
-Future namespaces (per PLAN.md): `Cards`, `Progression`
+Future namespaces (per PLAN.md): `Progression`
 
 ## Testing
 

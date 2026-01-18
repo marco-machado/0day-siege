@@ -481,6 +481,8 @@ Consecutive hits on the **same target** gain stacking damage:
 
 Total if all 3 hit same target: 64 damage (vs 54 if spread).
 
+**Mastery 5 (Dictionary Attack):** At Mastery Level 5, Credential Stuffing is replaced by Dictionary Attack, which adds a 4th projectile and increases the consecutive hit bonus to +25% per hit (see Section 7.3).
+
 Additional Advanced Towers may be added in future updates (see Appendix D).
 
 ### 5.3 Special Towers (Post-MVP)
@@ -680,6 +682,11 @@ Card selection is triggered by reaching score thresholds during a run. The game 
 - Boss kills (100 points) create satisfying score spikes
 - Game remains paused until player selects a card
 
+**Edge Cases:**
+- **Multiple thresholds crossed:** If a kill crosses multiple thresholds (e.g., boss kill jumps from 180 to 380), card selections trigger sequentially—player completes first selection, then immediately sees second selection
+- **Threshold during wave transition:** Card selection takes priority; wave transition resumes after selection
+- **Threshold at wave 20 clear:** Card selection still triggers if threshold crossed before victory screen
+
 ### 6.2 Card Types
 
 | Card Type | Effect |
@@ -693,7 +700,15 @@ Card selection is triggered by reaching score thresholds during a run. The game 
 - Restores **30% of max Wall HP**
 - Cannot exceed **max Wall HP**
 - Does not grant any other buffs (pure survivability)
-- Has a low drop chance
+- **15% chance** to appear when wall has taken damage (see Section 6.4)
+
+#### Card Display and Interaction
+
+| Card Type | Displays | Interaction |
+|-----------|----------|-------------|
+| **Place Tower** | Tower name, tower icon, available slots (e.g., "Slot: 1,2,4") | Select card → choose slot from available options → tower placed |
+| **Tower Upgrade** | Upgrade type, tier, target tower name | Select card → upgrade applied immediately |
+| **Wall Repair** | Heal amount (30%), current/max HP preview | Select card → healing applied immediately |
 
 ### 6.3 Tower Upgrade Options
 
@@ -710,6 +725,12 @@ Each tower can receive the following upgrades with multiple tiers. Upgrades are 
 | Damage + | +25% damage | +50% damage |
 | Fire Rate + | +25% attack speed | +50% attack speed |
 
+**Upgrade Calculations:**
+- **Damage+** applies multiplicatively to the tower's base damage
+- **Fire Rate+** applies multiplicatively to the tower's base fire rate
+
+**Card Targeting:** Each Tower Upgrade card specifies which placed tower it applies to. The target tower is determined when the card is generated.
+
 ### 6.4 Card Selection Rules
 
 Players are presented with **3 cards** to choose from.
@@ -718,9 +739,11 @@ Players are presented with **3 cards** to choose from.
 
 All 3 cards are randomly selected from the available pool:
 
-- **Place Tower:** Available if empty slots exist AND unlocked towers haven't been placed
+- **Place Tower:** Available if empty slots exist AND there are unlocked towers not yet placed
 - **Tower Upgrade:** Available for placed towers with upgrades not at max tier
-- **Wall Repair (15% chance):** If wall has taken damage, 15% chance to replace one card with Wall Repair. Restores 30% of max Wall HP
+- **Wall Repair (15% chance):** If wall has taken damage, 15% chance to replace one card with Wall Repair
+
+**Card Weighting:** Place Tower and Tower Upgrade cards are equally weighted within the available pool. Wall Repair is a separate 15% roll that replaces one random card if triggered.
 
 No duplicate cards (same tower + same upgrade type/tier) can appear in the same selection.
 
@@ -788,7 +811,7 @@ Players can spend **Decrypt Keys** to reroll card selections, providing agency w
 - **Early run:** Balance between placing Advanced/Special Towers vs. upgrading the Basic Tower
 - **Score optimization:** Efficient enemy kills unlock cards faster
 - **Tower timing:** Decide whether to save card selections or use them immediately based on current threats
-- **Late run:** Stack upgrades on key towers for maximum effectiveness against boss waves
+- **Late run:** Apply both Damage+ and Fire Rate+ upgrades to key towers for maximum effectiveness against boss waves
 - **Slot management:** Only 4 outer slots available for Advanced/Special Towers - choose wisely
 - **Reroll budgeting:** Conserve Decrypt Keys for critical card selections (e.g., boss wave preparation)
 
@@ -933,10 +956,17 @@ Each tower has its own mastery track. Spend currency to boost a specific tower's
 | Piercing Tower | +10/20/30/40/50% | 150, 300, 600, 1200, 2400 | Network Breach: Hits mark enemies for 5s, +15% damage taken |
 | Brute Force Node | +10/20/30/40/50% | 100, 200, 400, 800, 1600 | Dictionary Attack: 4th shot added, +25% per consecutive hit |
 
+**Damage Bonus Clarification:** Values shown are the total bonus at each level (not cumulative). Level 5 grants +50% damage total, not +150%.
+
+**Level 5 Ability Details:** See Section 5.6 for Burn (Firewall Cascade) and Breach (Network Breach). Additional abilities:
+
+- **Precision Strike (Burst Tower):** Attacks against enemies above 50% HP deal +50% bonus damage. Applies before crit calculation.
+- **Dictionary Attack (Brute Force Node):** Adds a 4th projectile to each burst (4 shots instead of 3). Replaces Credential Stuffing bonus with +25% damage per consecutive hit on the same target (up to +75% on 4th hit).
+
 ### 7.4 Progression Notes
 
 - Permanent upgrades apply to all future runs
-- In-run card upgrades stack on top of permanent upgrades
+- In-run card upgrades multiply with permanent upgrades (see Appendix H.4 for formula)
 - Number of unlockable towers and upgrade levels can be tuned for desired progression length
 - Players naturally specialize in favorite towers over time
 
@@ -1816,11 +1846,12 @@ Towers have distinct stat profiles while maintaining similar overall DPS. Basic 
 
 | Property | Value |
 |----------|-------|
-| Burst Count | 3 shots |
+| Burst Count | 3 shots (4 with Mastery 5) |
 | Burst Interval | 0.1s (fires in ~0.3s) |
 | Reload Time | 1.2s between bursts |
 | Projectile Speed | 2.0 units/s |
 | Credential Stuffing | +20%/+40% damage on consecutive hits (64 total vs 54 base) |
+| Dictionary Attack (Mastery 5) | 4th shot, +25%/+50%/+75% per hit (100 total vs 72 base) |
 
 ### Tower DPS with Upgrades
 
