@@ -59,5 +59,18 @@ namespace ZeroDaySiege.UI
         public static readonly Color HealthBarHealthyColor = new(0f, 0.8f, 1f, 1f);
 
         public static readonly Color VignetteColor = new(0.8f, 0f, 0f, 0.5f);
+
+        public static readonly Vector2 ScoreContainerPosition = new(0, -130);
+        public static readonly Vector2 ScoreContainerSize = new(300, 50);
+        public const int ScoreTextFontSize = 36;
+
+        public static readonly Vector2 MenuTitlePosition = new(0, 200);
+        public static readonly Vector2 MenuTitleSize = new(600, 120);
+        public const int MenuTitleFontSize = 72;
+        public static readonly Vector2 MenuStartButtonPosition = new(0, -50);
+        public static readonly Vector2 MenuStartButtonSize = new(350, 80);
+        public const int MenuStartButtonFontSize = 40;
+        public static readonly Color MenuBackgroundColor = new(0.05f, 0.05f, 0.1f, 1f);
+        public static readonly Color MenuTitleColor = new(0f, 0.8f, 1f, 1f);
     }
 }

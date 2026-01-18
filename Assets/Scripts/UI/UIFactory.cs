@@ -347,6 +347,36 @@ namespace ZeroDaySiege.UI
             return (containerGO, fillImage, hpText);
         }
 
+        public static (GameObject container, TextMeshProUGUI text) CreateScoreDisplay(Transform parent)
+        {
+            var containerGO = new GameObject("ScoreContainer");
+            containerGO.transform.SetParent(parent, false);
+
+            var containerRect = containerGO.AddComponent<RectTransform>();
+            containerRect.anchorMin = new Vector2(0.5f, 1f);
+            containerRect.anchorMax = new Vector2(0.5f, 1f);
+            containerRect.pivot = new Vector2(0.5f, 1f);
+            containerRect.anchoredPosition = UIConstants.ScoreContainerPosition;
+            containerRect.sizeDelta = UIConstants.ScoreContainerSize;
+
+            var textGO = new GameObject("ScoreText");
+            textGO.transform.SetParent(containerGO.transform, false);
+
+            var textRect = textGO.AddComponent<RectTransform>();
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
+
+            var scoreText = textGO.AddComponent<TextMeshProUGUI>();
+            scoreText.text = "Score: 0";
+            scoreText.fontSize = UIConstants.ScoreTextFontSize;
+            scoreText.alignment = TextAlignmentOptions.Center;
+            scoreText.color = Color.white;
+
+            return (containerGO, scoreText);
+        }
+
         public static Image CreateVignetteOverlay(Transform parent)
         {
             var vignetteGO = new GameObject("VignetteOverlay");
@@ -387,6 +417,81 @@ namespace ZeroDaySiege.UI
 
             texture.Apply();
             return Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f));
+        }
+
+        public static (GameObject container, Button startButton) CreateMenuScreen(Transform parent)
+        {
+            var containerGO = new GameObject("MenuScreen");
+            containerGO.transform.SetParent(parent, false);
+
+            var containerRect = containerGO.AddComponent<RectTransform>();
+            containerRect.anchorMin = Vector2.zero;
+            containerRect.anchorMax = Vector2.one;
+            containerRect.offsetMin = Vector2.zero;
+            containerRect.offsetMax = Vector2.zero;
+
+            var bgImage = containerGO.AddComponent<Image>();
+            bgImage.color = UIConstants.MenuBackgroundColor;
+
+            var titleGO = new GameObject("Title");
+            titleGO.transform.SetParent(containerGO.transform, false);
+
+            var titleRect = titleGO.AddComponent<RectTransform>();
+            titleRect.anchorMin = new Vector2(0.5f, 0.5f);
+            titleRect.anchorMax = new Vector2(0.5f, 0.5f);
+            titleRect.pivot = new Vector2(0.5f, 0.5f);
+            titleRect.anchoredPosition = UIConstants.MenuTitlePosition;
+            titleRect.sizeDelta = UIConstants.MenuTitleSize;
+
+            var titleText = titleGO.AddComponent<TextMeshProUGUI>();
+            titleText.text = "0 DAY SIEGE";
+            titleText.fontSize = UIConstants.MenuTitleFontSize;
+            titleText.alignment = TextAlignmentOptions.Center;
+            titleText.color = UIConstants.MenuTitleColor;
+            titleText.fontStyle = FontStyles.Bold;
+
+            var startButton = CreateStartButton(containerGO.transform);
+
+            return (containerGO, startButton);
+        }
+
+        private static Button CreateStartButton(Transform parent)
+        {
+            var buttonGO = new GameObject("StartButton");
+            buttonGO.transform.SetParent(parent, false);
+
+            var rect = buttonGO.AddComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = UIConstants.MenuStartButtonPosition;
+            rect.sizeDelta = UIConstants.MenuStartButtonSize;
+
+            var image = buttonGO.AddComponent<Image>();
+            image.color = UIConstants.ButtonColor;
+
+            var button = buttonGO.AddComponent<Button>();
+            var colors = button.colors;
+            colors.highlightedColor = UIConstants.ButtonHighlightColor;
+            colors.pressedColor = UIConstants.ButtonPressedColor;
+            button.colors = colors;
+
+            var textGO = new GameObject("Text");
+            textGO.transform.SetParent(buttonGO.transform, false);
+
+            var textRect = textGO.AddComponent<RectTransform>();
+            textRect.anchorMin = Vector2.zero;
+            textRect.anchorMax = Vector2.one;
+            textRect.offsetMin = Vector2.zero;
+            textRect.offsetMax = Vector2.zero;
+
+            var text = textGO.AddComponent<TextMeshProUGUI>();
+            text.text = "START RUN";
+            text.fontSize = UIConstants.MenuStartButtonFontSize;
+            text.alignment = TextAlignmentOptions.Center;
+            text.color = Color.white;
+
+            return button;
         }
     }
 }
