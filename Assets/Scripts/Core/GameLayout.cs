@@ -25,6 +25,12 @@ namespace ZeroDaySiege.Core
         public float PlayAreaWidth => playAreaWidth;
         public float PlayAreaLeft => -playAreaWidth / 2f;
         public float PlayAreaRight => playAreaWidth / 2f;
+        public float PlayAreaHeight => spawnY - FirewallTop;
+
+        public float NormalizedSpeedToWorld(float normalizedSpeed)
+        {
+            return normalizedSpeed * PlayAreaHeight;
+        }
 
         public float ScreenTop => orthographicSize;
         public float ScreenBottom => -orthographicSize;
