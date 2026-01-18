@@ -17,6 +17,7 @@ namespace ZeroDaySiege.Enemies
         [SerializeField] private float ransomwareSize = 1.5f;
 
         public event Action<int, int> OnHPChanged;
+        public event Action<int, bool> OnDamageTaken;
         public event Action OnDied;
 
         private EnemyType enemyType;
@@ -51,7 +52,9 @@ namespace ZeroDaySiege.Enemies
 
             maxHP = EnemyData.CalculateScaledHP(type, wave, difficultyMultiplier);
             currentHP = maxHP;
-            speed = stats.Speed;
+            speed = GameLayout.Instance != null
+                ? GameLayout.Instance.NormalizedSpeedToWorld(stats.Speed)
+                : stats.Speed;
             wallDamage = stats.WallDamage;
             attackCooldown = stats.AttackCooldown;
             scoreValue = stats.ScoreValue;
@@ -119,12 +122,13 @@ namespace ZeroDaySiege.Enemies
             }
         }
 
-        public bool TakeDamage(int amount)
+        public bool TakeDamage(int amount, bool isCrit = false)
         {
             if (amount <= 0 || !IsAlive) return false;
 
             currentHP = Mathf.Max(0, currentHP - amount);
             OnHPChanged?.Invoke(currentHP, maxHP);
+            OnDamageTaken?.Invoke(amount, isCrit);
 
             if (currentHP <= 0)
             {

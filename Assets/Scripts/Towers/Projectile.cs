@@ -109,7 +109,7 @@ namespace ZeroDaySiege.Towers
         {
             if (target != null && target.IsAlive)
             {
-                target.TakeDamage(damage);
+                target.TakeDamage(damage, isCritical);
                 OnHit?.Invoke(this, target, damage, isCritical);
             }
         }
@@ -136,7 +136,7 @@ namespace ZeroDaySiege.Towers
 
                 if (splashDamage > 0)
                 {
-                    enemy.TakeDamage(splashDamage);
+                    enemy.TakeDamage(splashDamage, isCritical);
                     totalDamage += splashDamage;
                     enemiesHit++;
                 }

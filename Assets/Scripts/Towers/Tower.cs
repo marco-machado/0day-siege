@@ -198,7 +198,7 @@ namespace ZeroDaySiege.Towers
                 float distToLine = DistancePointToLine(enemy.transform.position, start, end);
                 if (distToLine <= PiercingHitWidth)
                 {
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(damage, isCrit);
                     totalDamage += damage;
                     enemiesHit++;
                 }
