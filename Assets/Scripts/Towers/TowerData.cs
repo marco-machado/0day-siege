@@ -45,8 +45,8 @@ namespace ZeroDaySiege.Towers
                 TowerType.BaseTower,
                 new TowerStats(
                     damage: 50,
-                    fireRate: 0.5f,
-                    range: 1.2f,
+                    fireRate: 1.0f,
+                    range: 0.9f,
                     projectileSpeed: 10.0f,
                     placeholder: "[T1]",
                     color: new Color(0f, 0.8f, 1f, 1f)
@@ -56,7 +56,7 @@ namespace ZeroDaySiege.Towers
                 TowerType.AOETower,
                 new TowerStats(
                     damage: 40,
-                    fireRate: 0.6f,
+                    fireRate: 1.2f,
                     range: 0.9f,
                     projectileSpeed: 4.0f,
                     placeholder: "[T2]",
@@ -69,7 +69,7 @@ namespace ZeroDaySiege.Towers
                 TowerType.BurstTower,
                 new TowerStats(
                     damage: 150,
-                    fireRate: 0.165f,
+                    fireRate: 0.33f,
                     range: 0.9f,
                     projectileSpeed: 8.0f,
                     placeholder: "[T3]",
@@ -80,7 +80,7 @@ namespace ZeroDaySiege.Towers
                 TowerType.PiercingTower,
                 new TowerStats(
                     damage: 50,
-                    fireRate: 0.5f,
+                    fireRate: 1.0f,
                     range: 0.9f,
                     projectileSpeed: float.PositiveInfinity,
                     placeholder: "[T4]",
@@ -91,7 +91,7 @@ namespace ZeroDaySiege.Towers
                 TowerType.BruteForceNode,
                 new TowerStats(
                     damage: 18,
-                    fireRate: 0.415f,
+                    fireRate: 0.83f,
                     range: 0.85f,
                     projectileSpeed: 8.0f,
                     placeholder: "[T5]",

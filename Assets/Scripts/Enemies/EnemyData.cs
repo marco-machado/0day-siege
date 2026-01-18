@@ -29,7 +29,7 @@ namespace ZeroDaySiege.Enemies
     {
         public static readonly EnemyStats Virus = new(
             baseHP: 100,
-            speed: 0.2f,
+            speed: 0.1f,
             wallDamage: 15,
             attackCooldown: 1.0f,
             displayName: "Virus",
@@ -39,7 +39,7 @@ namespace ZeroDaySiege.Enemies
 
         public static readonly EnemyStats Worm = new(
             baseHP: 60,
-            speed: 1.3f,
+            speed: 0.16f,
             wallDamage: 10,
             attackCooldown: 0.8f,
             displayName: "Worm",
@@ -49,12 +49,12 @@ namespace ZeroDaySiege.Enemies
 
         public static readonly EnemyStats Ransomware = new(
             baseHP: 500,
-            speed: 0.2f,
+            speed: 0.06f,
             wallDamage: 100,
             attackCooldown: 2.0f,
             displayName: "Ransomware",
             placeholder: "[R]",
-            scoreValue: 100
+            scoreValue: 200
         );
 
         public static EnemyStats GetStats(EnemyType type)
