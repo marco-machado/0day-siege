@@ -149,5 +149,24 @@ namespace ZeroDaySiege.Core
             OnScoreChanged?.Invoke(currentScore);
             CheckCardThresholds();
         }
+
+        public int GetPersonalBest(string stageId)
+        {
+            string key = $"PersonalBest_{stageId}";
+            return PlayerPrefs.GetInt(key, 0);
+        }
+
+        public void SetPersonalBest(string stageId, int score)
+        {
+            string key = $"PersonalBest_{stageId}";
+            int current = PlayerPrefs.GetInt(key, 0);
+
+            if (score > current)
+            {
+                PlayerPrefs.SetInt(key, score);
+                PlayerPrefs.Save();
+                Debug.Log($"[ScoreManager] New personal best for {stageId}: {score}");
+            }
+        }
     }
 }

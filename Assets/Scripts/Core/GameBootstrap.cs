@@ -26,11 +26,14 @@ namespace ZeroDaySiege.Core
             SetupScreenController();
             SetupGameManager();
             SetupWaveManager();
+            SetupStageManager();
             SetupWaveSpawner();
             SetupGameLayout();
             SetupEnemyManager();
             SetupTowerManager();
             SetupScoreManager();
+            SetupRunStats();
+            SetupDecryptKeyManager();
             SetupCardManager();
             SetupFirewall();
             SetupEventSystem();
@@ -40,6 +43,9 @@ namespace ZeroDaySiege.Core
             SetupVignetteOverlay();
             SetupPauseUI();
             SetupMenuUI();
+            SetupStageSelectUI();
+            SetupCardSelectionUI();
+            SetupGameOverUI();
             SetupDamageNumbers();
             SetupDebugControls();
         }
@@ -67,6 +73,15 @@ namespace ZeroDaySiege.Core
             var waveGO = new GameObject("[WaveManager]");
             waveGO.AddComponent<WaveManager>();
             DontDestroyOnLoad(waveGO);
+        }
+
+        private void SetupStageManager()
+        {
+            if (StageManager.Instance != null) return;
+
+            var stageGO = new GameObject("[StageManager]");
+            stageGO.AddComponent<StageManager>();
+            DontDestroyOnLoad(stageGO);
         }
 
         private void SetupWaveSpawner()
@@ -119,6 +134,24 @@ namespace ZeroDaySiege.Core
             var scoreGO = new GameObject("[ScoreManager]");
             scoreGO.AddComponent<ScoreManager>();
             DontDestroyOnLoad(scoreGO);
+        }
+
+        private void SetupRunStats()
+        {
+            if (RunStats.Instance != null) return;
+
+            var statsGO = new GameObject("[RunStats]");
+            statsGO.AddComponent<RunStats>();
+            DontDestroyOnLoad(statsGO);
+        }
+
+        private void SetupDecryptKeyManager()
+        {
+            if (DecryptKeyManager.Instance != null) return;
+
+            var keyGO = new GameObject("[DecryptKeyManager]");
+            keyGO.AddComponent<DecryptKeyManager>();
+            DontDestroyOnLoad(keyGO);
         }
 
         private void SetupCardManager()
@@ -209,6 +242,38 @@ namespace ZeroDaySiege.Core
 
             var menuUI = runCanvas.AddComponent<MenuUI>();
             menuUI.SetReferences(container, startButton);
+        }
+
+        private void SetupStageSelectUI()
+        {
+            var (container, stageButtons, stageLabels, selectedText, startBtn, backBtn) =
+                UIFactory.CreateStageSelectScreen(runCanvas.transform);
+
+            var stageSelectUI = runCanvas.AddComponent<StageSelectUI>();
+            stageSelectUI.SetReferences(container, stageButtons, stageLabels, selectedText, startBtn, backBtn);
+
+            var menuUI = runCanvas.GetComponent<MenuUI>();
+            menuUI?.SetStageSelectUI(stageSelectUI);
+        }
+
+        private void SetupCardSelectionUI()
+        {
+            var (overlay, cardContainer, rerollBtn, keyDisplay, titleText) = UIFactory.CreateCardSelectionOverlay(runCanvas.transform);
+            var (modal, slotButtons, cancelBtn) = UIFactory.CreateSlotSelectionModal(runCanvas.transform);
+
+            var slotModal = modal.AddComponent<SlotSelectionModal>();
+            slotModal.SetReferences(modal, slotButtons, cancelBtn);
+
+            var cardSelectionUI = runCanvas.AddComponent<CardSelectionUI>();
+            cardSelectionUI.SetReferences(overlay, cardContainer, rerollBtn, keyDisplay, titleText, slotModal);
+        }
+
+        private void SetupGameOverUI()
+        {
+            var (overlay, title, stats, restart, menu) = UIFactory.CreateGameOverUI(runCanvas.transform);
+
+            var gameOverUI = runCanvas.AddComponent<GameOverUI>();
+            gameOverUI.SetReferences(overlay, title, stats, restart, menu);
         }
 
         private void SetupDamageNumbers()

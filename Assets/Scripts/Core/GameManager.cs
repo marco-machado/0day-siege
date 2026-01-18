@@ -146,9 +146,9 @@ namespace ZeroDaySiege.Core
 
         public void EndRun(bool victory)
         {
+            lastRunOutcome = victory ? RunOutcome.Victory : RunOutcome.Defeat;
             if (TryChangeState(GameState.GameOver))
             {
-                lastRunOutcome = victory ? RunOutcome.Victory : RunOutcome.Defeat;
                 Debug.Log($"Run ended: {lastRunOutcome} (Wave {currentWave}/{TotalWaves})");
             }
         }
