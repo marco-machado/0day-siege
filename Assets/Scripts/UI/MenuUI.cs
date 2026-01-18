@@ -8,6 +8,7 @@ namespace ZeroDaySiege.UI
     {
         private GameObject menuContainer;
         private Button startButton;
+        private StageSelectUI stageSelectUI;
 
         public void SetReferences(GameObject container, Button start)
         {
@@ -15,6 +16,11 @@ namespace ZeroDaySiege.UI
             startButton = start;
 
             startButton.onClick.AddListener(OnStartClicked);
+        }
+
+        public void SetStageSelectUI(StageSelectUI stageSelect)
+        {
+            stageSelectUI = stageSelect;
         }
 
         private void OnEnable()
@@ -49,13 +55,32 @@ namespace ZeroDaySiege.UI
 
         private void UpdateVisibility(GameState state)
         {
+            if (menuContainer == null) return;
+
             bool shouldShow = state == GameState.Menu;
             menuContainer.SetActive(shouldShow);
         }
 
+        public void ShowMenu()
+        {
+            if (menuContainer != null)
+            {
+                menuContainer.SetActive(true);
+            }
+        }
+
+        public void HideMenu()
+        {
+            if (menuContainer != null)
+            {
+                menuContainer.SetActive(false);
+            }
+        }
+
         private void OnStartClicked()
         {
-            GameManager.Instance?.StartRun();
+            HideMenu();
+            stageSelectUI?.Show();
         }
     }
 }
