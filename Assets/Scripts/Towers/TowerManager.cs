@@ -9,8 +9,6 @@ namespace ZeroDaySiege.Towers
     {
         public static TowerManager Instance { get; private set; }
 
-        [SerializeField] private TowerDatabase towerDatabase;
-
         public event Action<Tower> OnTowerPlaced;
         public event Action<Tower> OnTowerDestroyed;
 
@@ -19,7 +17,6 @@ namespace ZeroDaySiege.Towers
 
         public int ActiveTowerCount => activeTowers.Count;
         public IReadOnlyList<Tower> ActiveTowers => activeTowers;
-        public TowerDatabase Database => towerDatabase;
 
         public TowerType StartingTowerType { get; set; } = TowerType.BaseTower;
 

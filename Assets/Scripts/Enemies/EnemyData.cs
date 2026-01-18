@@ -39,7 +39,7 @@ namespace ZeroDaySiege.Enemies
 
         public static readonly EnemyStats Worm = new(
             baseHP: 60,
-            speed: 0.3f,
+            speed: 1.3f,
             wallDamage: 10,
             attackCooldown: 0.8f,
             displayName: "Worm",
