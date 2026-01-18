@@ -91,10 +91,7 @@ namespace ZeroDaySiege.Enemies
 
                 if (activeEnemies.Count == 0 && GameManager.Instance?.IsPlaying == true)
                 {
-                    if (WaveManager.Instance?.CurrentWaveState == WaveState.InProgress)
-                    {
-                        OnAllEnemiesDefeated?.Invoke();
-                    }
+                    OnAllEnemiesDefeated?.Invoke();
                 }
             }
         }

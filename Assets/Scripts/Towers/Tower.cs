@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ZeroDaySiege.Cards;
 using ZeroDaySiege.Core;
 using ZeroDaySiege.Enemies;
 
@@ -21,6 +22,14 @@ namespace ZeroDaySiege.Towers
         private TowerType towerType;
         private TowerState currentState;
         private int slotIndex;
+
+        private UpgradeTier damageTier = UpgradeTier.None;
+        private UpgradeTier fireRateTier = UpgradeTier.None;
+        private float damageMultiplier = 1f;
+        private float fireRateMultiplier = 1f;
+
+        private int originalBaseDamage;
+        private float originalFireRate;
 
         private int baseDamage;
         private float fireRate;
@@ -49,6 +58,8 @@ namespace ZeroDaySiege.Towers
         public float FireRate => fireRate;
         public float Range => normalizedRange;
         public float WorldRange => worldRange;
+        public UpgradeTier DamageTier => damageTier;
+        public UpgradeTier FireRateTier => fireRateTier;
 
         public void Initialize(TowerType type, int slot)
         {
@@ -56,6 +67,8 @@ namespace ZeroDaySiege.Towers
             slotIndex = slot;
 
             var stats = TowerData.GetStats(type);
+            originalBaseDamage = stats.Damage;
+            originalFireRate = stats.FireRate;
             baseDamage = stats.Damage;
             fireRate = stats.FireRate;
             normalizedRange = stats.Range;
@@ -307,6 +320,40 @@ namespace ZeroDaySiege.Towers
         public bool IsInRange(Vector3 position)
         {
             return Vector3.Distance(transform.position, position) <= worldRange;
+        }
+
+        public void ApplyUpgrade(UpgradeType upgradeType, UpgradeTier tier)
+        {
+            switch (upgradeType)
+            {
+                case UpgradeType.Damage:
+                    damageTier = tier;
+                    damageMultiplier = GetTierMultiplier(tier);
+                    break;
+                case UpgradeType.FireRate:
+                    fireRateTier = tier;
+                    fireRateMultiplier = GetTierMultiplier(tier);
+                    break;
+            }
+
+            RecalculateStats();
+            Debug.Log($"[Tower] {towerType} slot {slotIndex} upgraded: {upgradeType} to {tier} (mult={GetTierMultiplier(tier):F2})");
+        }
+
+        private float GetTierMultiplier(UpgradeTier tier)
+        {
+            return tier switch
+            {
+                UpgradeTier.Tier1 => 1.25f,
+                UpgradeTier.Tier2 => 1.50f,
+                _ => 1.0f
+            };
+        }
+
+        private void RecalculateStats()
+        {
+            baseDamage = Mathf.RoundToInt(originalBaseDamage * damageMultiplier);
+            fireRate = originalFireRate * fireRateMultiplier;
         }
     }
 }
