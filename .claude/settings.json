@@ -1,0 +1,8 @@
+{
+  "largeFileLineLimit": 3000,
+  "tools": {
+    "read": {
+      "maxTokens": 50000
+    }
+  }
+}
