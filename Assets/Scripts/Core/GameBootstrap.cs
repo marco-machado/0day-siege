@@ -38,7 +38,6 @@ namespace ZeroDaySiege.Core
             SetupFirewall();
             SetupEventSystem();
             SetupRunUI();
-            SetupFirewallUI();
             SetupScoreUI();
             SetupVignetteOverlay();
             SetupPauseUI();
@@ -194,16 +193,6 @@ namespace ZeroDaySiege.Core
             runUI.SetReferences(waveText, waveContainer);
 
             waveContainer.SetActive(false);
-        }
-
-        private void SetupFirewallUI()
-        {
-            var (container, fill, text) = UIFactory.CreateFirewallHealthBar(runCanvas.transform);
-
-            var firewallUI = runCanvas.AddComponent<FirewallUI>();
-            firewallUI.SetReferences(fill, text, container);
-
-            container.SetActive(false);
         }
 
         private void SetupScoreUI()

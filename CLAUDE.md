@@ -31,7 +31,7 @@ All game code lives in the `ZeroDaySiege` assembly (`Assets/Scripts/ZeroDaySiege
 - `[RunStats]` - Run statistics (enemies killed, wave reached, etc.)
 - `[Firewall]` - Firewall entity with HP and visual feedback
 - `[EventSystem]` - UI input handling (new Input System)
-- `[RunCanvas]` - UI canvas with wave display, health bar, pause overlay, vignette, game over screen
+- `[RunCanvas]` - UI canvas with wave display, pause overlay, vignette, game over screen
 - `[DebugControls]` - Keyboard shortcuts (Escape for pause, F1-F10/T for debug)
 
 **GameManager** (Singleton) - State machine with validated transitions:
@@ -69,7 +69,7 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 - Personal bests: `GetPersonalBest(stageId)`, `SetPersonalBest(stageId, score)` via PlayerPrefs
 
 **GameLayout** (Singleton) - Defines play area in world units:
-- Spawn line: Y=8, Firewall: Y=-4, Tower slots: Y=-6
+- Spawn line: Y=8, Firewall: Y=-7, Tower slots: Y=-8.5
 - Play width: 10 units (-5 to +5)
 - Coordinate helpers: `NormalizedToWorldX/Y()`, `GetTowerSlotPosition(0-4)`
 
@@ -79,6 +79,7 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 - Events: `OnHPChanged(current, max)`, `OnHealthStateChanged(state)`, `OnFirewallDestroyed`
 - Methods: `TakeDamage(amount)`, `Heal(amount)`, `HealPercent(percent)`, `ResetHP()`
 - Visual: Color changes (cyan → orange → red with flicker), positioned at GameLayout.FirewallY
+- HP text displayed inside the firewall visual using world-space TextMeshPro
 - Triggers `GameManager.EndRun(false)` when destroyed
 
 **EnemyManager** (`Enemies/EnemyManager.cs`) - Singleton for spawning and tracking enemies:
@@ -117,8 +118,6 @@ Idle -> InProgress -> Transitioning (1s pause) -> InProgress -> ... -> Victory
 ### UI Systems (Implemented)
 
 **RunUI** (`UI/RunUI.cs`) - Wave counter display, visible during Playing/Paused/CardSelection
-
-**FirewallUI** (`UI/FirewallUI.cs`) - Health bar display (bottom-center), shows current/max HP with color matching health state
 
 **VignetteOverlay** (`UI/VignetteOverlay.cs`) - Red pulsing screen overlay when Firewall HP ≤25%
 

@@ -11,9 +11,9 @@ namespace ZeroDaySiege.Core
 
         [Header("Vertical Boundaries (World Units)")]
         [SerializeField] private float spawnY = 8f;
-        [SerializeField] private float firewallY = -4f;
+        [SerializeField] private float firewallY = -7f;
         [SerializeField] private float firewallHeight = 1f;
-        [SerializeField] private float towerSlotsY = -6f;
+        [SerializeField] private float towerSlotsY = -8.5f;
 
         [Header("Horizontal Settings")]
         [SerializeField] private float playAreaWidth = 10f;

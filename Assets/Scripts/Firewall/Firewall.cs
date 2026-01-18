@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using ZeroDaySiege.Core;
 
 namespace ZeroDaySiege.Firewall
@@ -29,6 +30,7 @@ namespace ZeroDaySiege.Firewall
         private int maxHP;
         private FirewallHealthState healthState;
         private SpriteRenderer visualRenderer;
+        private TextMeshPro hpText;
         private Coroutine flickerCoroutine;
 
         public int CurrentHP => currentHP;
@@ -83,6 +85,17 @@ namespace ZeroDaySiege.Firewall
             visualRenderer.sprite = CreateSquareSprite();
             visualRenderer.color = healthyColor;
             visualGO.transform.localScale = new Vector3(layout.PlayAreaWidth, 1f, 1f);
+
+            var textGO = new GameObject("HPText");
+            textGO.transform.SetParent(visualGO.transform);
+            textGO.transform.localPosition = Vector3.zero;
+            textGO.transform.localScale = new Vector3(1f / layout.PlayAreaWidth, 1f, 1f);
+            hpText = textGO.AddComponent<TextMeshPro>();
+            hpText.text = $"{currentHP} / {maxHP}";
+            hpText.fontSize = 3;
+            hpText.alignment = TextAlignmentOptions.Center;
+            hpText.color = Color.white;
+            hpText.sortingOrder = 10;
         }
 
         private Sprite CreateSquareSprite()
@@ -107,6 +120,7 @@ namespace ZeroDaySiege.Firewall
             if (amount <= 0 || IsDestroyed) return;
 
             currentHP = Mathf.Max(0, currentHP - amount);
+            UpdateHPText();
             OnHPChanged?.Invoke(currentHP, maxHP);
 
             UpdateHealthState();
@@ -123,6 +137,7 @@ namespace ZeroDaySiege.Firewall
             if (amount <= 0 || IsDestroyed) return;
 
             currentHP = Mathf.Min(maxHP, currentHP + amount);
+            UpdateHPText();
             OnHPChanged?.Invoke(currentHP, maxHP);
 
             UpdateHealthState();
@@ -142,9 +157,16 @@ namespace ZeroDaySiege.Firewall
 
             StopFlicker();
             UpdateVisualColor();
+            UpdateHPText();
 
             OnHPChanged?.Invoke(currentHP, maxHP);
             OnHealthStateChanged?.Invoke(healthState);
+        }
+
+        private void UpdateHPText()
+        {
+            if (hpText != null)
+                hpText.text = $"{currentHP} / {maxHP}";
         }
 
         private void UpdateHealthState()

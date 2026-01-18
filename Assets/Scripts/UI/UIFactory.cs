@@ -289,64 +289,6 @@ namespace ZeroDaySiege.UI
             return button;
         }
 
-        public static (GameObject container, Image fill, TextMeshProUGUI text) CreateFirewallHealthBar(Transform parent)
-        {
-            var containerGO = new GameObject("FirewallHealthContainer");
-            containerGO.transform.SetParent(parent, false);
-
-            var containerRect = containerGO.AddComponent<RectTransform>();
-            containerRect.anchorMin = new Vector2(0.5f, 0f);
-            containerRect.anchorMax = new Vector2(0.5f, 0f);
-            containerRect.pivot = new Vector2(0.5f, 0f);
-            containerRect.anchoredPosition = UIConstants.FirewallHealthPosition;
-            containerRect.sizeDelta = UIConstants.FirewallHealthSize;
-
-            var bgGO = new GameObject("Background");
-            bgGO.transform.SetParent(containerGO.transform, false);
-
-            var bgRect = bgGO.AddComponent<RectTransform>();
-            bgRect.anchorMin = Vector2.zero;
-            bgRect.anchorMax = Vector2.one;
-            bgRect.offsetMin = Vector2.zero;
-            bgRect.offsetMax = Vector2.zero;
-
-            var bgImage = bgGO.AddComponent<Image>();
-            bgImage.color = UIConstants.HealthBarBackgroundColor;
-
-            var fillGO = new GameObject("Fill");
-            fillGO.transform.SetParent(containerGO.transform, false);
-
-            var fillRect = fillGO.AddComponent<RectTransform>();
-            fillRect.anchorMin = Vector2.zero;
-            fillRect.anchorMax = Vector2.one;
-            fillRect.offsetMin = new Vector2(4, 4);
-            fillRect.offsetMax = new Vector2(-4, -4);
-
-            var fillImage = fillGO.AddComponent<Image>();
-            fillImage.color = UIConstants.HealthBarHealthyColor;
-            fillImage.type = Image.Type.Filled;
-            fillImage.fillMethod = Image.FillMethod.Horizontal;
-            fillImage.fillOrigin = 0;
-            fillImage.fillAmount = 1f;
-
-            var textGO = new GameObject("HPText");
-            textGO.transform.SetParent(containerGO.transform, false);
-
-            var textRect = textGO.AddComponent<RectTransform>();
-            textRect.anchorMin = Vector2.zero;
-            textRect.anchorMax = Vector2.one;
-            textRect.offsetMin = Vector2.zero;
-            textRect.offsetMax = Vector2.zero;
-
-            var hpText = textGO.AddComponent<TextMeshProUGUI>();
-            hpText.text = "2000 / 2000";
-            hpText.fontSize = UIConstants.HealthBarFontSize;
-            hpText.alignment = TextAlignmentOptions.Center;
-            hpText.color = Color.white;
-
-            return (containerGO, fillImage, hpText);
-        }
-
         public static (GameObject container, TextMeshProUGUI text) CreateScoreDisplay(Transform parent)
         {
             var containerGO = new GameObject("ScoreContainer");
