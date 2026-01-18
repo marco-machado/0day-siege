@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
+using ZeroDaySiege.Cards;
 using ZeroDaySiege.Enemies;
 using ZeroDaySiege.Firewall;
 using ZeroDaySiege.Towers;
@@ -25,15 +26,21 @@ namespace ZeroDaySiege.Core
             SetupScreenController();
             SetupGameManager();
             SetupWaveManager();
+            SetupWaveSpawner();
             SetupGameLayout();
             SetupEnemyManager();
             SetupTowerManager();
+            SetupScoreManager();
+            SetupCardManager();
             SetupFirewall();
             SetupEventSystem();
             SetupRunUI();
             SetupFirewallUI();
+            SetupScoreUI();
             SetupVignetteOverlay();
             SetupPauseUI();
+            SetupMenuUI();
+            SetupDamageNumbers();
             SetupDebugControls();
         }
 
@@ -62,6 +69,21 @@ namespace ZeroDaySiege.Core
             DontDestroyOnLoad(waveGO);
         }
 
+        private void SetupWaveSpawner()
+        {
+            if (WaveSpawner.Instance != null)
+            {
+                Debug.Log("[GameBootstrap] WaveSpawner already exists");
+                return;
+            }
+
+            Debug.Log("[GameBootstrap] Creating WaveSpawner...");
+            var spawnerGO = new GameObject("[WaveSpawner]");
+            spawnerGO.AddComponent<WaveSpawner>();
+            DontDestroyOnLoad(spawnerGO);
+            Debug.Log("[GameBootstrap] WaveSpawner created");
+        }
+
         private void SetupGameLayout()
         {
             if (GameLayout.Instance != null) return;
@@ -88,6 +110,24 @@ namespace ZeroDaySiege.Core
             var towerGO = new GameObject("[TowerManager]");
             towerGO.AddComponent<TowerManager>();
             DontDestroyOnLoad(towerGO);
+        }
+
+        private void SetupScoreManager()
+        {
+            if (ScoreManager.Instance != null) return;
+
+            var scoreGO = new GameObject("[ScoreManager]");
+            scoreGO.AddComponent<ScoreManager>();
+            DontDestroyOnLoad(scoreGO);
+        }
+
+        private void SetupCardManager()
+        {
+            if (CardManager.Instance != null) return;
+
+            var cardGO = new GameObject("[CardManager]");
+            cardGO.AddComponent<CardManager>();
+            DontDestroyOnLoad(cardGO);
         }
 
         private void SetupFirewall()
@@ -133,6 +173,16 @@ namespace ZeroDaySiege.Core
             container.SetActive(false);
         }
 
+        private void SetupScoreUI()
+        {
+            var (container, text) = UIFactory.CreateScoreDisplay(runCanvas.transform);
+
+            var scoreUI = runCanvas.AddComponent<ScoreUI>();
+            scoreUI.SetReferences(text, container);
+
+            container.SetActive(false);
+        }
+
         private void SetupVignetteOverlay()
         {
             var vignetteImage = UIFactory.CreateVignetteOverlay(runCanvas.transform);
@@ -151,6 +201,23 @@ namespace ZeroDaySiege.Core
 
             var pauseUI = runCanvas.AddComponent<PauseUI>();
             pauseUI.SetReferences(pauseButton, pauseOverlay, resumeBtn, restartBtn, quitBtn, confirmDialog);
+        }
+
+        private void SetupMenuUI()
+        {
+            var (container, startButton) = UIFactory.CreateMenuScreen(runCanvas.transform);
+
+            var menuUI = runCanvas.AddComponent<MenuUI>();
+            menuUI.SetReferences(container, startButton);
+        }
+
+        private void SetupDamageNumbers()
+        {
+            if (DamageNumberManager.Instance != null) return;
+
+            var damageNumberGO = new GameObject("[DamageNumberManager]");
+            damageNumberGO.AddComponent<DamageNumberManager>();
+            DontDestroyOnLoad(damageNumberGO);
         }
 
         private void SetupDebugControls()

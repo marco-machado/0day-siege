@@ -109,10 +109,11 @@ namespace ZeroDaySiege.Core
 
         public void StartRun()
         {
+            lastRunOutcome = RunOutcome.None;
+            currentWave = 1;
+
             if (TryChangeState(GameState.Playing))
             {
-                lastRunOutcome = RunOutcome.None;
-                currentWave = 1;
                 OnWaveChanged?.Invoke(currentWave);
             }
         }
