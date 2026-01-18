@@ -1,10 +1,10 @@
-# Base Tower Defense - *Game Design Document*
+# 0Day Siege - *Game Design Document*
 
 ---
 
 ## 1. Overview
 
-Base Tower Defense is a tower defense game where players protect a defensive wall from waves of enemies. Players place defensive towers in 5 fixed slots to intercept waves of attackers before they reach the wall.
+0Day Siege is a tower defense game where players protect a defensive wall from waves of enemies. Players place defensive towers in 5 fixed slots to intercept waves of attackers before they reach the wall.
 
 ---
 
