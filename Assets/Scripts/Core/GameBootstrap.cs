@@ -3,9 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using ZeroDaySiege.Cards;
 using ZeroDaySiege.Enemies;
-using ZeroDaySiege.Firewall;
 using ZeroDaySiege.Towers;
 using ZeroDaySiege.UI;
+using FirewallEntity = ZeroDaySiege.Firewall.Firewall;
 
 namespace ZeroDaySiege.Core
 {
@@ -23,6 +23,7 @@ namespace ZeroDaySiege.Core
 
         private void Start()
         {
+            #region Core Managers
             SetupScreenController();
             SetupGameManager();
             SetupWaveManager();
@@ -37,6 +38,9 @@ namespace ZeroDaySiege.Core
             SetupCardManager();
             SetupFirewall();
             SetupEventSystem();
+            #endregion
+
+            #region UI Systems
             SetupRunUI();
             SetupScoreUI();
             SetupVignetteOverlay();
@@ -46,11 +50,19 @@ namespace ZeroDaySiege.Core
             SetupCardSelectionUI();
             SetupGameOverUI();
             SetupDamageNumbers();
+            #endregion
+
+            #region Debug
             SetupDebugControls();
+            #endregion
         }
+
+        #region Core Manager Setup
 
         private void SetupScreenController()
         {
+            if (Object.FindAnyObjectByType<ScreenController>() != null) return;
+
             var screenGO = new GameObject("[ScreenController]");
             screenGO.AddComponent<ScreenController>();
             DontDestroyOnLoad(screenGO);
@@ -85,17 +97,11 @@ namespace ZeroDaySiege.Core
 
         private void SetupWaveSpawner()
         {
-            if (WaveSpawner.Instance != null)
-            {
-                Debug.Log("[GameBootstrap] WaveSpawner already exists");
-                return;
-            }
+            if (WaveSpawner.Instance != null) return;
 
-            Debug.Log("[GameBootstrap] Creating WaveSpawner...");
             var spawnerGO = new GameObject("[WaveSpawner]");
             spawnerGO.AddComponent<WaveSpawner>();
             DontDestroyOnLoad(spawnerGO);
-            Debug.Log("[GameBootstrap] WaveSpawner created");
         }
 
         private void SetupGameLayout()
@@ -164,10 +170,10 @@ namespace ZeroDaySiege.Core
 
         private void SetupFirewall()
         {
-            if (Firewall.Firewall.Instance != null) return;
+            if (FirewallEntity.Instance != null) return;
 
             var firewallGO = new GameObject("[Firewall]");
-            firewallGO.AddComponent<Firewall.Firewall>();
+            firewallGO.AddComponent<FirewallEntity>();
             DontDestroyOnLoad(firewallGO);
         }
 
@@ -181,8 +187,14 @@ namespace ZeroDaySiege.Core
             DontDestroyOnLoad(eventSystemGO);
         }
 
+        #endregion
+
+        #region UI System Setup
+
         private void SetupRunUI()
         {
+            if (Object.FindAnyObjectByType<RunUI>() != null) return;
+
             var canvas = UIFactory.CreateRunCanvas();
             runCanvas = canvas.gameObject;
             DontDestroyOnLoad(runCanvas);
@@ -274,11 +286,19 @@ namespace ZeroDaySiege.Core
             DontDestroyOnLoad(damageNumberGO);
         }
 
+        #endregion
+
+        #region Debug Setup
+
         private void SetupDebugControls()
         {
+            if (Object.FindAnyObjectByType<DebugControls>() != null) return;
+
             var debugGO = new GameObject("[DebugControls]");
             debugGO.AddComponent<DebugControls>();
             DontDestroyOnLoad(debugGO);
         }
+
+        #endregion
     }
 }
