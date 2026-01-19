@@ -1997,7 +1997,7 @@ Time to kill with 5 fully upgraded towers (~112.5 DPS each = 562.5 DPS total):
   "enemyId": "basic",
   "displayName": "Virus",
   "baseHP": 100,
-  "speed": 0.1,
+  "speed": 0.05,
   "firewallDamage": 15,
   "firewallAttackCooldown": 1.0,
   "behavior": "direct",
@@ -2010,7 +2010,7 @@ Time to kill with 5 fully upgraded towers (~112.5 DPS each = 562.5 DPS total):
   "enemyId": "fast",
   "displayName": "Worm",
   "baseHP": 60,
-  "speed": 0.16,
+  "speed": 0.08,
   "firewallDamage": 10,
   "firewallAttackCooldown": 0.8,
   "behavior": "direct",
@@ -2026,13 +2026,13 @@ Speed determines how quickly enemies travel from spawn to wall. Values use norma
 
 | Enemy Type | Speed (units/s) | Time to Wall | Hard Mode (1.2x) |
 |------------|-----------------|--------------|------------------|
-| Basic | 0.1 | ~8 seconds | ~6.7 seconds |
-| Fast | 0.16 | ~5 seconds | ~4.2 seconds |
-| Boss | 0.06 | ~13 seconds | ~11 seconds |
+| Basic | 0.05 | ~16 seconds | ~13.3 seconds |
+| Fast | 0.08 | ~10 seconds | ~8.3 seconds |
+| Boss | 0.03 | ~26 seconds | ~21.7 seconds |
 
 **Design Notes:**
-- Basic enemies give towers ~8 seconds of firing time at Normal difficulty
-- Fast enemies give only ~5 seconds, requiring quick targeting or they slip through
+- Basic enemies give towers ~16 seconds of firing time at Normal difficulty
+- Fast enemies give only ~10 seconds, requiring quick targeting or they slip through
 - Bosses are slower, giving more time to deal with their high HP
 - Hard mode's 1.2x speed multiplier reduces reaction time by ~17%
 
