@@ -151,8 +151,13 @@ namespace ZeroDaySiege.Towers
                 return;
             }
 
-            currentTarget = TargetingSystem.FindTarget(transform.position, worldRange, enemyManager.ActiveEnemies);
+            if (currentTarget != null && currentTarget.IsAlive && IsInRange(currentTarget.transform.position))
+            {
+                currentState = TowerState.Targeting;
+                return;
+            }
 
+            currentTarget = TargetingSystem.FindTarget(transform.position, worldRange, enemyManager.ActiveEnemies);
             currentState = currentTarget != null ? TowerState.Targeting : TowerState.Idle;
         }
 
