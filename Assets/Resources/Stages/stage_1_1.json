@@ -7,176 +7,216 @@
       "waveNumber": 1,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 2,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 3,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 4,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 5,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 6,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 7,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 1 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 8,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.2, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.8, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 9,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 10,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 11,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 1 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 12,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 1 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 1 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 13,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 14,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 0.5 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 15,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 16,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 17,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 3 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 18,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 1.5 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 3 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 19,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 0 },
-        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 1 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.5 }
+        { "enemyType": "Virus", "spawnX": 0.1, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.9, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 20,
       "isBoss": true,
       "enemies": [
-        { "enemyType": "Ransomware", "spawnX": 0.5, "spawnTime": 0 }
+        { "enemyType": "Ransomware", "spawnX": 0.5, "spawnTime": 2.0 }
       ]
     }
   ]
