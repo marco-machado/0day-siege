@@ -67,8 +67,8 @@ Essential feedback for understanding game state:
 - **Wave Indicators**: Clear display of current wave number and wave progress
 - **Attack Indicators**: Basic visual indication when towers are firing (projectile trails/beams)
 - **Score Updates**: Real-time score counter updates
-- **Tower Tooltip**: Hovering over a tower shows current stats and applied upgrades (see format below)
-- **Range Indicator**: Hovering over a tower shows its targeting range as a circular overlay
+- **Tower Tooltip**: Tapping a tower shows current stats and applied upgrades (see format below)
+- **Range Indicator**: Tapping a tower shows its targeting range as a circular overlay
 
 **Tower Tooltip Format:**
 ```

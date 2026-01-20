@@ -49,7 +49,9 @@ namespace ZeroDaySiege.Towers
         private SpriteRenderer visualRenderer;
         private TextMeshPro labelText;
         private LineRenderer rangeIndicator;
-        private bool isHovered;
+        private bool isSelected;
+
+        public bool IsSelected => isSelected;
 
         public TowerType Type => towerType;
         public TowerState State => currentState;
@@ -94,8 +96,6 @@ namespace ZeroDaySiege.Towers
 
         private void Update()
         {
-            UpdateHover();
-
             if (GameManager.Instance == null || !GameManager.Instance.IsPlaying)
                 return;
 
@@ -110,24 +110,34 @@ namespace ZeroDaySiege.Towers
             }
         }
 
-        private void UpdateHover()
+        public bool ContainsScreenPoint(Vector2 screenPosition)
         {
-            if (rangeIndicator == null) return;
+            if (Camera.main == null) return false;
 
-            var mouse = Mouse.current;
-            if (mouse == null) return;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+            worldPos.z = 0f;
 
-            Vector3 mouseScreen = mouse.position.ReadValue();
-            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-            mouseWorld.z = 0f;
+            float distance = Vector2.Distance(worldPos, transform.position);
+            return distance <= towerSize * 0.5f;
+        }
 
-            float distance = Vector2.Distance(mouseWorld, transform.position);
-            bool nowHovered = distance <= towerSize * 0.5f;
-
-            if (nowHovered != isHovered)
+        public void Select()
+        {
+            if (isSelected) return;
+            isSelected = true;
+            if (rangeIndicator != null)
             {
-                isHovered = nowHovered;
-                rangeIndicator.gameObject.SetActive(isHovered);
+                rangeIndicator.gameObject.SetActive(true);
+            }
+        }
+
+        public void Deselect()
+        {
+            if (!isSelected) return;
+            isSelected = false;
+            if (rangeIndicator != null)
+            {
+                rangeIndicator.gameObject.SetActive(false);
             }
         }
 

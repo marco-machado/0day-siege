@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using ZeroDaySiege.Core;
 
 namespace ZeroDaySiege.Towers
@@ -11,12 +12,18 @@ namespace ZeroDaySiege.Towers
 
         public event Action<Tower> OnTowerPlaced;
         public event Action<Tower> OnTowerDestroyed;
+        public event Action<Tower> OnTowerSelected;
+        public event Action OnTowerDeselected;
 
         private readonly List<Tower> activeTowers = new();
         private TowerSlot[] slots;
+        private Tower selectedTower;
+        private float selectionTimer;
+        private const float SelectionTimeout = 3f;
 
         public int ActiveTowerCount => activeTowers.Count;
         public IReadOnlyList<Tower> ActiveTowers => activeTowers;
+        public Tower SelectedTower => selectedTower;
 
         public TowerType StartingTowerType { get; set; } = TowerType.BaseTower;
 
@@ -49,6 +56,90 @@ namespace ZeroDaySiege.Towers
             }
         }
 
+        private void Update()
+        {
+            if (GameManager.Instance == null || !GameManager.Instance.IsPlaying)
+                return;
+
+            CheckForTap();
+            UpdateSelectionTimer();
+        }
+
+        private void UpdateSelectionTimer()
+        {
+            if (selectedTower == null) return;
+
+            selectionTimer -= Time.deltaTime;
+            if (selectionTimer <= 0f)
+            {
+                DeselectAll();
+            }
+        }
+
+        private void CheckForTap()
+        {
+            Vector2? tapPosition = null;
+
+            var pointer = Pointer.current;
+            if (pointer != null && pointer.press.wasPressedThisFrame)
+            {
+                tapPosition = pointer.position.ReadValue();
+            }
+
+            if (tapPosition == null) return;
+
+            Tower tappedTower = null;
+            foreach (var tower in activeTowers)
+            {
+                if (tower != null && tower.ContainsScreenPoint(tapPosition.Value))
+                {
+                    tappedTower = tower;
+                    break;
+                }
+            }
+
+            if (tappedTower != null)
+            {
+                if (selectedTower == tappedTower)
+                {
+                    DeselectAll();
+                }
+                else
+                {
+                    SelectTower(tappedTower);
+                }
+            }
+            else
+            {
+                DeselectAll();
+            }
+        }
+
+        public void SelectTower(Tower tower)
+        {
+            if (tower == null) return;
+
+            if (selectedTower != null && selectedTower != tower)
+            {
+                selectedTower.Deselect();
+            }
+
+            selectedTower = tower;
+            selectedTower.Select();
+            selectionTimer = SelectionTimeout;
+            OnTowerSelected?.Invoke(tower);
+        }
+
+        public void DeselectAll()
+        {
+            if (selectedTower != null)
+            {
+                selectedTower.Deselect();
+                selectedTower = null;
+                OnTowerDeselected?.Invoke();
+            }
+        }
+
         private void InitializeSlots()
         {
             slots = new TowerSlot[TowerSlot.TotalSlots];
@@ -62,11 +153,16 @@ namespace ZeroDaySiege.Towers
         {
             if (newState == GameState.Menu || newState == GameState.GameOver)
             {
+                DeselectAll();
                 ClearAllTowers();
             }
             else if (newState == GameState.Playing && previousState == GameState.Menu)
             {
                 PlaceStartingTower();
+            }
+            else if (newState == GameState.Paused || newState == GameState.CardSelection)
+            {
+                DeselectAll();
             }
         }
 
