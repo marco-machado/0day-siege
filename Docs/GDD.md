@@ -151,7 +151,7 @@ Score serves a **dual purpose**: it triggers card selection thresholds during a 
 
 **Key Distinction:**
 - **Score** = Competitive performance metric (in-run progression + bragging rights)
-- **Shards** = Progression currency (unlocks, mastery) — earned independently, NOT converted from score
+- **Shards** = Progression currency (mastery, consumables) — earned independently, NOT converted from score
 
 Score persists across waves within a single run but resets between runs.
 
@@ -431,7 +431,7 @@ Basic Towers are the main damage-dealing towers that form the foundation of ever
 | Selection | Chosen before run begins (pre-run selection screen) |
 | Placement | Always in the middle slot (slot 3) |
 | Limit | Only one Basic Tower per run |
-| Unlock | Must be unlocked with currency between runs (except starter) |
+| Unlock | Unlocked at Player Level 1 |
 
 **MVP Basic Towers:**
 
@@ -442,20 +442,20 @@ Basic Towers are the main damage-dealing towers that form the foundation of ever
 | **Burst Tower** | Charged sniper shot | Slow fire rate, 3x single-target damage | Burst |
 | **Piercing Tower** | Piercing rail shot | Projectile passes through all enemies in a line | Multi-Target |
 
-The Base Tower is always unlocked. Other Basic Towers must be purchased with currency before they become selectable.
+All Basic Towers are unlocked at Player Level 1.
 
 *For detailed stats (damage, fire rate, range, DPS), see Appendix B: Balance Guidelines.*
 
 ### 5.2 Advanced Towers
 
-Advanced Towers are unlockable damage dealers that can be placed during a run via the card system. They provide specialized damage capabilities to complement the Basic Tower.
+Advanced Towers are damage dealers that can be placed during a run via the card system. They provide specialized damage capabilities to complement the Basic Tower.
 
 | Rule | Description |
 |------|-------------|
 | Selection | Placed via Place Tower cards during the run |
 | Placement | Any available outer slot (1, 2, 4, or 5) |
-| Limit | Only previously unlocked towers can appear in card selection |
-| Unlock | Must be unlocked with currency between runs |
+| Limit | Only unlocked towers can appear in card selection |
+| Unlock | Unlocked at Player Level 1 |
 
 **MVP Advanced Towers:**
 
@@ -493,8 +493,8 @@ Special Towers will focus on **crowd control and utility effects** rather than d
 |------|-------------|
 | Selection | Will be placed via Place Tower cards during the run |
 | Placement | Any available outer slot (1, 2, 4, or 5) |
-| Limit | Only previously unlocked towers will appear in card selection |
-| Unlock | Will require currency to unlock between runs |
+| Limit | Only unlocked towers will appear in card selection |
+| Unlock | Will unlock at specific Player Levels |
 
 **Planned Special Tower Archetypes:**
 
@@ -539,7 +539,7 @@ All towers use the following targeting priority system to select enemies:
 
 **Design Note:** The fixed targeting system is intentionally simple. Per-tower targeting modes were considered but rejected to keep gameplay focused on tower placement and upgrade decisions rather than micro-management.
 
-Additional tower examples and archetypes can be found in Appendix D. The MVP includes 4 unlockable towers representing distinct archetypes (AOE, Utility, Burst, Multi-Target).
+Additional tower examples and archetypes can be found in Appendix D. The MVP includes 4 tower types representing distinct archetypes (AOE, Utility, Burst, Multi-Target).
 
 ### 5.5 Critical Hit System
 
@@ -820,7 +820,7 @@ Players can spend **Decrypt Keys** to reroll card selections, providing agency w
 
 ## 7. Meta-Progression
 
-Between runs, players spend currency to unlock new towers and permanently upgrade them. This provides long-term goals and allows players to develop personalized playstyles.
+Between runs, players spend currency to permanently upgrade their towers via the Mastery system. Towers are unlocked by reaching Player Level milestones. This provides long-term goals and allows players to develop personalized playstyles.
 
 ### 7.1 Progression Currencies
 
@@ -830,12 +830,12 @@ The game uses two currencies with distinct acquisition methods and purposes.
 
 | Currency | Icon | Primary Source | Role |
 |----------|------|----------------|------|
-| **Data Shards** | ◈ | Run rewards, kills, bonuses | Unlocks, mastery, consumables |
+| **Data Shards** | ◈ | Run rewards, kills, bonuses | Mastery, consumables |
 | **Decrypt Keys** | 🔑 | Boss kills, achievements, daily | Card rerolls, premium shop items |
 
 #### Data Shards
 
-The primary currency used for unlocks and permanent upgrades. Earned from run performance.
+The primary currency used for permanent upgrades (Mastery). Earned from run performance.
 
 **Important:** Shards are earned from **discrete events** (kills, waves, bonuses), NOT converted from score. Score and shards are independent systems—score is a competitive metric, shards are progression currency.
 
@@ -928,7 +928,7 @@ A secondary currency used for card rerolls during runs and premium shop purchase
 
 ### 7.2 Tower Unlocks
 
-Towers must be unlocked with currency before they become available. Each tower group has different unlock benefits:
+Towers are unlocked by reaching Player Level milestones. Each tower group has different unlock benefits:
 
 | Tower Group | Unlock Benefit |
 |-------------|----------------|
@@ -936,14 +936,12 @@ Towers must be unlocked with currency before they become available. Each tower g
 | **Advanced Towers** | Unlocked towers can appear in Place Tower cards during runs |
 | **Special Towers** | Unlocked towers can appear in Place Tower cards during runs |
 
-The Base Tower is always unlocked. All other towers must be purchased with currency.
-
-**MVP Scope:**
-- **Basic Towers (4):** Base Tower (always unlocked), AOE Tower, Burst Tower, Piercing Tower
+**MVP Scope (All Unlocked at Level 1):**
+- **Basic Towers (4):** Base Tower, AOE Tower, Burst Tower, Piercing Tower
 - **Advanced Towers (1):** Brute Force Node
 - **Special Towers:** None in MVP (post-launch content)
 
-Additional towers may be added in future content updates (see Appendix D).
+Future updates may gate towers behind higher Player Levels. Additional towers may be added in future content updates (see Appendix D).
 
 ### 7.3 Tower Mastery
 
@@ -964,11 +962,37 @@ Each tower has its own mastery track. Spend currency to boost a specific tower's
 - **Precision Strike (Burst Tower):** Attacks against enemies above 50% HP deal +50% bonus damage. Applies before crit calculation.
 - **Dictionary Attack (Brute Force Node):** Adds a 4th projectile to each burst (4 shots instead of 3). Replaces Credential Stuffing bonus with +25% damage per consecutive hit on the same target (up to +75% on 4th hit).
 
-### 7.4 Progression Notes
+### 7.4 Player Level
+
+Players have a persistent account level that increases through successful run completions. Player Level gates tower unlocks (see Section 7.2).
+
+| Parameter | Value |
+|-----------|-------|
+| XP per victory | 15 |
+| XP per level | 100 |
+| Starting level | 1 |
+
+**Level Formula:** `Level = 1 + (TotalXP / 100)`
+
+| Level | Total XP Required | Victories Needed |
+|-------|-------------------|------------------|
+| 1 | 0 | 0 |
+| 2 | 100 | 7 |
+| 3 | 200 | 14 |
+| 5 | 400 | 27 |
+| 10 | 900 | 60 |
+
+**Design Notes:**
+- XP is only awarded on victory (successful run completion)
+- Defeats, restarts, and quits do not award XP
+- All towers currently unlock at Level 1; future updates may gate towers at higher levels
+- Values are initial tuning targets, subject to balancing
+
+### 7.5 Progression Notes
 
 - Permanent upgrades apply to all future runs
 - In-run card upgrades multiply with permanent upgrades (see Appendix H.4 for formula)
-- Number of unlockable towers and upgrade levels can be tuned for desired progression length
+- Tower unlock levels and mastery upgrade levels can be tuned for desired progression length
 - Players naturally specialize in favorite towers over time
 
 ---
@@ -1607,7 +1631,7 @@ Each chip is balanced to ~4% of a "power point":
 
 ## 10. Shop System
 
-The Network Terminal is the between-runs shop where players spend currencies on unlocks, upgrades, and consumables.
+The Network Terminal is the between-runs shop where players spend currencies on upgrades and consumables.
 
 ### 10.1 Shop Overview
 
@@ -1616,29 +1640,14 @@ The Network Terminal is the between-runs shop where players spend currencies on 
 ║  NETWORK TERMINAL                              ◈ 2,450  🔑 12   ║
 ╠════════════════════════════════════════════════════════════════╣
 ║                                                                 ║
-║  [ARSENAL]  [MASTERY]  [SUPPLY]  [BLACK MARKET]  [COSMETICS]   ║
+║  [MASTERY]  [SUPPLY]  [BLACK MARKET]  [COSMETICS]              ║
 ║                                                                 ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
 The shop is accessible from the main menu between runs. Currency totals are always visible in the header.
 
-### 10.2 Arsenal (Tower Unlocks)
-
-Permanent tower unlocks. Buy once, own forever.
-
-| Item | Cost | Description |
-|------|------|-------------|
-| Logic Bomb (AOE) | 200 ◈ | Unlocks AOE Tower for pre-run selection |
-| Zero-Day Striker (Burst) | 250 ◈ | Unlocks Burst Tower for pre-run selection |
-| Traceroute Cannon (Piercing) | 300 ◈ | Unlocks Piercing Tower for pre-run selection |
-| Brute Force Node | 400 ◈ | Unlocks Advanced Tower for card pool |
-
-**Visual States:**
-- Locked: Silhouette + "ENCRYPTED" label
-- Purchased: Full art + "DECRYPTED ✓" label
-
-### 10.3 Mastery (Permanent Upgrades)
+### 10.2 Mastery (Permanent Upgrades)
 
 Per-tower mastery investment. Displays current level, next upgrade cost, and Level 5 ability preview.
 
@@ -1657,7 +1666,7 @@ Per-tower mastery investment. Displays current level, next upgrade cost, and Lev
 
 See Section 7.3 for mastery costs and abilities per tower.
 
-### 10.4 Supply (Consumables & Chips)
+### 10.3 Supply (Consumables & Chips)
 
 Repeatable purchases for chips and utility items.
 
@@ -1685,7 +1694,7 @@ Repeatable purchases for chips and utility items.
 - Maximum 1 of each consumable type per run
 - Consumed whether run succeeds or fails
 
-### 10.5 Black Market (Rotating Stock)
+### 10.4 Black Market (Rotating Stock)
 
 Daily rotating deals with discounted and exclusive items. Creates urgency and variety.
 
@@ -1726,7 +1735,7 @@ Daily rotating deals with discounted and exclusive items. Creates urgency and va
 | Featured | Keys-only item, rotates weekly |
 | Purchase limits | Some items limited to 1/day |
 
-### 10.6 Cosmetics (Visual Customization)
+### 10.5 Cosmetics (Visual Customization)
 
 Non-gameplay items for personalization. All cosmetics are earnable through gameplay OR purchasable.
 
@@ -1740,14 +1749,13 @@ Non-gameplay items for personalization. All cosmetics are earnable through gamep
 
 **Design Note:** No exclusive paid cosmetics. Everything is earnable through achievements or direct purchase with gameplay currency.
 
-### 10.7 Economy Balance Targets
+### 10.6 Economy Balance Targets
 
 #### Shard Progression
 
 | Milestone | Target Time | Shards Needed |
 |-----------|-------------|---------------|
-| First tower unlock | 1-2 hours | 200 |
-| All Basic towers | 4-6 hours | 750 |
+| First Mastery 1 | 1-2 hours | 75 |
 | First Mastery 5 | 8-12 hours | 2,325 |
 | Full tower mastery (1 tower) | 15-20 hours | 2,325 |
 | All towers mastered | 60-80 hours | ~12,000 |
@@ -1760,7 +1768,7 @@ Non-gameplay items for personalization. All cosmetics are earnable through gamep
 | Comfortable reroll budget | 5-8 keys banked |
 | Keys earned per week (active) | 25-35 |
 
-### 10.8 Anti-Pay-to-Win Safeguards
+### 10.7 Anti-Pay-to-Win Safeguards
 
 | Principle | Implementation |
 |-----------|----------------|
@@ -1770,12 +1778,12 @@ Non-gameplay items for personalization. All cosmetics are earnable through gamep
 | Cosmetic-only premium | If real money ever added, cosmetics only |
 | Catch-up mechanics | Bonus shards for first-time Hard clears |
 
-### 10.9 Shop Prompts & Tutorials
+### 10.8 Shop Prompts & Tutorials
 
 | Trigger | Prompt |
 |---------|--------|
 | First boss kill | "You earned a Decrypt Key! Use these to reroll cards during runs." |
-| Enough shards for unlock | Badge appears on Arsenal tab |
+| Enough shards for mastery | Badge appears on Mastery tab |
 | New Black Market stock | Main menu notification dot |
 | First purchase | Brief tutorial on currency types |
 
