@@ -41,15 +41,7 @@ namespace ZeroDaySiege.Towers
 
         private static int CalculatePriority(Enemy enemy)
         {
-            int priority = 0;
-
-            if (enemy.State == EnemyState.Attacking)
-                priority += 10000;
-
-            if (enemy.Type == EnemyType.Ransomware)
-                priority += 1000;
-
-            return priority;
+            return enemy.State == EnemyState.Attacking ? 10000 : 0;
         }
 
         private static Enemy BreakTie(Enemy current, Enemy candidate)
@@ -60,6 +52,14 @@ namespace ZeroDaySiege.Towers
             if (candidateY < currentY)
                 return candidate;
             if (currentY < candidateY)
+                return current;
+
+            bool currentIsBoss = current.Type == EnemyType.Ransomware;
+            bool candidateIsBoss = candidate.Type == EnemyType.Ransomware;
+
+            if (candidateIsBoss && !currentIsBoss)
+                return candidate;
+            if (currentIsBoss && !candidateIsBoss)
                 return current;
 
             if (candidate.CurrentHP > current.CurrentHP)

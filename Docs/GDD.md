@@ -522,17 +522,18 @@ All towers use the following targeting priority system to select enemies:
 
 1. **Attacking Wall** (highest priority) - Enemies currently at the wall dealing damage are targeted first
 2. **Closest to Wall** - Among non-attacking enemies, those closest to the wall are targeted
-3. **Highest Health** - Among enemies at the same distance, prioritize those with the most remaining health
-4. **First Spawned** - If multiple enemies share the same distance and health, target the one that spawned first
+3. **Boss Priority** - Among enemies at the same distance, Boss enemies are targeted before other types
+4. **Highest Health** - Among same-distance, same-type enemies, prioritize those with the most remaining health
+5. **First Spawned** - If multiple enemies share the same distance, type, and health, target the one that spawned first
 
 **Rationale:**
 - Prioritizing enemies attacking the wall stops active damage immediately
 - Targeting enemies closest to the wall prevents new attackers from joining
+- Targeting Boss enemies ensures high-value targets are eliminated when equidistant
 - Targeting high-health enemies ensures they're eliminated before reaching the wall
 - This creates strategic depth: players must position towers to cover different paths and upgrade towers to handle high-health threats
 
 **Special Cases:**
-- **Boss Priority:** Within the same priority tier, Boss enemies are always targeted before Basic enemies. This ensures towers focus high-value targets when multiple enemies are equidistant.
 - Towers with multi-shot or piercing abilities still follow this priority for their primary target
 - Towers with area-of-effect attacks prioritize the center of enemy clusters using the same rules
 
@@ -2296,8 +2297,8 @@ Multiple towers sometimes fire at the same enemy when a single shot would have b
 
 **Final Priority Order:**
 1. Attacking Wall (highest)
-2. Boss enemies (within same distance tier)
-3. Closest to Wall
+2. Closest to Wall
+3. Boss Priority (within same distance tier)
 4. Highest Health
 5. First Spawned (tiebreaker)
 
