@@ -2243,7 +2243,28 @@ This appendix documents known design limitations and gaps that may require futur
 
 ### Active Issues
 
-*No active issues at this time.*
+#### F.6 Tower Overkill / Wasted Shots
+
+Multiple towers sometimes fire at the same enemy when a single shot would have been sufficient, wasting damage potential. This is most noticeable when several towers target a low-health enemy simultaneously.
+
+**Potential Solutions:**
+
+1. **Damage Reservation** - Towers calculate if their shot will kill the target before firing. If so, mark the target with "reserved damage" so other towers prefer different targets.
+   - *Complication:* Critical hits (5% chance, 1.5x damage) make damage prediction unreliable
+   - *Complication:* Projectile travel time means conditions can change before impact
+   - *Complication:* AOE and Piercing towers hit multiple targets, making reservation complex
+
+2. **Soft Preference** - Track "incoming damage" on enemies as a hint rather than a hard lock. Towers prefer targets without enough incoming damage to kill, but still fire at marked targets if nothing else is available.
+   - *Benefit:* Avoids the "everyone ignores the last enemy" edge case
+   - *Benefit:* More forgiving of crit variance
+
+3. **Balance Tuning** - Adjust tower fire rates, damage values, or enemy HP so overkill is less frequent naturally.
+   - *Benefit:* Simplest solution, no code complexity
+   - *Consideration:* May affect intended difficulty curve
+
+**Status:** Pending investigation. May be resolved through balance tuning alone. Revisit after tower stat balancing pass.
+
+**See Also:** Section 5.4 (Tower Targeting Priority)
 
 ---
 
