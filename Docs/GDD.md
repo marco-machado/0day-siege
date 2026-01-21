@@ -48,12 +48,12 @@ The Firewall is a protective barrier positioned just above the tower slots. Enem
 
 - 5 fixed tower slots at the bottom of the screen, positioned behind the wall
 - **Middle slot (slot 3)**: Reserved for the Antivirus Turret (Basic Tower)
-- **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced and Special Towers; player chooses which slot to place each tower
+- **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced Towers; player chooses which slot to place each tower
 - Each slot holds one active tower
 - **Only one tower of each type can be deployed** - each tower type is unique per run
 - Once placed, towers cannot be moved or swapped
-- Advanced and Special Towers are placed via card selection (see Section 6: Card System)
-- Towers are divided into three groups: Basic, Advanced, and Special (see Section 5: Towers)
+- Advanced Towers are placed via card selection (see Section 6: Card System)
+- Towers are divided into two groups: Basic and Advanced (see Section 5: Towers)
 
 ### 3.3 Visual Feedback Elements
 
@@ -140,7 +140,7 @@ Each run follows this structure:
 2. Run starts with the Antivirus Turret placed in the **middle slot (slot 3)**
 3. Fight waves of enemies continuously
 4. Earn score by killing enemies
-5. Card selection unlocks when score thresholds are reached (place Advanced/Special Towers, upgrade existing towers)
+5. Card selection unlocks when score thresholds are reached (place Advanced Towers, upgrade existing towers, or use Deployables)
 6. Run ends when all 20 waves complete or Wall HP reaches zero
 
 During a run, there is no resource management. Strategic depth comes from profile configuration, tower placement timing, and upgrade choices.
@@ -415,12 +415,12 @@ When enemies reach the wall, they **stop moving and begin attacking** the wall r
 
 ## 5. Towers
 
-Towers are divided into **three distinct groups**: Basic Towers, Advanced Towers, and Special Towers. Each group serves a different strategic role and has unique placement rules.
+Towers are divided into **two distinct groups**: Basic Towers and Advanced Towers. Each group serves a different strategic role and has unique placement rules.
 
 **Tower Slot Layout:**
 - 5 fixed tower slots at the bottom of the screen, positioned behind the wall
 - **Middle slot (slot 3)**: Always occupied by the Antivirus Turret (Basic Tower)
-- **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced and Special Towers via the card system
+- **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced Towers via the card system
 
 ### 5.1 Basic Tower
 
@@ -484,36 +484,37 @@ Total if all 3 hit same target: 64 damage (vs 54 if spread).
 
 Additional Advanced Towers may be added in future updates (see Appendix D).
 
-### 5.3 Special Towers (Post-MVP)
+### 5.3 Deployables (Post-MVP)
 
-Special Towers will focus on **crowd control and utility effects** rather than dealing damage. They will provide strategic options for controlling enemy movement and creating defensive setups.
+Deployables are **consumable utility items** that provide crowd control and defensive effects. Unlike towers, deployables do not occupy tower slots and are consumed upon use.
 
 | Rule | Description |
 |------|-------------|
-| Selection | Will be placed via Place Tower cards during the run |
-| Placement | Any available outer slot (1, 2, 4, or 5) |
-| Limit | Only unlocked towers will appear in card selection |
+| Acquisition | Obtained via card selection (same system as towers) |
+| Placement | Placed on the enemy path, random position weighted toward the firewall |
+| Duration | Consumable - triggered once then removed |
+| Limit | Only unlocked deployables can appear in card selection |
 | Unlock | Will unlock at specific Player Levels |
 
-**Planned Special Tower Archetypes:**
+**Planned Deployable Archetypes:**
 
-| Archetype | Effect | Example Mechanics |
-|-----------|--------|-------------------|
-| **Barrier** | Blocks or redirects enemy movement | Force fields, walls, deflectors |
-| **Trap** | Triggers effects when enemies enter area | Mines, snares, damage zones |
-| **Teleport** | Moves enemies to different locations | Send enemies back, relocate to other lanes |
-| **Debuff** | Applies negative effects without damage | Weaken, expose vulnerabilities, disable abilities |
+| Archetype | Effect | Trigger |
+|-----------|--------|---------|
+| **Barrier** | Blocks or redirects enemy movement | On placement |
+| **Trap** | Triggers effects when enemies enter area | Enemy contact |
+| **Teleport** | Moves enemies to different locations | Enemy contact |
+| **Debuff** | Applies negative effects without damage | Enemy contact |
 
-**Planned Special Towers:**
+**Planned Deployables:**
 
-| Tower | Effect Type | Special Mechanic |
-|-------|-------------|------------------|
-| **Barrier Tower** | Barrier | Creates temporary force field blocking enemy path |
-| **Trap Tower** | Trap | Places mines that detonate when enemies pass |
-| **Warp Tower** | Teleport | Teleports enemies back toward spawn point |
-| **Disruptor Tower** | Debuff | Marks enemies to take increased damage from all sources |
+| Deployable | Effect Type | Special Mechanic |
+|------------|-------------|------------------|
+| **Barrier** | Barrier | Creates temporary force field blocking enemy path |
+| **Mine** | Trap | Explodes when enemy passes, dealing area damage |
+| **Warp Trap** | Teleport | Teleports enemy back toward spawn point |
+| **Disruptor** | Debuff | Marks enemies to take increased damage from all sources |
 
-Special Towers will be introduced in future content updates.
+Deployables will be introduced in future content updates.
 
 ### 5.4 Tower Targeting Priority
 
@@ -808,11 +809,11 @@ Players can spend **Decrypt Keys** to reroll card selections, providing agency w
 ### 6.6 Strategic Considerations
 
 - **Battle Profile:** Configure a profile with gear that best suits the stage
-- **Early run:** Balance between placing Advanced/Special Towers vs. upgrading the Antivirus Turret
+- **Early run:** Balance between placing Advanced Towers vs. upgrading the Antivirus Turret
 - **Score optimization:** Efficient enemy kills unlock cards faster
 - **Tower timing:** Decide whether to save card selections or use them immediately based on current threats
 - **Late run:** Apply both Damage+ and Fire Rate+ upgrades to key towers for maximum effectiveness against boss waves
-- **Slot management:** Only 4 outer slots available for Advanced/Special Towers - choose wisely
+- **Slot management:** Only 4 outer slots available for Advanced Towers - choose wisely
 - **Reroll budgeting:** Conserve Decrypt Keys for critical card selections (e.g., boss wave preparation)
 
 ---
@@ -929,18 +930,18 @@ A secondary currency used for card rerolls during runs and premium shop purchase
 
 Towers are unlocked by reaching Player Level milestones. Each tower group has different unlock benefits:
 
-| Tower Group | Unlock Benefit |
+| Unlock Type | Unlock Benefit |
 |-------------|----------------|
 | **Basic Tower** | The Antivirus Turret is always available |
 | **Advanced Towers** | Unlocked towers can appear in Place Tower cards during runs |
-| **Special Towers** | Unlocked towers can appear in Place Tower cards during runs |
+| **Deployables** | Unlocked deployables can appear in Deployable cards during runs |
 
 **MVP Scope:**
 - **Basic Tower (1):** Antivirus Turret (unlocked at Level 1)
 - **Advanced Towers (4):** Logic Bomb, Zero-Day Striker, Traceroute Cannon, Brute Force Node (unlocked at Level 2)
-- **Special Towers:** None in MVP (post-launch content)
+- **Deployables:** None in MVP (post-launch content)
 
-Future updates may gate towers behind higher Player Levels. Additional towers may be added in future content updates (see Appendix D).
+Future updates may gate towers and deployables behind higher Player Levels. Additional content may be added in future updates (see Appendix D).
 
 ### 7.3 Tower Mastery
 

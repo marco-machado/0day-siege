@@ -161,7 +161,7 @@ ZeroDaySiege.Cards    - Card system, card pool, upgrades
 ZeroDaySiege.UI       - HUD, pause menu, dialogs, game over screen
 ```
 
-Future namespaces (per PLAN.md): `Progression`
+Future namespaces (per PLAN.md): `Progression`, `Deployables`
 
 ## Testing
 

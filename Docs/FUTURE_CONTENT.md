@@ -27,13 +27,13 @@ The following towers are reserved for future content updates and expansions:
 | Spray Tower | Rapid-fire weak projectiles | Sprays the whole path, good for groups | Multi-Target |
 | Drone Tower | Deployable units | Units seek targets, return to reload | Special |
 
-**Future Special Towers:**
+**Future Deployables:**
 
-| Tower ID | Effect Type | Special Mechanic |
-|----------|-------------|------------------|
-| Stasis Tower | Trap | Traps enemy in place for 2 seconds |
-| Mind Tower | Debuff | Chance to turn enemies against others briefly |
-| Slow Field Tower | Debuff | Creates area that slows all enemies passing through |
+| Deployable | Effect Type | Special Mechanic |
+|------------|-------------|------------------|
+| Stasis Trap | Trap | Traps enemy in place for 2 seconds |
+| Mind Disruptor | Debuff | Chance to turn enemies against others briefly |
+| Slow Field | Debuff | Creates area that slows all enemies passing through |
 
 ## Future: Damage Type System
 

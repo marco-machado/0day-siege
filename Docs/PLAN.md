@@ -577,7 +577,7 @@ Lower priority features for future updates:
 - Epic 17: Gear System
 - Epic 18: Chip System
 - Epic 19: Full Shop System
-- Special Towers (Barrier, Trap, Warp, Disruptor)
+- Deployables (Barrier, Mine, Warp Trap, Disruptor)
 - Chapter 2+ stages
 - Random Mode
 - Leaderboards
