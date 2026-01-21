@@ -6,21 +6,21 @@
 
 This is the authoritative source for all tower statistics. For tower mechanics and special abilities, see Section 5 of the GDD.
 
-Towers have distinct stat profiles while maintaining similar overall DPS. Basic towers have full range (0.9), Advanced towers have moderate range.
+Towers have distinct stat profiles while maintaining similar overall DPS. The Basic Tower (Antivirus Turret) and most Advanced Towers have full range (0.9), while some Advanced Towers have moderate range.
 
-### Basic Towers
+### Basic Tower
 
 | Tower | Damage | Fire Rate | Range | DPS | Unlock Cost |
 |-------|--------|-----------|-------|-----|-------------|
-| Base Tower | 50 | 1.0/s | 0.9 | 50 | Always unlocked |
-| AOE Tower | 40 | 1.2/s | 0.9 | 48 | 200 shards |
-| Burst Tower | 150 | 0.33/s | 0.9 | 50 | 250 shards |
-| Piercing Tower | 50 | 1.0/s | 0.9 | 50 | 300 shards |
+| Antivirus Turret | 50 | 1.0/s | 0.9 | 50 | Always unlocked |
 
 ### Advanced Towers
 
 | Tower | Damage | Fire Rate | Range | DPS | Unlock Cost |
 |-------|--------|-----------|-------|-----|-------------|
+| Logic Bomb | 40 | 1.2/s | 0.9 | 48 | 200 shards |
+| Zero-Day Striker | 150 | 0.33/s | 0.9 | 50 | 250 shards |
+| Traceroute Cannon | 50 | 1.0/s | 0.9 | 50 | 300 shards |
 | Brute Force Node | 18×3 | 0.83 bursts/s | 0.85 | 45 | 400 shards |
 
 **Brute Force Node Details:**
@@ -36,7 +36,7 @@ Towers have distinct stat profiles while maintaining similar overall DPS. Basic 
 
 ## Tower DPS with Upgrades
 
-| Upgrade State | DPS Multiplier | Example (Base Tower) |
+| Upgrade State | DPS Multiplier | Example (Antivirus Turret) |
 |---------------|----------------|----------------------|
 | No upgrades | 1.0x | 50 DPS |
 | Tier 1 Damage OR Fire Rate | 1.25x | 62.5 DPS |

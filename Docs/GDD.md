@@ -47,7 +47,7 @@ The Firewall is a protective barrier positioned just above the tower slots. Enem
 ### 3.2 Tower Placement
 
 - 5 fixed tower slots at the bottom of the screen, positioned behind the wall
-- **Middle slot (slot 3)**: Reserved for the Basic Tower selected before the run
+- **Middle slot (slot 3)**: Reserved for the Antivirus Turret (Basic Tower)
 - **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced and Special Towers; player chooses which slot to place each tower
 - Each slot holds one active tower
 - **Only one tower of each type can be deployed** - each tower type is unique per run
@@ -93,7 +93,7 @@ Gear: critical_section.dll
 
 **Average DPS Calculation:** `AvgDPS = DPS × (1 + CritChance × (CritMultiplier - 1))`
 
-Example: Base Tower with Mastery 5 (+50% damage, Overclocked), Tier 1 Damage (+25%), critical_section.dll (+5% crit):
+Example: Antivirus Turret with Mastery 5 (+50% damage, Overclocked), Tier 1 Damage (+25%), critical_section.dll (+5% crit):
 - Base DPS: `50 × 1.50 × 1.25 × 1.0 = 93.75 DPS`
 - Crit stats: 35% chance (5% base + 15% chips + 15% Overclocked), 2.1x multiplier (1.5x base + 0.5x Overclocked + 0.1x chips)
 - Avg DPS: `93.75 × (1 + 0.35 × 1.1) = 93.75 × 1.385 = 129.8 DPS`
@@ -122,7 +122,7 @@ Battle Profiles are user-defined loadouts that determine the starting configurat
 
 | Component | Description |
 |-----------|-------------|
-| **Basic Tower** | The primary tower placed in the middle slot at run start |
+| **Basic Tower** | The Antivirus Turret, automatically placed in the middle slot at run start |
 | **Gear Selection** | Equipment that provides passive bonuses or special effects (see Section 9: Gear System) |
 | **Other Settings** | Additional battle-affecting configurations (TBD) |
 
@@ -137,7 +137,7 @@ Battle Profiles are user-defined loadouts that determine the starting configurat
 Each run follows this structure:
 
 1. Player selects a **Battle Profile** (or uses default)
-2. Run starts with the profile's Basic Tower placed in the **middle slot (slot 3)**
+2. Run starts with the Antivirus Turret placed in the **middle slot (slot 3)**
 3. Fight waves of enemies continuously
 4. Earn score by killing enemies
 5. Card selection unlocks when score thresholds are reached (place Advanced/Special Towers, upgrade existing towers)
@@ -419,30 +419,26 @@ Towers are divided into **three distinct groups**: Basic Towers, Advanced Towers
 
 **Tower Slot Layout:**
 - 5 fixed tower slots at the bottom of the screen, positioned behind the wall
-- **Middle slot (slot 3)**: Always occupied by the selected Basic Tower
+- **Middle slot (slot 3)**: Always occupied by the Antivirus Turret (Basic Tower)
 - **Outer slots (slots 1, 2, 4, 5)**: Available for Advanced and Special Towers via the card system
 
-### 5.1 Basic Towers
+### 5.1 Basic Tower
 
-Basic Towers are the main damage-dealing towers that form the foundation of every run. Players select **one Basic Tower before starting a run**, and it is automatically placed in the **middle slot (slot 3)**.
+The Basic Tower is the starting tower that forms the foundation of every run. It is automatically placed in the **middle slot (slot 3)** at the start of each run.
 
 | Rule | Description |
 |------|-------------|
-| Selection | Chosen before run begins (pre-run selection screen) |
 | Placement | Always in the middle slot (slot 3) |
-| Limit | Only one Basic Tower per run |
+| Automatic | Placed automatically when a run begins |
 | Unlock | Unlocked at Player Level 1 |
 
-**MVP Basic Towers:**
+**MVP Basic Tower:**
 
 | Tower | Attack Style | Special Mechanic | Archetype |
 |-------|--------------|-----------------|-----------|
-| **Base Tower** | Single-target projectiles | Balanced starter tower, fast and reliable | Balanced |
-| **AOE Tower** | Lobbed explosives | Splash damage, hits clustered enemies | AOE/DOT |
-| **Burst Tower** | Charged sniper shot | Slow fire rate, 3x single-target damage | Burst |
-| **Piercing Tower** | Piercing rail shot | Projectile passes through all enemies in a line | Multi-Target |
+| **Antivirus Turret** | Single-target projectiles | Balanced starter tower, fast and reliable | Balanced |
 
-All Basic Towers are unlocked at Player Level 1.
+The Antivirus Turret is unlocked at Player Level 1.
 
 *For detailed stats (damage, fire rate, range, DPS), see Appendix B: Balance Guidelines.*
 
@@ -461,6 +457,9 @@ Advanced Towers are damage dealers that can be placed during a run via the card 
 
 | Tower | Attack Style | Special Mechanic | Archetype |
 |-------|--------------|-----------------|-----------|
+| **Logic Bomb** | Lobbed explosives | Splash damage, hits clustered enemies | AOE/DOT |
+| **Zero-Day Striker** | Charged sniper shot | Slow fire rate, 3x single-target damage | Burst |
+| **Traceroute Cannon** | Piercing rail shot | Projectile passes through all enemies in a line | Multi-Target |
 | **Brute Force Node** | 3-shot burst | Consecutive hits on same target deal bonus damage | Sustained single-target |
 
 *For detailed stats, see Appendix B: Balance Guidelines.*
@@ -539,7 +538,7 @@ All towers use the following targeting priority system to select enemies:
 
 **Design Note:** The fixed targeting system is intentionally simple. Per-tower targeting modes were considered but rejected to keep gameplay focused on tower placement and upgrade decisions rather than micro-management.
 
-Additional tower examples and archetypes can be found in Appendix D. The MVP includes 4 tower types representing distinct archetypes (AOE, Utility, Burst, Multi-Target).
+Additional tower examples and archetypes can be found in Appendix D. The MVP includes 5 tower types: 1 Basic Tower (Antivirus Turret) and 4 Advanced Towers (Logic Bomb, Zero-Day Striker, Traceroute Cannon, Brute Force Node).
 
 ### 5.5 Critical Hit System
 
@@ -569,22 +568,22 @@ finalCritMultiplier = min(base + chipBonus + gearBonus + masteryBonus, 2.6x)
 | Base (all towers) | 5% | 1.5x |
 | CRIT Chip (×5 max useful) | +3% each, +15% cap | — |
 | CRIT-X Chip (×4 max useful) | — | +0.15x each, +0.6x cap |
-| Overclocked Processor (Base Tower M5) | +15% | +0.5x |
+| Overclocked Processor (Antivirus Turret M5) | +15% | +0.5x |
 | critical_section.dll (Uncommon) | +5% | — |
 | buffer_overflow.dll (Rare) | +8% | +0.25x vs <30% HP |
 | exception_handler.dll (Epic) | +10% | — |
 | zero_day.dll (Rare) | First hit = auto-crit | — |
 
-#### Overclocked Processor (Base Tower Mastery 5)
+#### Overclocked Processor (Antivirus Turret Mastery 5)
 
-The Base Tower at Mastery Level 5 gains the "Overclocked Processor" ability, which **adds** to base crit values:
+The Antivirus Turret at Mastery Level 5 gains the "Overclocked Processor" ability, which **adds** to base crit values:
 
 | Property | Bonus |
 |----------|-------|
 | Crit Chance | +15% (5% → 20%) |
 | Crit Multiplier | +0.5x (1.5x → 2.0x) |
 
-With full chip investment, an Overclocked Base Tower reaches 35% crit chance and 2.1x multiplier.
+With full chip investment, an Overclocked Antivirus Turret reaches 35% crit chance and 2.1x multiplier.
 
 #### Interaction Rules
 
@@ -629,11 +628,11 @@ Towers and abilities can apply status effects to enemies. This section defines d
 |----------|-------|
 | Ground Duration | 2 seconds |
 | Tick Rate | Every 0.5 seconds (4 ticks total) |
-| Damage per Tick | 25% of AOE Tower base damage |
+| Damage per Tick | 25% of Logic Bomb base damage |
 | Total Burn Damage | 100% of tower damage over 2s |
 | Stacking | None—overlapping zones refresh duration only |
 
-Burning ground zones do not stack damage. An enemy standing in multiple burn zones takes damage as if in one zone, but the duration refreshes. This prevents AOE Tower from becoming dominant through zone overlap.
+Burning ground zones do not stack damage. An enemy standing in multiple burn zones takes damage as if in one zone, but the duration refreshes. This prevents the Logic Bomb from becoming dominant through zone overlap.
 
 #### Breach (Network Breach - Piercing Mastery 5)
 
@@ -644,7 +643,7 @@ Burning ground zones do not stack damage. An enemy standing in multiple burn zon
 | Duration | 5 seconds (shared timer) |
 | Reapplication | Adds stack (if below cap) and refreshes all stacks to 5s |
 
-Breach marks stack up to 2 times, rewarding focus-fire strategies. Any hit from a Piercing Tower with Network Breach refreshes the duration of all existing stacks. Multiple Piercing Towers can quickly build and maintain max stacks on priority targets.
+Breach marks stack up to 2 times, rewarding focus-fire strategies. Any hit from a Traceroute Cannon with Network Breach refreshes the duration of all existing stacks. Multiple Traceroute Cannons can quickly build and maintain max stacks on priority targets.
 
 #### Status Effect Visuals
 
@@ -781,7 +780,7 @@ Players can spend **Decrypt Keys** to reroll card selections, providing agency w
 ║  │ Brute Force │  │ Damage +    │  │ Fire Rate + │           ║
 ║  │ Node        │  │ Tier 1      │  │ Tier 2      │           ║
 ║  │             │  │             │  │             │           ║
-║  │ Slot: 1,2,4 │  │ Base Tower  │  │ AOE Tower   │           ║
+║  │ Slot: 1,2,4 │  │ Antivirus   │  │ Logic Bomb  │           ║
 ║  └─────────────┘  └─────────────┘  └─────────────┘           ║
 ║                                                               ║
 ║                    [🔑 DECRYPT - Reroll All]                  ║
@@ -808,8 +807,8 @@ Players can spend **Decrypt Keys** to reroll card selections, providing agency w
 
 ### 6.6 Strategic Considerations
 
-- **Battle Profile:** Configure a profile with the Basic Tower and gear that best suits the stage
-- **Early run:** Balance between placing Advanced/Special Towers vs. upgrading the Basic Tower
+- **Battle Profile:** Configure a profile with gear that best suits the stage
+- **Early run:** Balance between placing Advanced/Special Towers vs. upgrading the Antivirus Turret
 - **Score optimization:** Efficient enemy kills unlock cards faster
 - **Tower timing:** Decide whether to save card selections or use them immediately based on current threats
 - **Late run:** Apply both Damage+ and Fire Rate+ upgrades to key towers for maximum effectiveness against boss waves
@@ -932,13 +931,13 @@ Towers are unlocked by reaching Player Level milestones. Each tower group has di
 
 | Tower Group | Unlock Benefit |
 |-------------|----------------|
-| **Basic Towers** | Unlocked towers become selectable in pre-run tower selection |
+| **Basic Tower** | The Antivirus Turret is always available |
 | **Advanced Towers** | Unlocked towers can appear in Place Tower cards during runs |
 | **Special Towers** | Unlocked towers can appear in Place Tower cards during runs |
 
 **MVP Scope (All Unlocked at Level 1):**
-- **Basic Towers (4):** Base Tower, AOE Tower, Burst Tower, Piercing Tower
-- **Advanced Towers (1):** Brute Force Node
+- **Basic Tower (1):** Antivirus Turret
+- **Advanced Towers (4):** Logic Bomb, Zero-Day Striker, Traceroute Cannon, Brute Force Node
 - **Special Towers:** None in MVP (post-launch content)
 
 Future updates may gate towers behind higher Player Levels. Additional towers may be added in future content updates (see Appendix D).
@@ -949,17 +948,17 @@ Each tower has its own mastery track. Spend currency to boost a specific tower's
 
 | Tower | Damage Bonus (Lv 1-5) | Costs (Lv 1-5) | Level 5 Special Ability |
 |-------|----------------------|----------------|-------------------------|
-| Base Tower | +10/20/30/40/50% | 75, 150, 300, 600, 1200 | Overclocked Processor: 20% chance for 2x damage |
-| AOE Tower | +10/20/30/40/50% | 100, 200, 400, 800, 1600 | Firewall Cascade: Explosions leave burning ground (2s, 25% damage/tick) |
-| Burst Tower | +10/20/30/40/50% | 125, 250, 500, 1000, 2000 | Precision Strike: +50% damage to enemies above 50% HP |
-| Piercing Tower | +10/20/30/40/50% | 150, 300, 600, 1200, 2400 | Network Breach: Hits mark enemies for 5s, +15% damage taken |
+| Antivirus Turret | +10/20/30/40/50% | 75, 150, 300, 600, 1200 | Overclocked Processor: 20% chance for 2x damage |
+| Logic Bomb | +10/20/30/40/50% | 100, 200, 400, 800, 1600 | Firewall Cascade: Explosions leave burning ground (2s, 25% damage/tick) |
+| Zero-Day Striker | +10/20/30/40/50% | 125, 250, 500, 1000, 2000 | Precision Strike: +50% damage to enemies above 50% HP |
+| Traceroute Cannon | +10/20/30/40/50% | 150, 300, 600, 1200, 2400 | Network Breach: Hits mark enemies for 5s, +15% damage taken |
 | Brute Force Node | +10/20/30/40/50% | 100, 200, 400, 800, 1600 | Dictionary Attack: 4th shot added, +25% per consecutive hit |
 
 **Damage Bonus Clarification:** Values shown are the total bonus at each level (not cumulative). Level 5 grants +50% damage total, not +150%.
 
 **Level 5 Ability Details:** See Section 5.6 for Burn (Firewall Cascade) and Breach (Network Breach). Additional abilities:
 
-- **Precision Strike (Burst Tower):** Attacks against enemies above 50% HP deal +50% bonus damage. Applies before crit calculation.
+- **Precision Strike (Zero-Day Striker):** Attacks against enemies above 50% HP deal +50% bonus damage. Applies before crit calculation.
 - **Dictionary Attack (Brute Force Node):** Adds a 4th projectile to each burst (4 shots instead of 3). Replaces Credential Stuffing bonus with +25% damage per consecutive hit on the same target (up to +75% on 4th hit).
 
 ### 7.4 Player Level
@@ -1312,7 +1311,7 @@ Chips are earned and purchased separately from gear:
 | **chaos_monkey.dll** | Legendary | 4 | +40% damage, -15% fire rate |
 
 **Crit Gear Notes:**
-- **zero_day.dll** synergizes with high-damage, slow-firing towers (Burst Tower) for devastating opening strikes
+- **zero_day.dll** synergizes with high-damage, slow-firing towers (Zero-Day Striker) for devastating opening strikes
 - **buffer_overflow.dll** rewards focus-fire builds that whittle enemies down before finishing with boosted crits
 - **exception_handler.dll** provides consistent crit scaling plus a recovery mechanic for non-crit attacks
 
@@ -1436,7 +1435,7 @@ Legendary gear is powerful but comes with significant drawbacks:
 | Network | syn_flood.cfg | CRIT |
 | Utility | neural_cache.bat | CRIT, CRIT |
 
-**Profile:** Stack crit to cap (40%), boost multiplier. Pairs well with Base Tower Mastery 5 (Overclocked Processor). Non-crits have 20% chance to refund cooldown.
+**Profile:** Stack crit to cap (40%), boost multiplier. Pairs well with Antivirus Turret Mastery 5 (Overclocked Processor). Non-crits have 20% chance to refund cooldown.
 
 **Final Crit Stats:** 5% base + 15% chips + 15% Overclocked + 10% gear = 45% → 40% (capped), 1.5x base + 0.45x chips + 0.5x Overclocked = 2.45x multiplier
 
@@ -1929,17 +1928,17 @@ Towers fire different projectile types with varying travel behavior.
 
 | Projectile Type | Tower | Speed | Behavior |
 |-----------------|-------|-------|----------|
-| Basic | Base Tower | 1.5 units/s | Single target, disappears on hit |
-| AOE | AOE Tower | 1.0 units/s | Explodes on impact, deals splash |
-| Burst | Burst Tower | 2.0 units/s | Single target, high damage |
-| Rail | Piercing Tower | Instant | Hitscan, pierces all enemies in line |
+| Basic | Antivirus Turret | 1.5 units/s | Single target, disappears on hit |
+| AOE | Logic Bomb | 1.0 units/s | Explodes on impact, deals splash |
+| Burst | Zero-Day Striker | 2.0 units/s | Single target, high damage |
+| Rail | Traceroute Cannon | Instant | Hitscan, pierces all enemies in line |
 | Rapid | Brute Force Node | 2.0 units/s | 3-shot burst, consecutive hit bonus |
 
 **Hitscan vs Travel:**
 - Instant (hitscan) projectiles cannot miss—damage applies immediately on fire
 - Traveling projectiles can miss if the enemy dies or moves before impact
 
-### Splash Damage (AOE Tower)
+### Splash Damage (Logic Bomb)
 
 | Property | Value |
 |----------|-------|

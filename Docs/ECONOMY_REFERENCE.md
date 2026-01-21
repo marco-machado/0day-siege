@@ -121,7 +121,7 @@ All bonuses have hard caps to prevent degenerate builds.
 | Gear (apt_payload.dll, +20%) | ×1.2 |
 | **Combined** | **3.24×** |
 
-*Example: Base Tower (50 dmg) → 50 × 3.24 = 162 damage per shot*
+*Example: Antivirus Turret (50 dmg) → 50 × 3.24 = 162 damage per shot*
 
 **Maximum Theoretical Shard Gain:**
 

@@ -356,12 +356,11 @@ Permanent tower unlocks with currency.
 1. Create TowerUnlockManager
 2. Track unlock state per tower type
 3. Implement unlock costs:
-   - AOE Tower: 200 shards
-   - Burst Tower: 250 shards
-   - Piercing Tower: 300 shards
+   - Logic Bomb: 200 shards
+   - Zero-Day Striker: 250 shards
+   - Traceroute Cannon: 300 shards
    - Brute Force Node: 400 shards
 4. Filter card pool to only include unlocked towers
-5. Filter starting tower selection to unlocked Basic towers
 6. Save/load unlock state
 7. Create unlock UI in shop Arsenal tab
 
@@ -379,17 +378,17 @@ Permanent tower damage upgrades with Level 5 abilities.
 1. Create MasteryManager
 2. Track mastery level per tower (0-5)
 3. Implement mastery costs per tower:
-   - Base Tower: 75, 150, 300, 600, 1200
-   - AOE Tower: 100, 200, 400, 800, 1600
-   - Burst Tower: 125, 250, 500, 1000, 2000
-   - Piercing Tower: 150, 300, 600, 1200, 2400
+   - Antivirus Turret: 75, 150, 300, 600, 1200
+   - Logic Bomb: 100, 200, 400, 800, 1600
+   - Zero-Day Striker: 125, 250, 500, 1000, 2000
+   - Traceroute Cannon: 150, 300, 600, 1200, 2400
    - Brute Force Node: 100, 200, 400, 800, 1600
 4. Apply mastery damage bonus (+10/20/30/40/50%)
 5. Implement Level 5 abilities:
-   - Base Tower: Overclocked Processor (+15% crit chance, +0.5x crit multiplier)
-   - AOE Tower: Firewall Cascade (burning ground)
-   - Burst Tower: Precision Strike (+50% damage to >50% HP enemies)
-   - Piercing Tower: Network Breach (mark for +15% damage, stacks to 2)
+   - Antivirus Turret: Overclocked Processor (+15% crit chance, +0.5x crit multiplier)
+   - Logic Bomb: Firewall Cascade (burning ground)
+   - Zero-Day Striker: Precision Strike (+50% damage to >50% HP enemies)
+   - Traceroute Cannon: Network Breach (mark for +15% damage, stacks to 2)
    - Brute Force Node: Dictionary Attack (4th shot, +25% per consecutive hit)
 6. Create Mastery UI in shop
 7. Display mastery level on tower tooltips

@@ -46,7 +46,7 @@ Multiple towers sometimes fire at the same enemy when a single shot would have b
 | F.5.1 | Undocumented Base Crit | Documented in Section 5.5; CRIT line added to tooltip (Section 3.3) |
 | F.5.2 | No Crit Upgrades | Marked "Not planned" in Appendix E; crit scaling via Gear/Chips instead |
 | F.5.3 | No Tooltip Display | New CRIT line shows chance × multiplier with source breakdown |
-| F.5.4 | Only Base Tower Has Crit Mastery | Documented as intentional; new crit gear provides alternatives |
+| F.5.4 | Only Antivirus Turret Has Crit Mastery | Documented as intentional; new crit gear provides alternatives |
 | F.5.5 | Splash Crit Inheritance | "Once per explosion" rule added; "!" only on impact point |
 | F.5.6 | Two-Tier Crit Gap | New gear (critical_section.dll +5%, buffer_overflow.dll +8%, exception_handler.dll +10%) provides intermediate options |
 | F.5.7 | Rounding Behavior | Changed to `Math.round()` in Section 5.5 |
