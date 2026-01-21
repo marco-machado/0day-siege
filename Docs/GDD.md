@@ -451,7 +451,7 @@ Advanced Towers are damage dealers that can be placed during a run via the card 
 | Selection | Placed via Place Tower cards during the run |
 | Placement | Any available outer slot (1, 2, 4, or 5) |
 | Limit | Only unlocked towers can appear in card selection |
-| Unlock | Unlocked at Player Level 1 |
+| Unlock | Unlocked at Player Level 2 |
 
 **MVP Advanced Towers:**
 
@@ -935,9 +935,9 @@ Towers are unlocked by reaching Player Level milestones. Each tower group has di
 | **Advanced Towers** | Unlocked towers can appear in Place Tower cards during runs |
 | **Special Towers** | Unlocked towers can appear in Place Tower cards during runs |
 
-**MVP Scope (All Unlocked at Level 1):**
-- **Basic Tower (1):** Antivirus Turret
-- **Advanced Towers (4):** Logic Bomb, Zero-Day Striker, Traceroute Cannon, Brute Force Node
+**MVP Scope:**
+- **Basic Tower (1):** Antivirus Turret (unlocked at Level 1)
+- **Advanced Towers (4):** Logic Bomb, Zero-Day Striker, Traceroute Cannon, Brute Force Node (unlocked at Level 2)
 - **Special Towers:** None in MVP (post-launch content)
 
 Future updates may gate towers behind higher Player Levels. Additional towers may be added in future content updates (see Appendix D).
@@ -984,7 +984,7 @@ Players have a persistent account level that increases through successful run co
 **Design Notes:**
 - XP is only awarded on victory (successful run completion)
 - Defeats, restarts, and quits do not award XP
-- All towers currently unlock at Level 1; future updates may gate towers at higher levels
+- Basic Tower unlocks at Level 1; Advanced Towers unlock at Level 2
 - Values are initial tuning targets, subject to balancing
 
 ### 7.5 Progression Notes
