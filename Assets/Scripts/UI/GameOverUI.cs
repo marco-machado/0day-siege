@@ -13,7 +13,7 @@ namespace ZeroDaySiege.UI
         private Button restartButton;
         private Button menuButton;
 
-        private string currentStageId;
+        private string currentStageDisplayId;
 
         public void SetReferences(GameObject container, TextMeshProUGUI title, TextMeshProUGUI stats,
                                    Button restart, Button menu)
@@ -89,7 +89,7 @@ namespace ZeroDaySiege.UI
             var outcome = GameManager.Instance.LastRunOutcome;
             bool isVictory = outcome == RunOutcome.Victory;
 
-            currentStageId = StageManager.Instance?.CurrentStageId ?? "1-1";
+            currentStageDisplayId = StageManager.Instance?.CurrentStage?.GetDisplayId() ?? "1-1";
 
             if (titleText != null)
             {
@@ -119,14 +119,14 @@ namespace ZeroDaySiege.UI
             string waveLabel = isVictory ? "Wave" : "Wave Reached";
             string scoreLabel = "Final Score";
 
-            string stats = $"Stage: {currentStageId} - {stageName}\n" +
+            string stats = $"Stage: {currentStageDisplayId} - {stageName}\n" +
                           $"{waveLabel}: {waveReached} / {totalWaves}\n" +
                           $"Enemies Defeated: {enemiesDefeated}\n" +
                           $"{scoreLabel}: {finalScore:N0}";
 
             if (isVictory)
             {
-                string bestKey = $"stage_{currentStageId.Replace("-", "_")}";
+                string bestKey = StageManager.Instance?.CurrentStage?.GetStorageKey() ?? "1_1";
                 int personalBest = ScoreManager.Instance?.GetPersonalBest(bestKey) ?? 0;
                 bool isNewBest = finalScore > personalBest;
 

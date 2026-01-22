@@ -440,7 +440,7 @@ The Basic Tower is the starting tower that forms the foundation of every run. It
 
 The Antivirus Turret is unlocked at Player Level 1.
 
-*For detailed stats (damage, fire rate, range, DPS), see Appendix B: Balance Guidelines.*
+*For detailed stats (damage, fire rate, range, DPS), see [Balance Guidelines](BALANCE_GUIDELINES.md).*
 
 ### 5.2 Advanced Towers
 
@@ -462,7 +462,7 @@ Advanced Towers are damage dealers that can be placed during a run via the card 
 | **Traceroute Cannon** | Piercing rail shot | Projectile passes through all enemies in a line | Multi-Target |
 | **Brute Force Node** | 3-shot burst | Consecutive hits on same target deal bonus damage | Sustained single-target |
 
-*For detailed stats, see Appendix B: Balance Guidelines.*
+*For detailed stats, see [Balance Guidelines](BALANCE_GUIDELINES.md).*
 
 #### Brute Force Node - Credential Stuffing
 
@@ -1006,25 +1006,68 @@ The game uses a chapter-based stage system with fixed, deterministic enemy spawn
 ### 8.1 Stage Architecture
 
 **MVP Launch:** Chapter 1 only (5 stages, 100 waves total)
-- Chapter 1: 1-1, 1-2, 1-3, 1-4, 1-5
+- Chapter 1: 1-1 through 1-5
 
-**Full Design (Future Content):** Stages are organized into chapters, each containing 5 sub-stages with 20 waves each:
+**Full Design (Future Content):** Stages are organized into chapters, each containing 25 stages with 20 waves each:
 
-- Chapter 1: 1-1, 1-2, 1-3, 1-4, 1-5
-- Chapter 2: 2-1, 2-2, 2-3, 2-4, 2-5
-- Chapter 3: 3-1, 3-2, 3-3, 3-4, 3-5
+- Chapter 1: 1-1 through 1-25 (500 waves)
+- Chapter 2: 2-1 through 2-25 (500 waves)
+- Chapter 3: 3-1 through 3-25 (500 waves)
 - Additional chapters can be added as needed
 
 ### 8.2 Stage File Contents
 
-Each sub-stage is defined in its own file containing all necessary data:
+Each stage is defined in its own JSON file containing all necessary data:
 
-| Field | Description |
-|-------|-------------|
-| stageId | Unique identifier (e.g., "1-3") |
-| stageName | Display name (e.g., "Payload Delivery") |
-| waves | Array of 20 wave definitions |
-| rewards | Currency awarded per difficulty (Normal/Hard) |
+| Field | Type | Description |
+|-------|------|-------------|
+| chapter | int | Chapter number (1, 2, 3...) |
+| stageId | int | Stage number within chapter (1-25) |
+| stageName | string | Display name (e.g., "Payload Delivery") |
+| rewards | StageRewards | Tiered reward structure (see 8.2.1) |
+| waves | WaveData[] | Array of 20 wave definitions |
+
+#### 8.2.1 Reward Structure
+
+Stage rewards are broken into four tiers with fixed currencies and optional item drops:
+
+| Tier | When Awarded | Description |
+|------|--------------|-------------|
+| completion | Every victory | Base rewards earned each successful run |
+| firstClear | First victory | One-time bonus on first clear (per difficulty) |
+| firstHalfHP | First ≥50% HP | One-time bonus for clearing with ≥50% firewall HP (per difficulty) |
+| firstFullHP | First 100% HP | One-time bonus for perfect clear (per difficulty) |
+
+**RewardBundle Structure:**
+```json
+{
+  "shards": 25,
+  "keys": 0,
+  "xp": 10,
+  "items": []
+}
+```
+
+- `shards` - Primary currency (Data Shards)
+- `keys` - Secondary currency (Decrypt Keys)
+- `xp` - Player experience points
+- `items` - Optional array of item drops (chips, gear, consumables)
+
+**Difficulty Interaction:**
+- `hardMultiplier` (float) applies to completion rewards on Hard mode
+- First-time bonuses are tracked separately for Normal and Hard (8 bonuses possible per stage)
+
+#### 8.2.2 Stage Progress Tracking
+
+Progress is tracked per stage per difficulty with 6 milestones:
+
+| Milestone | Normal | Hard |
+|-----------|--------|------|
+| Cleared | normalCleared | hardCleared |
+| ≥50% HP | normalHalfHP | hardHalfHP |
+| 100% HP | normalFullHP | hardFullHP |
+
+Progress persists to PlayerPrefs and determines which first-time bonuses have been claimed.
 
 ### 8.3 Wave Definition
 
@@ -1072,36 +1115,55 @@ Stage files use JSON format for easy editing and extensibility:
 
 ```json
 {
-  "stageId": "1-3",
+  "chapter": 1,
+  "stageId": 3,
   "stageName": "Payload Delivery",
-  "rewards": { "normal": 50, "hard": 100 },
+  "rewards": {
+    "completion": { "shards": 35, "keys": 0, "xp": 14 },
+    "firstClear": { "shards": 50, "keys": 0, "xp": 15 },
+    "firstHalfHP": { "shards": 25, "keys": 0, "xp": 5 },
+    "firstFullHP": { "shards": 50, "keys": 1, "xp": 10 },
+    "hardMultiplier": 1.5
+  },
   "waves": [
     {
       "waveNumber": 1,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Basic", "spawnX": 0.5, "spawnTime": 0, "baseHP": 100 },
-        { "enemyType": "Basic", "spawnX": 0.3, "spawnTime": 1.5, "baseHP": 100 },
-        { "enemyType": "Basic", "spawnX": 0.7, "spawnTime": 1.5, "baseHP": 100 }
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 }
       ]
     },
     {
       "waveNumber": 8,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Fast", "spawnX": 0.2, "spawnTime": 0, "baseHP": 60 },
-        { "enemyType": "Fast", "spawnX": 0.8, "spawnTime": 0, "baseHP": 60 },
-        { "enemyType": "Basic", "spawnX": 0.5, "spawnTime": 1.0, "baseHP": 100 },
-        { "enemyType": "Fast", "spawnX": 0.5, "spawnTime": 2.0, "baseHP": 60 }
+        { "enemyType": "Worm", "spawnX": 0.2, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.8, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 3.0 },
+        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 4.0 }
       ]
     },
     {
       "waveNumber": 20,
       "isBoss": true,
       "enemies": [
-        { "enemyType": "Boss", "spawnX": 0.5, "spawnTime": 0, "baseHP": 500 }
+        { "enemyType": "Ransomware", "spawnX": 0.5, "spawnTime": 2.0 }
       ]
     }
+  ]
+}
+```
+
+**Example with item drops (future):**
+```json
+"firstFullHP": {
+  "shards": 50,
+  "keys": 1,
+  "xp": 10,
+  "items": [
+    { "itemId": "chip_random_bronze", "amount": 1 }
   ]
 }
 ```
@@ -1138,13 +1200,14 @@ Stages unlock progressively within each chapter. Players must complete stages in
 | Chapter | Requirement |
 |---------|-------------|
 | Chapter 1 | Always unlocked |
-| Chapter 2 | Complete 1-5 (any difficulty) |
-| Chapter 3 | Complete 2-5 (any difficulty) |
+| Chapter 2 | Complete 1-25 (any difficulty) |
+| Chapter 3 | Complete 2-25 (any difficulty) |
 
 **Design Notes:**
 - Linear unlock prevents overwhelming new players
 - Hard mode as optional challenge, not progression gate
 - Per-stage Hard unlock lets players challenge favorite stages
+- First-time bonuses tracked separately per difficulty (8 bonuses per stage possible)
 - No star ratings in MVP (simplifies UI, can add post-launch)
 
 ### 8.10 Wave Pacing Design
@@ -1876,7 +1939,7 @@ See [BALANCE_GUIDELINES.md](BALANCE_GUIDELINES.md) for tower stats, enemy HP sca
 }
 ```
 
-*Note: Values match Appendix B balance tables. Range uses normalized coordinates (0-1).*
+*Note: Values match [Balance Guidelines](BALANCE_GUIDELINES.md) tables. Range uses normalized coordinates (0-1).*
 
 **Enemy Definitions:**
 ```json

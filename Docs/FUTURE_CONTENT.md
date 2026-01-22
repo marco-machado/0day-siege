@@ -2,7 +2,7 @@
 
 > This content was previously Appendix D of the [Game Design Document](GDD.md).
 
-This document contains ideas for future content updates. For current MVP towers, see Section 5 (mechanics) and Appendix B (stats) in the GDD.
+This document contains ideas for future content updates. For current MVP towers, see Section 5 (mechanics) in the GDD and [Balance Guidelines](BALANCE_GUIDELINES.md) for stats.
 
 ## Future Tower Ideas
 

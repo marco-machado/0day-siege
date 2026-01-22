@@ -69,7 +69,7 @@ namespace ZeroDaySiege.UI
             }
         }
 
-        private void HandleStageUnlocked(string stageId)
+        private void HandleStageUnlocked(int chapter, int stageId)
         {
             UpdateStageButtons();
         }
@@ -81,15 +81,16 @@ namespace ZeroDaySiege.UI
             for (int i = 0; i < StageManager.AllStages.Length && i < stageButtons.Length; i++)
             {
                 var stageInfo = StageManager.AllStages[i];
-                bool isUnlocked = StageManager.Instance.IsStageUnlocked(stageInfo.Id);
+                bool isUnlocked = StageManager.Instance.IsStageUnlocked(stageInfo.Chapter, stageInfo.Id);
 
                 stageButtons[i].interactable = isUnlocked;
 
                 if (stageLabels[i] != null)
                 {
+                    string displayId = stageInfo.GetDisplayId();
                     string displayText = isUnlocked
-                        ? $"{stageInfo.Id}\n{stageInfo.Name}"
-                        : $"{stageInfo.Id}\n[LOCKED]";
+                        ? $"{displayId}\n{stageInfo.Name}"
+                        : $"{displayId}\n[LOCKED]";
                     stageLabels[i].text = displayText;
                     stageLabels[i].color = isUnlocked ? Color.white : new Color(0.5f, 0.5f, 0.5f, 1f);
                 }
@@ -102,7 +103,8 @@ namespace ZeroDaySiege.UI
 
             for (int i = 0; i < StageManager.AllStages.Length; i++)
             {
-                if (StageManager.Instance.IsStageUnlocked(StageManager.AllStages[i].Id))
+                var stageInfo = StageManager.AllStages[i];
+                if (StageManager.Instance.IsStageUnlocked(stageInfo.Chapter, stageInfo.Id))
                 {
                     SelectStage(i);
                     return;
@@ -115,7 +117,7 @@ namespace ZeroDaySiege.UI
             if (index < 0 || index >= StageManager.AllStages.Length) return;
 
             var stageInfo = StageManager.AllStages[index];
-            if (StageManager.Instance != null && StageManager.Instance.IsStageUnlocked(stageInfo.Id))
+            if (StageManager.Instance != null && StageManager.Instance.IsStageUnlocked(stageInfo.Chapter, stageInfo.Id))
             {
                 SelectStage(index);
             }
@@ -130,7 +132,7 @@ namespace ZeroDaySiege.UI
 
             if (StageManager.Instance != null)
             {
-                StageManager.Instance.SelectStage(stageInfo.Id);
+                StageManager.Instance.SelectStage(stageInfo.Chapter, stageInfo.Id);
             }
 
             UpdateSelectedStageDisplay();
@@ -144,7 +146,7 @@ namespace ZeroDaySiege.UI
             var stage = StageManager.Instance.CurrentStage;
             if (stage != null)
             {
-                selectedStageText.text = $"Selected: {stage.stageId} - {stage.stageName}";
+                selectedStageText.text = $"Selected: {stage.GetDisplayId()} - {stage.stageName}";
             }
         }
 

@@ -1,7 +1,14 @@
 {
-  "stageId": "1-1",
+  "chapter": 1,
+  "stageId": 1,
   "stageName": "Entry Point",
-  "rewards": { "normal": 50, "hard": 75 },
+  "rewards": {
+    "completion": { "shards": 25, "keys": 0, "xp": 10 },
+    "firstClear": { "shards": 50, "keys": 0, "xp": 15 },
+    "firstHalfHP": { "shards": 25, "keys": 0, "xp": 5 },
+    "firstFullHP": { "shards": 50, "keys": 1, "xp": 10 },
+    "hardMultiplier": 1.5
+  },
   "waves": [
     {
       "waveNumber": 1,

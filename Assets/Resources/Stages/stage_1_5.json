@@ -1,7 +1,14 @@
 {
-  "stageId": "1-5",
+  "chapter": 1,
+  "stageId": 5,
   "stageName": "Root Access",
-  "rewards": { "normal": 100, "hard": 150 },
+  "rewards": {
+    "completion": { "shards": 50, "keys": 0, "xp": 20 },
+    "firstClear": { "shards": 50, "keys": 0, "xp": 15 },
+    "firstHalfHP": { "shards": 25, "keys": 0, "xp": 5 },
+    "firstFullHP": { "shards": 50, "keys": 1, "xp": 10 },
+    "hardMultiplier": 1.5
+  },
   "waves": [
     {
       "waveNumber": 1,

@@ -73,7 +73,7 @@ Enemy entities with movement, health, and wall attack behavior.
 
 ### References
 - GDD Section 4: Enemies
-- GDD Appendix B: Enemy HP Scaling
+- [Balance Guidelines](BALANCE_GUIDELINES.md): Enemy HP Scaling
 
 ---
 

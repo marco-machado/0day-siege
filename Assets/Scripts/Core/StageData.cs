@@ -5,12 +5,42 @@ using ZeroDaySiege.Enemies;
 namespace ZeroDaySiege.Core
 {
     [Serializable]
+    public class RewardItem
+    {
+        public string itemId;
+        public int amount;
+    }
+
+    [Serializable]
+    public class RewardBundle
+    {
+        public int shards;
+        public int keys;
+        public int xp;
+        public RewardItem[] items;
+    }
+
+    [Serializable]
+    public class StageRewards
+    {
+        public RewardBundle completion;
+        public RewardBundle firstClear;
+        public RewardBundle firstHalfHP;
+        public RewardBundle firstFullHP;
+        public float hardMultiplier;
+    }
+
+    [Serializable]
     public class StageData
     {
-        public string stageId;
+        public int chapter;
+        public int stageId;
         public string stageName;
         public StageRewards rewards;
         public StageWaveData[] waves;
+
+        public string GetDisplayId() => $"{chapter}-{stageId}";
+        public string GetStorageKey() => $"{chapter}_{stageId}";
 
         public WaveDefinition[] ToWaveDefinitions()
         {
@@ -28,13 +58,6 @@ namespace ZeroDaySiege.Core
         {
             return JsonUtility.FromJson<StageData>(json);
         }
-    }
-
-    [Serializable]
-    public class StageRewards
-    {
-        public int normal;
-        public int hard;
     }
 
     [Serializable]
