@@ -112,6 +112,11 @@ namespace ZeroDaySiege.Core
             lastRunOutcome = RunOutcome.None;
             currentWave = 1;
 
+            if (StageManager.Instance != null && StageManager.Instance.CurrentStage == null)
+            {
+                StageManager.Instance.SelectStage(1, 1);
+            }
+
             if (TryChangeState(GameState.Playing))
             {
                 OnWaveChanged?.Invoke(currentWave);

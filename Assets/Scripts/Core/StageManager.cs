@@ -45,7 +45,6 @@ namespace ZeroDaySiege.Core
 
             LoadUnlockedStages();
             LoadAllStageData();
-            SelectStage(1, 1);
         }
 
         private static string GetStageKey(int chapter, int stageId) => $"{chapter}_{stageId}";
