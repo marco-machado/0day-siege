@@ -6,13 +6,13 @@
 
 This is the authoritative source for all tower statistics. For tower mechanics and special abilities, see Section 5 of the GDD.
 
-Towers have distinct stat profiles while maintaining similar overall DPS. The Basic Tower (Antivirus Turret) and most Advanced Towers have full range (0.9), while some Advanced Towers have moderate range.
+Towers have distinct stat profiles while maintaining similar overall DPS. The Basic Tower (Antivirus Turret) and most Advanced Towers have full range (1.0), while some Advanced Towers have moderate range.
 
 ### Basic Tower
 
 | Tower | Damage | Fire Rate | Range | DPS | Unlock Cost |
 |-------|--------|-----------|-------|-----|-------------|
-| Antivirus Turret | 50 | 1.0/s | 0.9 | 50 | Always unlocked |
+| Antivirus Turret | 50 | 1.0/s | 1.0 | 50 | Always unlocked |
 
 ### Advanced Towers
 

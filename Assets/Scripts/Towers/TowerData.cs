@@ -46,7 +46,7 @@ namespace ZeroDaySiege.Towers
                 new TowerStats(
                     damage: 50,
                     fireRate: 1.0f,
-                    range: 0.9f,
+                    range: 1.0f,
                     projectileSpeed: 10.0f,
                     placeholder: "[T1]",
                     color: new Color(0f, 0.8f, 1f, 1f)

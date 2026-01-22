@@ -1130,7 +1130,6 @@ Stage files use JSON format for easy editing and extensibility:
       "waveNumber": 1,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
         { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
         { "enemyType": "Virus", "spawnX": 0.7, "spawnTime": 2.0 }
       ]
@@ -1139,10 +1138,9 @@ Stage files use JSON format for easy editing and extensibility:
       "waveNumber": 8,
       "isBoss": false,
       "enemies": [
-        { "enemyType": "Worm", "spawnX": 0.2, "spawnTime": 2.0 },
-        { "enemyType": "Worm", "spawnX": 0.8, "spawnTime": 2.0 },
-        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 3.0 },
-        { "enemyType": "Worm", "spawnX": 0.5, "spawnTime": 4.0 }
+        { "enemyType": "Virus", "spawnX": 0.3, "spawnTime": 2.0 },
+        { "enemyType": "Virus", "spawnX": 0.5, "spawnTime": 2.0 },
+        { "enemyType": "Worm", "spawnX": 0.7, "spawnTime": 2.0 }
       ]
     },
     {
@@ -1218,10 +1216,10 @@ Waves follow a deliberate pacing model to create a satisfying difficulty curve.
 
 | Phase | Waves | Design Intent |
 |-------|-------|---------------|
-| **Tutorial** | 1-5 | Introduce mechanics; low enemy count (7-10); Basic enemies only |
-| **Pressure** | 6-12 | Test tower placement; mixed Basic/Fast enemies; force card decisions |
-| **Escalation** | 13-19 | High enemy count (15-20); dense spawn patterns; punish poor builds |
-| **Climax** | 20 | Boss wave; coordination test; reduced Basic count with Boss enemy |
+| **Tutorial** | 1-5 | Introduce mechanics; low enemy count (2); Basic enemies only |
+| **Pressure** | 6-12 | Test tower placement; mixed Basic/Fast enemies (3 per wave); force card decisions |
+| **Escalation** | 13-19 | Moderate enemy count (2-3); mixed spawn patterns; punish poor builds |
+| **Climax** | 20 | Boss wave; coordination test; single Boss enemy |
 
 #### Design Guidelines
 
@@ -1238,15 +1236,15 @@ Waves follow a deliberate pacing model to create a satisfying difficulty curve.
 - Players should fill outer tower slots during this phase
 
 **Escalation Phase (Waves 13-19):**
-- Peak enemy density tests DPS capacity
-- Spawn patterns designed to overwhelm single-tower coverage
+- Moderate enemy density tests DPS capacity
+- Spawn patterns test tower coverage
 - Upgrade cards become critical for survival
 - Wall damage becomes likely if build is weak
 
 **Climax Phase (Wave 20):**
-- Boss enemy spawns mid-wave with supporting Basic enemies
+- Single Boss enemy spawns
 - Boss priority targeting (Section 5.4) ensures towers focus threat
-- Victory requires sustained DPS while managing adds
+- Victory requires sustained DPS
 - Time pressure: Boss reaches wall in ~13 seconds (Normal)
 
 ---
@@ -1933,7 +1931,7 @@ See [BALANCE_GUIDELINES.md](BALANCE_GUIDELINES.md) for tower stats, enemy HP sca
   "attackStyle": "single_target",
   "baseDamage": 50,
   "baseFireRate": 1.0,
-  "baseRange": 0.9,
+  "baseRange": 1.0,
   "specialMechanic": null,
   "unlockCost": 0
 }

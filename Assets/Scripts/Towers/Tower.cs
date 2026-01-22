@@ -82,7 +82,7 @@ namespace ZeroDaySiege.Towers
             var layout = GameLayout.Instance;
             if (layout != null)
             {
-                worldRange = TowerData.ConvertRangeToWorld(normalizedRange, layout.SpawnY, layout.FirewallY);
+                worldRange = TowerData.ConvertRangeToWorld(normalizedRange, layout.SpawnY, layout.TowerSlotsY);
                 worldSplashRadius = splashRadius * layout.PlayAreaWidth;
             }
 
