@@ -17,7 +17,7 @@ namespace ZeroDaySiege.Core
         public WaveState CurrentWaveState => currentWaveState;
 
         private Coroutine transitionCoroutine;
-        private bool awaitingVictory;
+        private bool spawningComplete;
 
         private void Awake()
         {
@@ -64,15 +64,20 @@ namespace ZeroDaySiege.Core
         {
             if (EnemyManager.Instance.ActiveEnemyCount > 0) return;
             if (!GameManager.Instance.IsPlaying) return;
+            if (!spawningComplete) return;
 
             bool isFinalWave = GameManager.Instance.CurrentWave >= GameManager.TotalWaves;
-            bool spawningComplete = currentWaveState == WaveState.Transitioning || awaitingVictory;
 
-            if (isFinalWave && spawningComplete)
+            if (isFinalWave)
             {
-                awaitingVictory = false;
                 Debug.Log("[WaveManager] All enemies defeated on final wave, triggering victory");
                 GameManager.Instance.EndRun(true);
+            }
+            else
+            {
+                Debug.Log("[WaveManager] All enemies defeated, starting transition to next wave");
+                SetWaveState(WaveState.Transitioning);
+                transitionCoroutine = StartCoroutine(TransitionToNextWave());
             }
         }
 
@@ -107,6 +112,7 @@ namespace ZeroDaySiege.Core
                 StopCoroutine(transitionCoroutine);
                 transitionCoroutine = null;
             }
+            spawningComplete = false;
             SetWaveState(WaveState.InProgress);
         }
 
@@ -117,7 +123,7 @@ namespace ZeroDaySiege.Core
                 StopCoroutine(transitionCoroutine);
                 transitionCoroutine = null;
             }
-            awaitingVictory = false;
+            spawningComplete = false;
             SetWaveState(WaveState.Idle);
         }
 
@@ -126,8 +132,24 @@ namespace ZeroDaySiege.Core
             if (currentWaveState != WaveState.InProgress) return;
             if (!GameManager.Instance.IsPlaying) return;
 
-            SetWaveState(WaveState.Transitioning);
-            transitionCoroutine = StartCoroutine(TransitionToNextWave());
+            spawningComplete = true;
+            Debug.Log("[WaveManager] Spawning complete, waiting for all enemies to be defeated");
+
+            if (EnemyManager.Instance == null || EnemyManager.Instance.ActiveEnemyCount == 0)
+            {
+                bool isFinalWave = GameManager.Instance.CurrentWave >= GameManager.TotalWaves;
+                if (isFinalWave)
+                {
+                    Debug.Log("[WaveManager] Final wave complete with no enemies, triggering victory");
+                    GameManager.Instance.EndRun(true);
+                }
+                else
+                {
+                    Debug.Log("[WaveManager] Wave complete with no enemies remaining, starting transition");
+                    SetWaveState(WaveState.Transitioning);
+                    transitionCoroutine = StartCoroutine(TransitionToNextWave());
+                }
+            }
         }
 
         private IEnumerator TransitionToNextWave()
@@ -136,23 +158,8 @@ namespace ZeroDaySiege.Core
 
             transitionCoroutine = null;
 
-            if (GameManager.Instance.CurrentWave >= GameManager.TotalWaves)
-            {
-                if (EnemyManager.Instance == null || EnemyManager.Instance.ActiveEnemyCount == 0)
-                {
-                    GameManager.Instance.EndRun(true);
-                }
-                else
-                {
-                    awaitingVictory = true;
-                    Debug.Log("[WaveManager] Final wave spawning complete, waiting for all enemies to be defeated");
-                }
-            }
-            else
-            {
-                GameManager.Instance.AdvanceWave();
-                SetWaveState(WaveState.InProgress);
-            }
+            GameManager.Instance.AdvanceWave();
+            SetWaveState(WaveState.InProgress);
         }
 
         private void SetWaveState(WaveState newState)

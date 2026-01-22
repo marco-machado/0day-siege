@@ -215,7 +215,7 @@ Players have access to the following controls during a run:
 | **Resume** | Resumes gameplay from the paused state. Only available when game is paused. |
 | **Restart** | Immediately ends the current run and starts a new run of the same stage with the same difficulty selection. Confirmation dialog required to prevent accidental restarts. |
 | **Quit** | Exits the current run and returns to the main menu/stage selection. Progress is lost. Confirmation dialog required. |
-| **Wave Transition** | 1.0s delay between waves. Next wave begins automatically; wave counter updates silently with no additional UI. |
+| **Wave Transition** | Waves advance after all enemies are defeated, followed by 1.0s delay. Next wave begins automatically; wave counter updates silently with no additional UI. |
 
 **Control Availability:**
 - Pause/Resume: Available at any time during active gameplay
@@ -227,15 +227,17 @@ Players have access to the following controls during a run:
 
 | Phase | Duration | Notes |
 |-------|----------|-------|
-| **First wave delay** | 0.2s | Run starts, enemies begin spawning |
-| **Wave duration** | 9-27s | Varies by wave; ends when last enemy spawns |
+| **First wave delay** | 1.0s | Run starts, first enemy spawns |
+| **Spawn interval** | 1.0s | Time between enemy spawns within a wave |
+| **Wave clear** | Variable | Wave ends when all enemies are defeated |
 | **Inter-wave break** | 1.0s | Automatic; next wave starts after delay |
 
 **Timing Notes:**
-- Wave duration is determined by the final enemy's spawn time in the wave data
-- Enemies may still be alive when a wave "ends" (spawning complete)
-- Inter-wave break begins when all enemies for the current wave have spawned
-- Break does NOT wait for enemies to be defeated
+- Enemies spawn staggered (1 second apart) rather than simultaneously
+- Wave transitions only begin after ALL enemies from the current wave are defeated
+- Inter-wave break (1s) begins after the last enemy dies
+- Expected wave duration: 15-30s depending on tower DPS vs enemy HP
+- Expected stage duration: 5-10 minutes for 20 waves
 - Pause is available at any time (during waves or breaks)
 
 **Wave Transition UI:**
@@ -1974,13 +1976,13 @@ Speed determines how quickly enemies travel from spawn to wall. Values use norma
 
 | Enemy Type | Speed (units/s) | Time to Wall | Hard Mode (1.2x) |
 |------------|-----------------|--------------|------------------|
-| Basic | 0.05 | ~16 seconds | ~13.3 seconds |
-| Fast | 0.08 | ~10 seconds | ~8.3 seconds |
-| Boss | 0.03 | ~26 seconds | ~21.7 seconds |
+| Basic | 0.035 | ~23 seconds | ~19 seconds |
+| Fast | 0.056 | ~14 seconds | ~12 seconds |
+| Boss | 0.021 | ~37 seconds | ~31 seconds |
 
 **Design Notes:**
-- Basic enemies give towers ~16 seconds of firing time at Normal difficulty
-- Fast enemies give only ~10 seconds, requiring quick targeting or they slip through
+- Basic enemies give towers ~23 seconds of firing time at Normal difficulty
+- Fast enemies give only ~14 seconds, requiring quick targeting or they slip through
 - Bosses are slower, giving more time to deal with their high HP
 - Hard mode's 1.2x speed multiplier reduces reaction time by ~17%
 
