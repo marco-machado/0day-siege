@@ -1,0 +1,16 @@
+# Asset Validation Script Dependencies
+# Install with: pip install -r requirements.txt
+
+# Required
+pillow>=10.0.0
+numpy>=1.24.0
+
+# Color analysis
+colorthief>=0.2.1
+colormath>=3.0.0
+
+# Optional - Text/watermark detection
+# Requires tesseract-ocr to be installed on system:
+#   macOS: brew install tesseract
+#   Ubuntu: sudo apt install tesseract-ocr
+# pytesseract>=0.3.10
