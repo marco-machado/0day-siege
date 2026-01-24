@@ -5,8 +5,6 @@ namespace ZeroDaySiege.Core
     public class PlaceholderVisuals : MonoBehaviour
     {
         [Header("Colors")]
-        [SerializeField] private Color spawnAreaColor = new Color(0.2f, 0.2f, 0.4f, 0.5f);
-        [SerializeField] private Color playFieldColor = new Color(0.1f, 0.1f, 0.2f, 1f);
         [SerializeField] private Color towerSlotColor = new Color(0.3f, 0.3f, 0.3f, 0.8f);
 
         private void Start()
@@ -18,11 +16,6 @@ namespace ZeroDaySiege.Core
         {
             var layout = GameLayout.Instance;
             if (layout == null) return;
-
-            CreateRegion("PlayField",
-                new Vector3(0, (layout.SpawnY + layout.FirewallY) / 2f, 1),
-                new Vector2(layout.PlayAreaWidth, layout.SpawnY - layout.FirewallY),
-                playFieldColor);
 
             for (int i = 0; i < 5; i++)
             {

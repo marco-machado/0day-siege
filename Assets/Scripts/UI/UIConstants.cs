@@ -8,11 +8,11 @@ namespace ZeroDaySiege.UI
         public const float CanvasMatchWidthOrHeight = 0.5f;
         public const int RunCanvasSortOrder = 100;
 
-        public static readonly Vector2 WaveContainerPosition = new(0, -50);
+        public static readonly Vector2 WaveContainerPosition = new(0, -80);
         public static readonly Vector2 WaveContainerSize = new(400, 80);
         public const int WaveTextFontSize = 48;
 
-        public static readonly Vector2 PauseButtonPosition = new(-30, -50);
+        public static readonly Vector2 PauseButtonPosition = new(-30, -80);
         public static readonly Vector2 PauseButtonSize = new(80, 80);
         public const int PauseButtonFontSize = 36;
         public static readonly Color PauseButtonColor = new(0.2f, 0.2f, 0.2f, 0.8f);

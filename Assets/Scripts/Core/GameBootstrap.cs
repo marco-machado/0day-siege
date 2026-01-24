@@ -25,6 +25,7 @@ namespace ZeroDaySiege.Core
         {
             #region Core Managers
             SetupScreenController();
+            SetupBackground();
             SetupGameManager();
             SetupWaveManager();
             SetupStageManager();
@@ -66,6 +67,15 @@ namespace ZeroDaySiege.Core
             var screenGO = new GameObject("[ScreenController]");
             screenGO.AddComponent<ScreenController>();
             DontDestroyOnLoad(screenGO);
+        }
+
+        private void SetupBackground()
+        {
+            if (Background.Instance != null) return;
+
+            var bgGO = new GameObject("[Background]");
+            bgGO.AddComponent<Background>();
+            DontDestroyOnLoad(bgGO);
         }
 
         private void SetupGameManager()
